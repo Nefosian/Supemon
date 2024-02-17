@@ -3,7 +3,7 @@
 #include "items.h"
 #include "supemon.h"
 #include "action.h"
-#include "items.h"
+#include "shop.h"
 
 int main() {
     Player player;
