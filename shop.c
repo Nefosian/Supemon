@@ -5,22 +5,25 @@
 #include "player.h"
 
 
-void verify(char temp[], char reponse, Player *player) {
-    printf("Would you want to buy another thing (Y for yes, N for no) ?\n");
-    fgets(temp, sizeof(temp), stdin);
-    reponse = temp[0]; 
-
-    if (reponse == 'Y' || reponse == 'y') {
+void verify(char temp[], char response, Player *player) {
+    do {
+        printf("Would you want to buy another thing (Y for yes, N for no) ?\n");
+        if (scanf(" %c", &response) != 1 || (response != 'y' && response != 'Y' && response != 'n' && response != 'N')) {
+            printf("Invalid response. Please enter 'Y' for yes or 'N' for no.\n"); 
+        } 
+    } while (response != 'Y' && response != 'y' && response != 'N' && response != 'n');
+    if (response == 'Y' || response == 'y') {
         shop(player);
     } else {
         return;
     }
 }
 
+
 void shop(Player *player){
     int choice = 0;
     char temp[256];
-    char reponse;
+    char response;
 
     printf("+-<3----<3----<3----<3----<3----<3----<3----<3----<3----<3----<3----+\n");
     printf("|Welcome to the shop!                                               |\n");
@@ -50,11 +53,11 @@ void shop(Player *player){
                 printf("You bought a Potion!\n");
                 player->supcoins -= 100;
                 printf("You have %d Supcoins left.\n", player->supcoins);
-                verify(temp, reponse, player);
+                verify(temp, response, player);
                 break;
             } else {
                 printf("You don't have enough Supcoins! You have already %d\n", player->supcoins);
-                verify(temp, reponse, player);
+                verify(temp, response, player);
                 break;
             }
         case 2:
@@ -62,11 +65,11 @@ void shop(Player *player){
                 printf("You bought a SuperPotion!\n");
                 player->supcoins -= 300;
                 printf("You have %d Supcoins left.\n", player->supcoins);
-                verify(temp, reponse, player);
+                verify(temp, response, player);
                 break;
             } else {
                 printf("You don't have enough Supcoins! You have already %d\n", player->supcoins);
-                verify(temp, reponse, player);
+                verify(temp, response, player);
                 break;
             }
         case 3:
@@ -74,11 +77,11 @@ void shop(Player *player){
                 printf("You bought a RareCandy!\n");
                 player->supcoins -= 700;
                 printf("You have %d Supcoins left.\n", player->supcoins);
-                verify(temp, reponse, player);
+                verify(temp, response, player);
                 break;
             } else {
                 printf("You don't have enough Supcoins! You have already %d\n", player->supcoins);
-                verify(temp, reponse, player);
+                verify(temp, response, player);
                 break;
             }
         case 4:
@@ -86,11 +89,11 @@ void shop(Player *player){
                 printf("You bought a Supeball!\n");
                 player->supcoins -= 250;
                 printf("You have %d Supcoins left.\n", player->supcoins);
-                verify(temp, reponse, player);
+                verify(temp, response, player);
                 break;
             } else {
                 printf("You don't have enough Supcoins! You have already %d\n", player->supcoins);
-                verify(temp, reponse, player);
+                verify(temp, response, player);
                 break;
             }
         case 5:
@@ -98,11 +101,11 @@ void shop(Player *player){
                 printf("You bought a SuperSupeball!\n");
                 player->supcoins -= 500;
                 printf("You have %d Supcoins left.\n", player->supcoins);
-                verify(temp, reponse, player);
+                verify(temp, response, player);
                 break;
             } else {
                 printf("You don't have enough Supcoins! You have already %d\n", player->supcoins);
-                verify(temp, reponse, player);
+                verify(temp, response, player);
                 break;
             }
         case 6:
@@ -110,11 +113,11 @@ void shop(Player *player){
                 printf("You bought a NetBall!\n");
                 player->supcoins -= 750;
                 printf("You have %d Supcoins left.\n", player->supcoins);
-                verify(temp, reponse, player);
+                verify(temp, response, player);
                 break;
             } else {
                 printf("You don't have enough Supcoins! You have already %d\n", player->supcoins);
-                verify(temp, reponse, player);
+                verify(temp, response, player);
                 break;
             }
         case 7:
