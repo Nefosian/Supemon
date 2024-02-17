@@ -4,5 +4,5 @@
 
 #ifndef SUPEMON_ACTION_H
 #define SUPEMON_ACTION_H
-
+void action();
 #endif //SUPEMON_ACTION_H
