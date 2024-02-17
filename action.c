@@ -12,13 +12,13 @@ void action() {
     char place[80];
     char temp[256];
 
-    printf("+-<3----<3----<3----<3----<3----<3-+\n");
+    printf("+-<3----<3----<3----<3----<3----<3-----+\n");
     printf("|Where do you want to go?              |\n");
     printf("| 1 - Into the wild                    |\n");
     printf("| 2 - In the shop                      |\n");
-    printf("| 3 - In the Supémon Center            |\n");
+    printf("| 3 - In the Supemon Center            |\n");
     printf("| 4 - Leave the game                   |\n");
-    printf("+----------------------------------+\n\n");
+    printf("+--------------------------------------+\n\n");
 
     printf("Choose 1, 2, 3 or 4 to go: \n");
     while (choice < 1 || choice > 4) {
@@ -42,7 +42,7 @@ void action() {
             break;
         case 3:
             strcpy(place, "Center");
-            printf("You go in the Supémon Center!\n");
+            printf("You go in the Supemon Center!\n");
             break;
         case 4:
             printf("You leave the game!\n");

@@ -8,12 +8,10 @@
 typedef enum{
     Potion,
     SuperPotion,
-    RareCandies,
+    RareCandy,
     Supeball,
     SuperSupeball,
     NetBall,
-    SupeRegrowth,
-    SuperSupeRegrowth,
 }Items;
 
 #endif

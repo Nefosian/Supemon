@@ -3,10 +3,13 @@
 #include "items.h"
 #include "supemon.h"
 #include "action.h"
+#include "items.h"
 
 int main() {
     Player player;
+    player.supcoins = 1000;
     initializePlayer(&player);
     action();
+    shop(&player);
     return 0;
 }
