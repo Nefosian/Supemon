@@ -14,6 +14,7 @@
 
 typedef struct{
     char name[80];
+    int age;
     Supemon collectionSupemons[maxSize];
     int numberSupemons;
     Supemon deckSupemons[deckSize];
