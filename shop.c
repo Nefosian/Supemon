@@ -19,6 +19,23 @@ void verify(char temp[], char response, Player *player) {
     }
 }
 
+void Buy(Player *player, Items item, int cost, char temp[], char response) {
+    if (player->supcoins >= cost) {
+        if (player->numberItems < maxItem) {
+            player->supcoins -= cost;
+            player->objets[player->numberItems++] = item;
+            printf("Item purchased successfully! You now have %d Supcoins remaining.\n", player->supcoins);
+            verify(temp, response, player);
+        } else {
+            printf("Your inventory is full.\n");
+            verify(temp, response, player);
+        }
+    } else {
+        printf("You don't have enough Supcoins! You have already %d\n", player->supcoins);
+        verify(temp, response, player);
+    }
+}
+
 
 void shop(Player *player){
     int choice = 0;
@@ -36,92 +53,34 @@ void shop(Player *player){
     printf("| 7 - Leave the game                                                |\n");
     printf("+-------------------------------------------------------------------+\n\n");
 
-    printf("Choose a number between 1 and 7 to buy an item: \n");
-    while (choice < 1 || choice > 7) {
-        fgets(temp, sizeof(temp), stdin);
-        if (sscanf(temp, "%d", &choice) != 1) {
-            printf("Invalid input. Please enter a number.\n");
-            choice = 0;
-        } else if (choice < 1 || choice > 7) {
-            printf("Invalid choice. Please choose a number between 1 and 7.\n");
-        }
+    printf("What would you like to buy? (Enter number):\n");
+
+    if (scanf("%d", &choice) != 1) {
+        printf("Invalid input. Please enter a number.\n");
     }
+    
 
     switch(choice) {
         case 1:
-            if (player->supcoins >= 100){
-                printf("You bought a Potion!\n");
-                player->supcoins -= 100;
-                printf("You have %d Supcoins left.\n", player->supcoins);
-                verify(temp, response, player);
-                break;
-            } else {
-                printf("You don't have enough Supcoins! You have already %d\n", player->supcoins);
-                verify(temp, response, player);
-                break;
-            }
+            Buy(player, Potion, 100, temp, response);
+            break;
         case 2:
-            if (player->supcoins >= 300){
-                printf("You bought a SuperPotion!\n");
-                player->supcoins -= 300;
-                printf("You have %d Supcoins left.\n", player->supcoins);
-                verify(temp, response, player);
-                break;
-            } else {
-                printf("You don't have enough Supcoins! You have already %d\n", player->supcoins);
-                verify(temp, response, player);
-                break;
-            }
+            Buy(player, SuperPotion, 300, temp, response);
+            break;
         case 3:
-            if (player->supcoins >= 700){
-                printf("You bought a RareCandy!\n");
-                player->supcoins -= 700;
-                printf("You have %d Supcoins left.\n", player->supcoins);
-                verify(temp, response, player);
-                break;
-            } else {
-                printf("You don't have enough Supcoins! You have already %d\n", player->supcoins);
-                verify(temp, response, player);
-                break;
-            }
+            Buy(player, RareCandy, 700, temp, response);
+            break;  
         case 4:
-            if (player->supcoins >= 250){
-                printf("You bought a Supeball!\n");
-                player->supcoins -= 250;
-                printf("You have %d Supcoins left.\n", player->supcoins);
-                verify(temp, response, player);
-                break;
-            } else {
-                printf("You don't have enough Supcoins! You have already %d\n", player->supcoins);
-                verify(temp, response, player);
-                break;
-            }
+            Buy(player, Supeball, 250, temp, response);
+            break;
         case 5:
-            if (player->supcoins >= 500){
-                printf("You bought a SuperSupeball!\n");
-                player->supcoins -= 500;
-                printf("You have %d Supcoins left.\n", player->supcoins);
-                verify(temp, response, player);
-                break;
-            } else {
-                printf("You don't have enough Supcoins! You have already %d\n", player->supcoins);
-                verify(temp, response, player);
-                break;
-            }
+            Buy(player, SuperSupeball, 500, temp, response);
+            break;
         case 6:
-            if (player->supcoins >= 750){
-                printf("You bought a NetBall!\n");
-                player->supcoins -= 750;
-                printf("You have %d Supcoins left.\n", player->supcoins);
-                verify(temp, response, player);
-                break;
-            } else {
-                printf("You don't have enough Supcoins! You have already %d\n", player->supcoins);
-                verify(temp, response, player);
-                break;
-            }
+            Buy(player, NetBall, 750, temp, response);
+            break;
         case 7:
-            printf("You leave the game!\n");
+            printf("You leave the shop!\n");
             break;
     }
 }
