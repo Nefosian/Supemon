@@ -4,8 +4,6 @@
 #include "player.h"
 #include "items.h"
 
-#define maxItem 20
-
 void addItem(Player *player, Items item, int quantity){
     if (player == NULL) {
         printf("Error: Inventory does not exist.\n");
@@ -30,33 +28,36 @@ void addItem(Player *player, Items item, int quantity){
     }
 }
 
-void removeItem(PlayerInventory *inventory, Items item, int quantity){
-    if (inventory == NULL){
-        printf("Error : Inventory does not exist.\n");
+void removeItem(Player *player, Items item, int quantity) {
+    if (player == NULL) {
+        printf("Error: Player does not exist.\n");
         return;
     }
-    if (quantity <= 0){
-        printf("Error : Invalid quantity to remove.\n");
+    if (quantity <= 0) {
+        printf("Error: Invalid quantity to remove.\n");
         return;
     }
     int removed = 0;
-    for (int i = 0; i < max_items; i++){
-        if (inventory->itemsCounts[i] != 0 && inventory->items[i] == item){
-            if (inventory->itemsCounts[i] >= quantity){
-                inventory->itemsCounts[i] -= quantity;
-                removed = 1;
-                printf("Item successfuly removed.\n");
-                break;
-            } else {
-                printf("Error : Not enough items to remove.\n");
+    for (int i = 0; i < maxItem; i++) {
+        if (player->objets[i] == item) {
+            if (player->numberItems < quantity) {
+                printf("Error: Not enough items to remove.\n");
                 return;
             }
+            removed = 1;
+            printf("Item successfully removed.\n");
+            for (int j = i; j < player->numberItems - 1; j++) {
+                player->objets[j] = player->objets[j + 1];
+            }
+            player->numberItems--;
+            break;
         }
     }
-    if (!removed){
-        printf("Error : Item not found in inventory.\n");
+    if (!removed) {
+        printf("Error: Item not found in inventory.\n");
     }
 }
+
 
 void addSupemon(Player *player, Supemon newSupemon) {
     if (player->numberSupemons < maxSize) {
@@ -91,5 +92,41 @@ void removeSupemon(Player *player, Supemon supemon) {
     }
     if (!removed) {
         printf("Error: Supemon not found in collection.\n");
+    }
+}
+
+int hasItem(const Player *player, Items item) {
+    for (int i = 0; i < player->numberItems; i++) {
+        if (player->objets[i] == item) {
+            return 1; 
+        }
+    }
+    return 0; 
+}
+
+void useItem(Player *player, Items item) {
+    if (hasItem(player, item)) {
+        removeItem(player, item, 1); 
+        printf("Item used successfully.\n");
+        if (item == Potion) {
+            player->supemonSelected->currentLife += 5;
+            if (player->supemonSelected->currentLife > player->supemonSelected->maxLife) {
+                player->supemonSelected->currentLife = player->supemonSelected->maxLife;
+            }
+        } else if (item == SuperPotion) {
+            player->supemonSelected->currentLife += 10;
+            if (player->supemonSelected->currentLife > player->supemonSelected->maxLife) {
+                player->supemonSelected->currentLife = player->supemonSelected->maxLife;
+            }
+        } else if (item == RareCandy) {
+            player->supemonSelected->level += 1;
+            if (player->supemonSelected->level > 100) {
+                player->supemonSelected->level = 100;
+                printf("Supemon reached maximum level.\n");
+            }            
+        }
+       
+    } else {
+        printf("Error: Item not found in inventory, cannot be used.\n");
     }
 }
