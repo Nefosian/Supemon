@@ -75,7 +75,7 @@ void loadGame(Player *player){
     printf("Game successfully loaded from %s\n", filename);
 }
 
-void initializePlayer(Player *player) {
+void initializePlayer(Player *player){
     int choice = 0;
     char starterName[80];
     char temp[256];
