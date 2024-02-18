@@ -4,4 +4,4 @@
 
 #include "battle.h"
 
-void supemonAttack()
+void supemonAttack();
