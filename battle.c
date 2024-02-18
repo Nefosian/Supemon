@@ -108,14 +108,16 @@ void check_ball(Supemon *attacker, Supemon *defender, Player *player,char respon
 void fct_for_item(Player *player,Supemon *defender,Items item){
     if (hasItem(player, item) == item){
         printf("You used a %s!\n",item);
-        removeItem(player, item, 1);
         useItem(player, item);
+        removeItem(player, item, 1);
+        return 0;
     } else {
         printf("You don't have any %s!\n",item);
+        return 0;
     }
 }
 
-void item_use(Player *player,char response,char choice_item,Supemon *defender){
+void item_use(Player *player,char response,int choice_item,Supemon *defender){
     do {
         printf("Do you want to use a Potion, SuperPotion or RareCandy? Y for yes N for no\n");
         if (scanf(" %c", &response) != 1 || (response != 'y' && response != 'Y' && response != 'n' && response != 'N')) {
@@ -131,6 +133,9 @@ void item_use(Player *player,char response,char choice_item,Supemon *defender){
             printf("4 - Don't use an item\n");
             scanf("%d", &choice_item);
             if (choice_item != 1 || choice_item < 1 || choice_item > 4) {
+                printf("Invalid input. Please enter a number between 1 and 4.\n");
+                return 0;
+            } else {
                 switch (choice_item) {
                     case 1:
                         fct_for_item(player,defender,Potion);
@@ -145,8 +150,6 @@ void item_use(Player *player,char response,char choice_item,Supemon *defender){
                         printf("You chose not to use an item.\n");
                         return 0;
                 }
-            } else {
-                printf("Invalid input. Please enter a number between 1 and 4.\n");
                 return 0;
             }
         } else {

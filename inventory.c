@@ -112,6 +112,7 @@ int nbitem(const Player *player, Items item) {
         if (player->objets[i] == item) {
             return 1;
             printf("You have %d %s.\n", player->numberItems, item); 
+            return 0;
         } else {
             printf("You don't have this item in your inventory.\n");
             return 0;  

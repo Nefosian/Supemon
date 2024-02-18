@@ -128,8 +128,4 @@ void initializePlayer(Player *player){
             printf("You have chosen Supirtle!\n");
             break;
     }
-    Supemon starterSupemon;
-    initializeSupemon(&starterSupemon, starterName); 
-    addSupemonToDeck(player, starterSupemon);
-    displayDeck(player);
 }
