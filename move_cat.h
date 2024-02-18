@@ -6,14 +6,21 @@
 #define SUPEMON_MOVE_CAT_H
 
 typedef enum {
-    curve,
+    Curve,
     Jump,
-    roulade,
-    roar,
-    dance,
-    whip,
-    slap,
-    backflip,
+    Roll,
+    Roar,
+    Dance,
+    Whip,
+    Slap,
+    Bit,
+    Backflip,
+    Wink,
+    Fly,
+    Spit,
+    Watch,
+    Charge,
+    Cry,
 } SupemonMove;
 
 #endif
