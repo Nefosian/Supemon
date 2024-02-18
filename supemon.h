@@ -16,15 +16,26 @@ typedef struct{
     int experience;
     int maxLife;
     int currentLife;
-    int attack;
-    int defense;
-    int dodge;
-    int precision;
+    int Attack;
+    int Defense;
+    int Dodge;
+    int Precision;
     int currentPrecision;
-    int speed;
+    int Speed;
     SupemonMove Move[6];
-    SupemonSkill skill[6];
+    SupemonSkill Skill[6];
     int luck;
 }Supemon;
+
+void initializeSupmander(Supemon *supemon);
+void initializeSupasaur(Supemon *supemon);
+void initializeSupirtle(Supemon *supemon);
+void initializeSupfox(Supemon *supemon);
+void initializeSuplion(Supemon *supemon);
+void initializeSuphawk(Supemon *supemon);
+void initializeSupsnake(Supemon *supemon);
+void initializeSupbear(Supemon *supemon);
+void initializeSupwolf(Supemon *supemon);
+void initializeSupbat(Supemon *supemon);
 
 #endif

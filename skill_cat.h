@@ -8,9 +8,23 @@
 typedef enum {
     Scratch,
     Grawl,
-    Shelling,
+    FireTornado,
+    Pound,
     Foliage,
     Shell,
+    Charm,
+    Intimidation,
+    Tornado,
+    Peck,
+    Poison,
+    Hipnosis,
+    Suplex,
+    Earthquake,
+    Fang,
+    IronTail,
+    Shockwave,
+    Slash,
+    Vampirism,
 } SupemonSkill;
 
 #endif
