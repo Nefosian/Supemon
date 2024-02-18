@@ -9,13 +9,13 @@
 
 int main() {
     Player player;
-    Supemon supasaur, defender;
+    Supemon supasaur;
+    Supemon supmander;
     player.supcoins = 1000;
     initializeSupasaur(&supasaur);
-    initializeSupasaur(&defender);
+    initializeSupmander(&supmander);
     initializePlayer(&player);
-    
-    affichage(&supasaur, &defender, &player);
+    affichage(&supasaur, &supmander, &player);
     action();
     shop(&player);
     return 0;

@@ -12,7 +12,7 @@
 
 
 
-void affichage(Supemon *attacker, Supemon *defender, Player *name){
+void affichage(Supemon *attacker, Supemon *defender, Player *player){
     int choice = 0;
     int choice_move = 0;
     char response;
@@ -23,7 +23,7 @@ void affichage(Supemon *attacker, Supemon *defender, Player *name){
     printf("Attack: %d            Defense: %d\n", attacker->Attack, attacker->Defense);
     printf("Speed:  %d            Dodge:   %d\n",attacker->Speed, attacker->Dodge);
     printf("--------------------------------\n");
-    printf("%s (%s)\n", defender->name, name->name);
+    printf("%s (%s)\n", defender->name, player->name);
     printf("--------------------------------\n");
     printf("HP:    %d/%d           Level:   %d\n", defender->currentLife, defender->maxLife, defender->level);
     printf("Attack: %d            Defense: %d\n", defender->Attack, defender->Defense);
@@ -97,8 +97,8 @@ void affichage(Supemon *attacker, Supemon *defender, Player *name){
         case 5:
             printf("You try to ran away!\n");
             //check if player can run away
-            float check = defender->Speed / (defender->Speed + attacker->Speed);
-            printf("check: %f\n", check);
+            float check = defender->Speed / (defender->Speed + attacker->Speed);           
+             printf("check: %f\n", check);
             break;
         default:
             printf("Invalid input. Please enter a number between 1 and 5.\n");
