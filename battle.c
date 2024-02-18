@@ -24,16 +24,16 @@ void run_away(Supemon *attacker, Supemon *defender){
 
     return 0;
 }
-
-void capture(Supemon *attacker, Supemon *defender, Player *player){
+//gerer le chance ball qui ne prend pas en compte la vlauer de la ball
+void capture(Supemon *attacker, Supemon *defender, Player *player,int chance_ball){
     printf("You throw a ball!\n");
-    printf("The Supemon is at %d/%d HP\n", attacker->currentLife, attacker->maxLife);
-    printf("%d,%d", (float)attacker->maxLife, (float)attacker->currentLife);
-    float chance_to_cap = ((float)attacker->maxLife - (float)attacker->currentLife) / (float)attacker->maxLife - 0.5;
-    printf("Chance to capture: %f\n", chance_to_cap);
+    float chance_to_cap = ((float)attacker->maxLife - (float)attacker->currentLife) / (float)attacker->maxLife - chance_ball;
+    int capture_chance = (int)(chance_to_cap * 100);
     srand(time(NULL));
     int random_number = rand() % 100;
-    if (random_number <= chance_to_cap) {
+    printf("Chance to capture: %d%%\n", capture_chance);
+    printf("Random number: %d\n", random_number);
+    if (random_number <= capture_chance) {
         printf("You captured the Supemon!\n");
         //addSupemon(player, defender);
     } else {
@@ -119,23 +119,27 @@ void affichage(Supemon *attacker, Supemon *defender, Player *player){
                     printf("1 - Supeball\n");
                     printf("2 - SuperSupeball\n");
                     printf("3 - NetBall\n");
+                    scanf("%d", &choice_ball);
                     switch (choice_ball) {
                         case 1:
                             //check if player has supeball avant de le faire
                             printf("You used a Supeball!\n");
+                            capture(attacker, defender, player,0.25);
                             break;
                         case 2:
                             //check if player has superspuball avant de le faire
                             printf("You used a SuperSupeball!\n");
+                            capture(attacker, defender, player,0);
                             break;
                         case 3:
                             //check if player has netball avant de le faire 
                             printf("You used a NetBall!\n");
+                            capture(attacker, defender, player,-0.25);
                             break;
                     }
                 } else {
                     printf("You chose not to use a ball.\n");
-                    capture(attacker, defender, player);
+                    capture(attacker, defender, player,0.5);
                     break;
             }
         case 5:
