@@ -28,6 +28,7 @@ typedef struct{
     int luck;
 }Supemon;
 
+void initializeSupemon(Supemon *supemon, int choice);
 void initializeSupmander(Supemon *supemon);
 void initializeSupasaur(Supemon *supemon);
 void initializeSupirtle(Supemon *supemon);

@@ -27,15 +27,19 @@ void displayDeck(const Player *player) {
         return;
     }
 
+    printf("+-<3----<3----<3----<3----<3----<3-----+\n");
+    printf("| Your current Supemon deck:           |\n");
     for (int i = 0; i < player->numberDeckSupemons; i++) {
-        printf("Supemon %d: %s, Level: %d, HP: %d/%d\n", 
+        printf("| %d - %s, Level: %d, HP: %d/%d    |\n", 
                i + 1, 
                player->deckSupemons[i].name, 
                player->deckSupemons[i].level, 
                player->deckSupemons[i].currentLife, 
                player->deckSupemons[i].maxLife);
     }
+    printf("+---------------------------------------+\n\n");
 }
+
 
 void addSupemonToDeck(Player *player, Supemon newSupemon) {
     if (player == NULL) {
