@@ -8,6 +8,7 @@
 void initializeSupmander(Supemon *supemon) {
     strcpy(supemon->name, "Supmander");
     supemon->maxLife = 10;
+    supemon->currentLife = 10;
     supemon->Attack = 1;
     supemon->Defense = 1;
     supemon->Dodge = 1;
@@ -22,6 +23,7 @@ void initializeSupmander(Supemon *supemon) {
 void initializeSupasaur(Supemon *supemon) {
     strcpy(supemon->name, "Supasaur");
     supemon->maxLife = 9;
+    supemon->currentLife = 9;
     supemon->Attack = 1;
     supemon->Defense = 1;
     supemon->Dodge = 3;
@@ -37,6 +39,7 @@ void initializeSupasaur(Supemon *supemon) {
 void initializeSupirtle(Supemon *supemon) {
     strcpy(supemon->name, "Supirtle");
     supemon->maxLife = 11;
+    supemon->currentLife = 11;
     supemon->Attack = 1;
     supemon->Defense = 2;
     supemon->Dodge = 2;
@@ -51,6 +54,7 @@ void initializeSupirtle(Supemon *supemon) {
 void initializeSupfox(Supemon *supemon) {
     strcpy(supemon->name, "Supfox");
     supemon->maxLife = 9;
+    supemon->currentLife = 9;
     supemon->Attack = 2;
     supemon->Defense = 3;
     supemon->Dodge = 1;
@@ -67,6 +71,7 @@ void initializeSupfox(Supemon *supemon) {
 void initializeSuplion(Supemon *supemon) {
     strcpy(supemon->name, "Suplion");
     supemon->maxLife = 9;
+    supemon->currentLife = 9;
     supemon->Attack = 2;
     supemon->Defense = 2;
     supemon->Dodge = 3;
@@ -81,6 +86,7 @@ void initializeSuplion(Supemon *supemon) {
 void initializeSuphawk(Supemon *supemon) {
     strcpy(supemon->name, "Suphawk");
     supemon->maxLife = 12;
+    supemon->currentLife = 12;
     supemon->Attack = 3;
     supemon->Defense = 3;
     supemon->Dodge = 3;
@@ -95,6 +101,7 @@ void initializeSuphawk(Supemon *supemon) {
 void initializeSupsnake(Supemon *supemon) {
     strcpy(supemon->name, "Supsnake");
     supemon->maxLife = 10;
+    supemon->currentLife = 10;
     supemon->Attack = 2;
     supemon->Defense = 1;
     supemon->Dodge = 3;
@@ -109,6 +116,7 @@ void initializeSupsnake(Supemon *supemon) {
 void initializeSupbear(Supemon *supemon) {
     strcpy(supemon->name, "Supbear");
     supemon->maxLife = 10;
+    supemon->currentLife = 10;
     supemon->Attack = 3;
     supemon->Defense = 1;
     supemon->Dodge = 3;
@@ -123,6 +131,7 @@ void initializeSupbear(Supemon *supemon) {
 void initializeSupwolf(Supemon *supemon) {
     strcpy(supemon->name, "Supwolf");
     supemon->maxLife = 10;
+    supemon->currentLife = 10;
     supemon->Attack = 3;
     supemon->Defense = 2;
     supemon->Dodge = 3;
@@ -137,6 +146,7 @@ void initializeSupwolf(Supemon *supemon) {
 void initializeSupbat(Supemon *supemon) {
     strcpy(supemon->name, "Supbat");
     supemon->maxLife = 11;
+    supemon->currentLife = 11;
     supemon->Attack = 1;
     supemon->Defense = 2;
     supemon->Dodge = 3;
