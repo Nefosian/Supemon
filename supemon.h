@@ -12,6 +12,7 @@ typedef struct{
     char name[80];
     char type[80];
     char gender[80];
+    char weakness[80];
     int level;
     int experience;
     int maxLife;
