@@ -98,10 +98,12 @@ void removeSupemon(Player *player, Supemon supemon) {
 int hasItem(const Player *player, Items item) {
     for (int i = 0; i < player->numberItems; i++) {
         if (player->objets[i] == item) {
-            return 1; 
+            return 1;
+            printf("Item found in inventory.\n"); 
         }
     }
-    return 0; 
+    printf("Item not found in inventory.\n");
+    return 0;    
 }
 
 void useItem(Player *player, Items item) {
@@ -110,15 +112,20 @@ void useItem(Player *player, Items item) {
         printf("Item used successfully.\n");
         if (item == Potion) {
             player->supemonSelected->currentLife += 5;
+            printf("Supemon healed by 5 HP.\n");
             if (player->supemonSelected->currentLife > player->supemonSelected->maxLife) {
                 player->supemonSelected->currentLife = player->supemonSelected->maxLife;
+                printf("Supemon reached maximum life.\n");
             }
         } else if (item == SuperPotion) {
             player->supemonSelected->currentLife += 10;
+            printf("Supemon's life increased by 10.\n");
             if (player->supemonSelected->currentLife > player->supemonSelected->maxLife) {
                 player->supemonSelected->currentLife = player->supemonSelected->maxLife;
+                printf("Supemon reached maximum life.\n");
             }
-        } else if (item == RareCandy) {
+        } else if (item == RareCandy)
+        printf("Supemon's level increased by 1.\n");{
             player->supemonSelected->level += 1;
             if (player->supemonSelected->level > 100) {
                 player->supemonSelected->level = 100;
