@@ -8,4 +8,6 @@ add_executable(SUPEMON supemon.h supemon.c player.h player.c shop.h shop.c items
         action.h
         battle.c
         inventory.c
+        deck.c
+        deck.h
 )
