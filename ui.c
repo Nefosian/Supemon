@@ -6,6 +6,10 @@
 #include <string.h>
 #include "ui.h"
 #include "player.h"
+#include "supemon.h"
+#include "items.h"
+#include "inventory.h"
+#include "deck.h"
 
 void initializePlayer(Player *player) {
     int choice = 0;
@@ -60,4 +64,8 @@ void initializePlayer(Player *player) {
             printf("You have chosen Supirtle!\n");
             break;
     }
+    Supemon starterSupemon;
+    initializeSupemon(&starterSupemon, starterName); 
+    addSupemonToDeck(player, starterSupemon);
+    displayDeck(player);
 }
