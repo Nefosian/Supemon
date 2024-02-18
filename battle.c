@@ -3,3 +3,5 @@
 //
 
 #include "battle.h"
+
+void supemonAttack()
