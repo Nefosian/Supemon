@@ -10,6 +10,7 @@ void initializeSupmander(Supemon *supemon) {
     strcpy(supemon->type, "Fire");
     strcpy(supemon->weakness, "Water, Ground, Rock");
     supemon->maxLife = 10;
+    supemon->currentLife = 10;
     supemon->Attack = 1;
     supemon->Defense = 1;
     supemon->Dodge = 1;
@@ -26,6 +27,7 @@ void initializeSupasaur(Supemon *supemon) {
     strcpy(supemon->type, "Plant");
     strcpy(supemon->weakness, "Fire, Ice, Poison, Flight, Insect");
     supemon->maxLife = 9;
+    supemon->currentLife = 9;
     supemon->Attack = 1;
     supemon->Defense = 1;
     supemon->Dodge = 3;
@@ -43,6 +45,7 @@ void initializeSupirtle(Supemon *supemon) {
     strcpy(supemon->type, "Water");
     strcpy(supemon->weakness, "Electrical, Plant");
     supemon->maxLife = 11;
+    supemon->currentLife = 11;
     supemon->Attack = 1;
     supemon->Defense = 2;
     supemon->Dodge = 2;
@@ -59,6 +62,7 @@ void initializeSupfox(Supemon *supemon) {
     strcpy(supemon->type, "Fire/Psy");
     strcpy(supemon->weakness, "Water, Rock, Earth, Spectre, Darkness");
     supemon->maxLife = 9;
+    supemon->currentLife = 9;
     supemon->Attack = 2;
     supemon->Defense = 3;
     supemon->Dodge = 1;
@@ -77,6 +81,7 @@ void initializeSuplion(Supemon *supemon) {
     strcpy(supemon->type, "normal");
     strcpy(supemon->weakness, "Fight");
     supemon->maxLife = 9;
+    supemon->currentLife = 9;
     supemon->Attack = 2;
     supemon->Defense = 2;
     supemon->Dodge = 3;
@@ -93,6 +98,7 @@ void initializeSuphawk(Supemon *supemon) {
     strcpy(supemon->type, "Flight");
     strcpy(supemon->weakness, "Electrical, Ice, Rock");
     supemon->maxLife = 12;
+    supemon->currentLife = 12;
     supemon->Attack = 3;
     supemon->Defense = 3;
     supemon->Dodge = 3;
@@ -109,6 +115,7 @@ void initializeSupsnake(Supemon *supemon) {
     strcpy(supemon->type, "Poison");
     strcpy(supemon->weakness, "Earth, Psy");
     supemon->maxLife = 10;
+    supemon->currentLife = 10;
     supemon->Attack = 2;
     supemon->Defense = 1;
     supemon->Dodge = 3;
@@ -125,6 +132,7 @@ void initializeSupbear(Supemon *supemon) {
     strcpy(supemon->type, "Fight/Earth");
     strcpy(supemon->weakness, "Flying, Psychic, Water, Plant, Ice");
     supemon->maxLife = 10;
+    supemon->currentLife = 10;
     supemon->Attack = 3;
     supemon->Defense = 1;
     supemon->Dodge = 3;
@@ -141,6 +149,7 @@ void initializeSupwolf(Supemon *supemon) {
     strcpy(supemon->type, "Darkness");
     strcpy(supemon->weakness, "Fighting, Insect, Fairy");
     supemon->maxLife = 10;
+    supemon->currentLife = 10;
     supemon->Attack = 3;
     supemon->Defense = 2;
     supemon->Dodge = 3;
@@ -157,6 +166,7 @@ void initializeSupbat(Supemon *supemon) {
     strcpy(supemon->type, "Flight/Poison");
     strcpy(supemon->weakness, "Electric, Ice, Rock, Psych");
     supemon->maxLife = 11;
+    supemon->currentLife = 11;
     supemon->Attack = 1;
     supemon->Defense = 2;
     supemon->Dodge = 3;
