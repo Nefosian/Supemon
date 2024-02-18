@@ -8,6 +8,10 @@ typedef struct{
     Items items[max_items];
     int itemsCounts[max_items];
     Supemon supemons[max_supemons]; 
-} PlayerInvotory;
+} PlayerInventory;
 
-void addItem(PlayerInvotory *inventory, Items item, int quantity);
+void addItem(PlayerInventory *inventory, Items item, int quantity);
+void removeItem(PlayerInventory *inventory, Items item, int quantity);
+void addSupemon(PlayerInventory *inventory, Supemon supemon);
+void removeSupemon(PlayerInventory *inventory, Supemon supemon);
+void displayInventory(PlayerInventory *inventory);
