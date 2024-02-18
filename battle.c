@@ -10,13 +10,27 @@
 #include "player.h"
 
 
+void run_away(Supemon *attacker, Supemon *defender){
+    printf("You try to run away!\n");
+    srand(time(NULL));
+    float chance_to_escape = (float)defender->Speed / ((float)defender->Speed + (float)attacker->Speed);
+    int escape_chance = (int)(chance_to_escape * 100);
+    int random_number = rand() % 100;
+    if (random_number <= escape_chance) {
+        printf("You successfully escaped!\n");
+    } else {
+        printf("You failed to escape!\n");
+    }
+
+    return 0;
+}
+
 
 
 void affichage(Supemon *attacker, Supemon *defender, Player *player){
     int choice = 0;
     int choice_move = 0;
     char response;
-    
     printf("%s (Enemy)\n", attacker->name);
     printf("--------------------------------\n");
     printf("HP:    %d/%d           Level:   %d\n", attacker->currentLife, attacker->maxLife, attacker->level);
@@ -95,11 +109,9 @@ void affichage(Supemon *attacker, Supemon *defender, Player *player){
                 break;
         }
         case 5:
-            printf("You try to ran away!\n");
-            //check if player can run away
-            float check = defender->Speed / (defender->Speed + attacker->Speed);           
-             printf("check: %f\n", check);
+            run_away(attacker, defender);
             break;
+
         default:
             printf("Invalid input. Please enter a number between 1 and 5.\n");
             break;
