@@ -12,6 +12,7 @@ int main() {
     Supemon supasaur;
     Supemon supmander;
     player.supcoins = 1000;
+    player.objets=Potion;
     initializeSupasaur(&supasaur);
     initializeSupmander(&supmander);
     initializePlayer(&player);

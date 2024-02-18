@@ -25,7 +25,7 @@ void run_away(Supemon *attacker, Supemon *defender){
 
     return 0;
 }
-//gerer le chance ball qui ne prend pas en compte la vlauer de la ball
+
 void capture(Supemon *attacker, Supemon *defender, Player *player,float chance_ball){
     printf("You throw a ball!\n");
     float chance_to_cap = (((float)attacker->maxLife - (float)attacker->currentLife) / (float)attacker->maxLife) - chance_ball;
@@ -105,12 +105,63 @@ void check_ball(Supemon *attacker, Supemon *defender, Player *player,char respon
         }
 }
 
+void fct_for_item(Player *player,Supemon *defender,Items item){
+    if (hasItem(player, item) == item){
+        printf("You used a %s!\n",item);
+        removeItem(player, item, 1);
+        useItem(player, item);
+    } else {
+        printf("You don't have any %s!\n",item);
+    }
+}
+
+void item_use(Player *player,char response,char choice_item,Supemon *defender){
+    do {
+        printf("Do you want to use a Potion, SuperPotion or RareCandy? Y for yes N for no\n");
+        if (scanf(" %c", &response) != 1 || (response != 'y' && response != 'Y' && response != 'n' && response != 'N')) {
+            printf("Invalid response. Please enter 'Y' for yes or 'N' for no.\n"); 
+        } 
+        } while (response != 'Y' && response != 'y' && response != 'N' && response != 'n');
+        if (response == 'Y' || response == 'y') {
+            printf("You have %d Potion, %d SuperPotion and %d RareCandy\n",nbitem(player, Potion),nbitem(player, SuperPotion),nbitem(player, RareCandy));
+            printf("Choose an item to use\n");
+            printf("1 - Potion\n");
+            printf("2 - SuperPotion\n");
+            printf("3 - RareCandy\n");
+            printf("4 - Don't use an item\n");
+            scanf("%d", &choice_item);
+            if (choice_item != 1 || choice_item < 1 || choice_item > 4) {
+                switch (choice_item) {
+                    case 1:
+                        fct_for_item(player,defender,Potion);
+                        break;
+                    case 2:
+                        fct_for_item(player,defender,SuperPotion);
+                        break;
+                    case 3:
+                        fct_for_item(player,defender,RareCandy);
+                        break;
+                    case 4:
+                        printf("You chose not to use an item.\n");
+                        return 0;
+                }
+            } else {
+                printf("Invalid input. Please enter a number between 1 and 4.\n");
+                return 0;
+            }
+        } else {
+            printf("You don't want to use item! The game continue!");
+            return 0;
+        }
+}
 
 void affichage(Supemon *attacker, Supemon *defender, Player *player){
     int choice = 0;
     int choice_move = 0;
     int choice_ball = 0;
+    int choice_item = 0;
     char response;
+    
 
     printf("%s (Enemy)\n", attacker->name);
     printf("--------------------------------\n");
@@ -166,10 +217,7 @@ void affichage(Supemon *attacker, Supemon *defender, Player *player){
             printf("Choose a Supemon\n");
             break;
         case 3:
-            printf("Choose an item\n");
-            printf("1 - Potion\n");
-            printf("2 - SuperPotion\n");
-            printf("3 - RareCandy\n");
+            item_use(player,response,choice_item,defender);
             break;
         case 4:
             check_ball(attacker, defender, player,response,choice_ball);
@@ -182,6 +230,6 @@ void affichage(Supemon *attacker, Supemon *defender, Player *player){
             printf("Invalid input. Please enter a number between 1 and 5.\n");
             break;
     }
+    }
 
-}
 
