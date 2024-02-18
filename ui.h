@@ -8,5 +8,8 @@
 #include "player.h"
 
 void initializePlayer(Player *player);
+void startNewGame(Player *player);
+void loadGame(Player *player);
+void welcomeScreen(Player *player);
 
 #endif
