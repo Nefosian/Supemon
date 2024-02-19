@@ -6,6 +6,7 @@
 #define SUPEMON_ITEMS_H
 
 typedef enum{
+    EmptySlot,
     Potion,
     SuperPotion,
     RareCandy,
