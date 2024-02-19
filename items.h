@@ -14,4 +14,6 @@ typedef enum{
     NetBall,
 }Items;
 
+void itemName(Items item, char *name);
+
 #endif

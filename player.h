@@ -8,9 +8,9 @@
 #include "supemon.h"
 #include "items.h"
 
-#define maxSize 300 // Paul ici, c' est pour le nombre total de supemon qu'il peut avoir
-#define deckSize 6 // Paul ici, c' est pour le nombre de supemon actif dans son deck, comme le vrai jeu pokemon quoi, max 6
-#define maxItem 20 // Paul ici, c' est pour le nombre total d'item dans l'inventaire
+#define maxSize 300 
+#define deckSize 6 
+#define maxItem 20 
 
 typedef struct{
     char name[80];

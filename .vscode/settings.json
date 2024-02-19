@@ -5,6 +5,7 @@
         "string.h": "c",
         "supemon.h": "c",
         "battle.h": "c",
-        "items.h": "c"
+        "items.h": "c",
+        "inventory.h": "c"
     }
 }
