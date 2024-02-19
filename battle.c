@@ -219,6 +219,7 @@ void affichage(Supemon *attacker, Supemon *defender, Player *player){
         case 2:
             printf("Choose a Supemon\n");
             break;
+            
         case 3:
             item_use(player,response,choice_item,defender);
             break;
