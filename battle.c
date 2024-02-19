@@ -233,6 +233,4 @@ void affichage(Supemon *attacker, Supemon *defender, Player *player){
             printf("Invalid input. Please enter a number between 1 and 5.\n");
             break;
     }
-    }
-
-
+}
