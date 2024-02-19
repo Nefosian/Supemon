@@ -6,6 +6,7 @@
 #define SUPEMON_ITEMS_H
 
 #define EmptySlot 0
+#define maxItem 20 
 
 typedef enum{
     Potion,
@@ -15,5 +16,10 @@ typedef enum{
     SuperSupeball,
     NetBall,
 }Items;
+
+typedef struct{
+    Items item;
+    int quantity;
+}Item_quantity;
 
 #endif
