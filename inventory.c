@@ -106,6 +106,21 @@ int hasItem(const Player *player, Items item) {
     return 0;    
 }
 
+
+int nbitem(const Player *player, Items item) {
+    for (int i = 0; i < player->numberItems; i++) {
+        if (player->objets[i] == item) {
+            return 1;
+            printf("You have %d %s.\n", player->numberItems, item); 
+            return 0;
+        } else {
+            printf("You don't have this item in your inventory.\n");
+            return 0;  
+        }
+    }
+      
+}
+
 void useItem(Player *player, Items item) {
     if (hasItem(player, item)) {
         removeItem(player, item, 1); 

@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "player.h"
+#include "inventory.h"
 
 
 void run_away(Supemon *attacker, Supemon *defender){
@@ -25,15 +26,13 @@ void run_away(Supemon *attacker, Supemon *defender){
     return 0;
 }
 
-void capture(Supemon *attacker, Supemon *defender, Player *player){
+void capture(Supemon *attacker, Supemon *defender, Player *player,float chance_ball){
     printf("You throw a ball!\n");
-    printf("The Supemon is at %d/%d HP\n", attacker->currentLife, attacker->maxLife);
-    printf("%d,%d", (float)attacker->maxLife, (float)attacker->currentLife);
-    float chance_to_cap = ((float)attacker->maxLife - (float)attacker->currentLife) / (float)attacker->maxLife - 0.5;
-    printf("Chance to capture: %f\n", chance_to_cap);
+    float chance_to_cap = (((float)attacker->maxLife - (float)attacker->currentLife) / (float)attacker->maxLife) - chance_ball;
+    int capture_chance = (int)(chance_to_cap * 100);
     srand(time(NULL));
     int random_number = rand() % 100;
-    if (random_number <= chance_to_cap) {
+    if (random_number <= capture_chance) {
         printf("You captured the Supemon!\n");
         //addSupemon(player, defender);
     } else {
@@ -41,12 +40,131 @@ void capture(Supemon *attacker, Supemon *defender, Player *player){
     }
 }
 
+void check_ball(Supemon *attacker, Supemon *defender, Player *player,char response,int choice_ball){
+    do {
+        printf("Do you want to use a Supeball, SuperSupeball or NetBall? Y for yes N for no\n");
+        if (scanf(" %c", &response) != 1 || (response != 'y' && response != 'Y' && response != 'n' && response != 'N')) {
+            printf("Invalid response. Please enter 'Y' for yes or 'N' for no.\n"); 
+        } 
+        } while (response != 'Y' && response != 'y' && response != 'N' && response != 'n');
+        if (response == 'Y' || response == 'y') {
+            printf("You have %d Supeball, %d SuperSupeball and %d NetBall\n",nbitem(player, Supeball),nbitem(player, SuperSupeball),nbitem(player, NetBall));
+            printf("Choose a Ball to use\n");
+            printf("1 - Supeball\n");
+            printf("2 - SuperSupeball\n");
+            printf("3 - NetBall\n");
+            printf("4 - Don't use a special ball\n");
+            scanf("%d", &choice_ball);
+            if (choice_ball != 1 || choice_ball < 1 || choice_ball > 4) {
+                printf("Invalid input. Please enter a number between 1 and 3.\n");
+            } else {
+                switch (choice_ball) {
+                    case 1:
+                        if (hasItem(player, Supeball) == Supeball){
+                            printf("You used a Supeball your chance to Capture is now increased by 2!\n");
+                            removeItem(player, Supeball, 1);
+                            capture(attacker, defender, player,0.25);
+                            break;
+                        } else {
+                            printf("You don't have any Supeball!\n");
+                            check_ball(attacker, defender, player,response,choice_ball);
+                            break;
+                        }
+                    case 2:
+                        if (hasItem(player, SuperSupeball) == SuperSupeball){
+                            printf("You used a SuperSupeball your chance to Capture is now increased by 2!\n");
+                            removeItem(player, SuperSupeball, 1);
+                            capture(attacker, defender, player,0.25);
+                            break;
+                        } else {
+                            printf("You don't have any SuperSupeball!\n");
+                            check_ball(attacker, defender, player,response,choice_ball);
+                            break;
+                        }
+                    case 3:
+                        if (hasItem(player, NetBall) == NetBall){
+                            printf("You used a NetBall your chance to Capture is now increased by 2!\n");
+                            removeItem(player, NetBall, 1);
+                            capture(attacker, defender, player,0.25);
+                            break;
+                        } else {
+                            printf("You don't have any NetBall!\n");
+                            check_ball(attacker, defender, player,response,choice_ball);
+                            break;
+                        }
+                    case 4:
+                        printf("You chose not to use a special ball.\n");
+                        capture(attacker, defender, player,0.5);
+                        return 0;
+                }
+            }
+        } else {
+            printf("You chose not to use a special ball.\n");
+            capture(attacker, defender, player,0.5);
+            return 0;
+        }
+}
+
+void fct_for_item(Player *player,Supemon *defender,Items item){
+    if (hasItem(player, item) == item){
+        printf("You used a %s!\n",item);
+        useItem(player, item);
+        removeItem(player, item, 1);
+        return 0;
+    } else {
+        printf("You don't have any %s!\n",item);
+        return 0;
+    }
+}
+
+void item_use(Player *player,char response,int choice_item,Supemon *defender){
+    do {
+        printf("Do you want to use a Potion, SuperPotion or RareCandy? Y for yes N for no\n");
+        if (scanf(" %c", &response) != 1 || (response != 'y' && response != 'Y' && response != 'n' && response != 'N')) {
+            printf("Invalid response. Please enter 'Y' for yes or 'N' for no.\n"); 
+        } 
+        } while (response != 'Y' && response != 'y' && response != 'N' && response != 'n');
+        if (response == 'Y' || response == 'y') {
+            printf("You have %d Potion, %d SuperPotion and %d RareCandy\n",nbitem(player, Potion),nbitem(player, SuperPotion),nbitem(player, RareCandy));
+            printf("Choose an item to use\n");
+            printf("1 - Potion\n");
+            printf("2 - SuperPotion\n");
+            printf("3 - RareCandy\n");
+            printf("4 - Don't use an item\n");
+            scanf("%d", &choice_item);
+            if (choice_item != 1 || choice_item < 1 || choice_item > 4) {
+                printf("Invalid input. Please enter a number between 1 and 4.\n");
+                return 0;
+            } else {
+                switch (choice_item) {
+                    case 1:
+                        fct_for_item(player,defender,Potion);
+                        break;
+                    case 2:
+                        fct_for_item(player,defender,SuperPotion);
+                        break;
+                    case 3:
+                        fct_for_item(player,defender,RareCandy);
+                        break;
+                    case 4:
+                        printf("You chose not to use an item.\n");
+                        return 0;
+                }
+                return 0;
+            }
+        } else {
+            printf("You don't want to use item! The game continue!");
+            return 0;
+        }
+}
 
 void affichage(Supemon *attacker, Supemon *defender, Player *player){
     int choice = 0;
     int choice_move = 0;
     int choice_ball = 0;
+    int choice_item = 0;
     char response;
+    
 
     printf("%s (Enemy)\n", attacker->name);
     printf("--------------------------------\n");
@@ -102,42 +220,11 @@ void affichage(Supemon *attacker, Supemon *defender, Player *player){
             printf("Choose a Supemon\n");
             break;
         case 3:
-            printf("Choose an item\n");
-            printf("1 - Potion\n");
-            printf("2 - SuperPotion\n");
-            printf("3 - RareCandy\n");
+            item_use(player,response,choice_item,defender);
             break;
         case 4:
-            do {
-                printf("Do you want to use a Supeball, SuperSupeball or NetBall? Y for yes N for no\n");
-                if (scanf(" %c", &response) != 1 || (response != 'y' && response != 'Y' && response != 'n' && response != 'N')) {
-                    printf("Invalid response. Please enter 'Y' for yes or 'N' for no.\n"); 
-                } 
-                } while (response != 'Y' && response != 'y' && response != 'N' && response != 'n');
-                if (response == 'Y' || response == 'y') {
-                    printf("Choose a Ball to use\n");
-                    printf("1 - Supeball\n");
-                    printf("2 - SuperSupeball\n");
-                    printf("3 - NetBall\n");
-                    switch (choice_ball) {
-                        case 1:
-                            //check if player has supeball avant de le faire
-                            printf("You used a Supeball!\n");
-                            break;
-                        case 2:
-                            //check if player has superspuball avant de le faire
-                            printf("You used a SuperSupeball!\n");
-                            break;
-                        case 3:
-                            //check if player has netball avant de le faire 
-                            printf("You used a NetBall!\n");
-                            break;
-                    }
-                } else {
-                    printf("You chose not to use a ball.\n");
-                    capture(attacker, defender, player);
-                    break;
-            }
+            check_ball(attacker, defender, player,response,choice_ball);
+            break;
         case 5:
             run_away(attacker, defender);
             break;
@@ -146,6 +233,6 @@ void affichage(Supemon *attacker, Supemon *defender, Player *player){
             printf("Invalid input. Please enter a number between 1 and 5.\n");
             break;
     }
+    }
 
-}
 

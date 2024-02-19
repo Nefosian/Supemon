@@ -15,7 +15,7 @@ int main() {
     initializeSupasaur(&supasaur);
     initializeSupmander(&supmander);
     initializePlayer(&player);
-    addItem(&player, Potion);
+    addItem(&player, Potion,1);
     affichage(&supasaur, &supmander, &player);
     action();
     shop(&player);
