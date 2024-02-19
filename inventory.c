@@ -4,34 +4,30 @@
 #include "player.h"
 #include "items.h"
 
-void addItem(Player *player, Items item, int quantity) {
+void addItem(Player *player, Items item, int quantity){
     if (player == NULL) {
-        printf("Error: Player does not exist.\n");
+        printf("Error: Inventory does not exist.\n");
         return;
     }
     if (quantity <= 0) {
         printf("Error: Invalid quantity to add.\n");
         return;
     }
-    if (player->numberItems + quantity > maxItem) {
-        printf("Error: Not enough space in inventory.\n");
-        return;
-    }
     int added = 0;
-    for (int i = 0; i < maxItem && quantity > 0; i++) {
-        if (player->objets[i] == EmptySlot) {
+    for (int i = 0; i < maxItem; i++) {
+        if (player->numberItems < maxItem && (player->objets[i] == item || player->numberItems == 0)) {
             player->objets[i] = item;
-            quantity--;
-            player->numberItems++;
+            player->numberItems += quantity;
             added = 1;
+            printf("Item successfully added.\n");
+            break;
         }
     }
-    if (added) {
-        printf("Item(s) successfully added.\n");
-    } else {
+    if (!added) {
         printf("Error: Inventory full, unable to add item.\n");
     }
 }
+
 
 void removeItem(Player *player, Items item, int quantity) {
     if (player == NULL) {
