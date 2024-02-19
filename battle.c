@@ -105,11 +105,11 @@ void check_ball(Supemon *attacker, Supemon *defender, Player *player,char respon
         }
 }
 
-void fct_for_item(Player *player,Supemon *defender,Items item){
-    if (hasItem(player, item) == item){
+void fct_for_item(Player *player,Supemon *defender,Item_info *item){
+    if (hasItem(player, &item) == item->itemName){
         printf("You used a %s!\n",item);
-        useItem(player, item);
-        removeItem(player, item, 1);
+        useItem(player, &item);
+        removeItem(player, &item, 1);
         return 0;
     } else {
         printf("You don't have any %s!\n",item);

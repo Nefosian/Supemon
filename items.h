@@ -19,7 +19,7 @@ typedef struct {
     int price;
     int quantity;
     int maxQuantity[5];
-} Shop;
+} Item_info;
 
 
 #endif
