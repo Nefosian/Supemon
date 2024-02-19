@@ -50,7 +50,6 @@ void removeItem(Player *player, Items item, int quantity) {
                 return;
             }
             removed = 1;
-            printf("Item successfully removed.\n");
             for (int j = i; j < player->numberItems - 1; j++) {
                 player->objets[j] = player->objets[j + 1];
             }
