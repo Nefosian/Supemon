@@ -11,7 +11,6 @@ void addItem(Player *player, Items item, int quantity) {
             return;
         }
     }
-    
     player->objets[player->numberItems].item = item;
     player->objets[player->numberItems].quantity = quantity;
     player->numberItems++;

@@ -3,28 +3,28 @@
 #include "items.h"
 #include "player.h"
 
-void itemName(Items item, char *name){
+void itemName(Items item){
     switch (item){
         case Potion:
-            strcpy(name, "Potion");
+            printf("Potion");
             break;
         case SuperPotion:
-            strcpy(name, "SuperPotion");
+            printf("SuperPotion");
             break;
         case RareCandy:
-            strcpy(name, "RareCandy");
+            printf("RareCandy");
             break;
         case Supeball:
-            strcpy(name, "Supeball");
+            printf("Supeball");
             break;
         case SuperSupeball:
-            strcpy(name, "SuperSupeball");
+            printf("SuperSupeball");
             break;
         case NetBall:
-            strcpy(name, "NetBall");
+            printf("NetBall");
             break;
         default:
-            strcpy(name, "Unknown");
+            printf("Invalid item");
             break;
     }
 }
