@@ -109,18 +109,6 @@ void check_ball(Supemon *attacker, Supemon *defender, Player *player,char respon
         }
 }
 
-void fct_for_item(Player *player,Supemon *defender,Items item){
-    if (hasItem(player, item)){
-        printf("You used a %c!\n",item);
-        useItem(player, item);
-        removeItem(player, item, 1);
-        return ;
-    } else {
-        printf("You don't have any %c!\n",item);
-        return ;
-    }
-}
-
 
 void item_use(Player *player,char response,int choice_item,Supemon *defender){
     do {
@@ -136,29 +124,55 @@ void item_use(Player *player,char response,int choice_item,Supemon *defender){
             printf("2 - SuperPotion\n");
             printf("3 - RareCandy\n");
             printf("4 - Don't use an item\n");
-            scanf("%d", &choice_item);
-            if (choice_item != 1 || choice_item < 1 || choice_item > 4) {
+            if (scanf("%d", &choice_item) != 1 || choice_item < 1 || choice_item > 4) {
                 printf("Invalid input. Please enter a number between 1 and 4.\n");
                 return ;
             } else {
                 switch (choice_item) {
                     case 1:
-                        fct_for_item(player,defender,Potion);
-                        break;
+                        if (hasItem(player, Potion)){
+                            printf("You used a Potion!\n");
+                            useItem(player, Potion);
+                            removeItem(player, Potion, 1);
+                            item_use(player,response,choice_item,defender);
+                            break;
+                        } else {
+                            printf("You don't have any Potion in your inventory!\n");
+                            item_use(player,response,choice_item,defender);
+                            break;
+                        }
                     case 2:
-                        fct_for_item(player,defender,SuperPotion);
-                        break;
+                        if (hasItem(player, SuperPotion)){
+                            printf("You used a SuperPotion!\n");
+                            useItem(player, SuperPotion);
+                            removeItem(player, SuperPotion, 1);
+                            item_use(player,response,choice_item,defender);
+                            break;
+                        } else {
+                            printf("You don't have any SuperPotion in your inventory!\n");
+                            item_use(player,response,choice_item,defender);
+                            break;
+                        }
                     case 3:
-                        fct_for_item(player,defender,RareCandy);
-                        break;
+                        if (hasItem(player, RareCandy)){
+                            printf("You used a RareCandy!\n");
+                            useItem(player, RareCandy);
+                            removeItem(player, RareCandy, 1);
+                            item_use(player,response,choice_item,defender);
+                            break;
+                        } else {
+                            printf("You don't have any RareCandy in your inventory!\n");
+                            item_use(player,response,choice_item,defender);
+                            break;
+                        }
                     case 4:
-                        printf("You chose not to use an item.\n");
+                        printf("You chose to not use an item.\n");
                         break;
                 }
                 return ;
             }
         } else {
-            printf("You don't want to use item! The game continue!");
+            printf("You don't want to use item! The fight continue!");
             return ;
         }
 }
