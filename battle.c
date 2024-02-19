@@ -27,7 +27,6 @@ void run_away(Supemon *attacker, Supemon *defender){
 }
 
 void capture(Supemon *attacker, Supemon *defender, Player *player,float chance_ball){
-    printf("You throw a ball!\n");
     float chance_to_cap = (((float)attacker->maxLife - (float)attacker->currentLife) / (float)attacker->maxLife) - chance_ball;
     int capture_chance = (int)(chance_to_cap * 100);
     srand(time(NULL));
@@ -60,8 +59,9 @@ void check_ball(Supemon *attacker, Supemon *defender, Player *player,char respon
             } else {
                 switch (choice_ball) {
                     case 1:
-                        if (hasItem(player, Supeball) == Supeball){
+                        if (hasItem(player, Supeball)){
                             printf("You used a Supeball your chance to Capture is now increased by 2!\n");
+                            printf("You throw a Supeball!\n");
                             removeItem(player, Supeball, 1);
                             capture(attacker, defender, player,0.25);
                             break;
@@ -71,8 +71,9 @@ void check_ball(Supemon *attacker, Supemon *defender, Player *player,char respon
                             break;
                         }
                     case 2:
-                        if (hasItem(player, SuperSupeball) == SuperSupeball){
+                        if (hasItem(player, SuperSupeball)){
                             printf("You used a SuperSupeball your chance to Capture is now increased by 2!\n");
+                            printf("You throw a SuperSupeball!\n");
                             removeItem(player, SuperSupeball, 1);
                             capture(attacker, defender, player,0.25);
                             break;
@@ -82,8 +83,9 @@ void check_ball(Supemon *attacker, Supemon *defender, Player *player,char respon
                             break;
                         }
                     case 3:
-                        if (hasItem(player, NetBall) == NetBall){
+                        if (hasItem(player, NetBall)){
                             printf("You used a NetBall your chance to Capture is now increased by 2!\n");
+                            printf("You throw a NetBall!\n");
                             removeItem(player,NetBall, 1);
                             capture(attacker, defender, player,0.25);
                             break;
@@ -94,22 +96,24 @@ void check_ball(Supemon *attacker, Supemon *defender, Player *player,char respon
                         }
                     case 4:
                         printf("You chose not to use a special ball.\n");
+                        printf("You throw a Ball!\n");
                         capture(attacker, defender, player,0.5);
                         return 0;
                 }
             }
         } else {
             printf("You chose not to use a special ball.\n");
+            printf("You throw a Ball!\n");
             capture(attacker, defender, player,0.5);
             return 0;
         }
 }
 
-void fct_for_item(Player *player,Supemon *defender,Item_info *item){
-    if (hasItem(player, &item) == item->itemName){
+void fct_for_item(Player *player,Supemon *defender,Items item){
+    if (hasItem(player, item)){
         printf("You used a %s!\n",item);
-        useItem(player, &item);
-        removeItem(player, &item, 1);
+        useItem(player, item);
+        removeItem(player, item, 1);
         return 0;
     } else {
         printf("You don't have any %s!\n",item);

@@ -14,12 +14,4 @@ typedef enum{
     NetBall,
 }Items;
 
-typedef struct {
-    Items itemName[80];
-    int price;
-    int quantity;
-    int maxQuantity[5];
-} Item_info;
-
-
 #endif

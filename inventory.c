@@ -18,7 +18,6 @@ void addItem(Player *player, Items item, int quantity){
         if (player->numberItems < maxItem && (player->objets[i] == item || player->numberItems == 0)) {
             player->objets[i] = item;
             player->numberItems += quantity;
-            added = 1;
             printf("Item successfully added.\n");
             break;
         }
@@ -45,7 +44,6 @@ void removeItem(Player *player, Items item, int quantity) {
                 return;
             }
             removed = 1;
-            printf("Item successfully removed.\n");
             for (int j = i; j < player->numberItems - 1; j++) {
                 player->objets[j] = player->objets[j + 1];
             }
@@ -95,9 +93,9 @@ void removeSupemon(Player *player, Supemon supemon) {
     }
 }
 
-int hasItem(const Player *player, Item_info *item) {
+int hasItem(const Player *player, Items item) {
     for (int i = 0; i < player->numberItems; i++) {
-        if (player->objets[i] == item->itemName) {
+        if (player->objets[i] == item) {
             return 1;
             printf("Item found in inventory.\n"); 
         }
