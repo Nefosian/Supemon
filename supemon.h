@@ -8,6 +8,8 @@
 #include "move_cat.h"
 #include "skill_cat.h"
 
+#define max_moves 4
+
 typedef struct{
     char name[80];
     char type[80];
@@ -23,7 +25,7 @@ typedef struct{
     int Precision;
     int currentPrecision;
     int Speed;
-    SupemonMove Move[6];
+    char *Move[max_moves];
     SupemonSkill Skill[6];
     int luck;
 }Supemon;
