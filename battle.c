@@ -84,7 +84,7 @@ void check_ball(Supemon *attacker, Supemon *defender, Player *player,char respon
                     case 3:
                         if (hasItem(player, NetBall) == NetBall){
                             printf("You used a NetBall your chance to Capture is now increased by 2!\n");
-                            removeItem(player, NetBall, 1);
+                            removeItem(player,NetBall, 1);
                             capture(attacker, defender, player,0.25);
                             break;
                         } else {
