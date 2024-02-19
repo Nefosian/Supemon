@@ -22,8 +22,6 @@ void run_away(Supemon *attacker, Supemon *defender){
     } else {
         printf("You failed to escape!\n");
     }
-
-    return 0;
 }
 
 void capture(Supemon *attacker, Supemon *defender, Player *player,float chance_ball){
@@ -98,14 +96,13 @@ void check_ball(Supemon *attacker, Supemon *defender, Player *player,char respon
                         printf("You chose not to use a special ball.\n");
                         printf("You throw a Ball!\n");
                         capture(attacker, defender, player,0.5);
-                        return 0;
+                        break;
                 }
             }
         } else {
             printf("You chose not to use a special ball.\n");
             printf("You throw a Ball!\n");
             capture(attacker, defender, player,0.5);
-            return 0;
         }
 }
 
@@ -114,10 +111,8 @@ void fct_for_item(Player *player,Supemon *defender,Items item){
         printf("You used a %s!\n",item);
         useItem(player, item);
         removeItem(player, item, 1);
-        return 0;
     } else {
         printf("You don't have any %s!\n",item);
-        return 0;
     }
 }
 
@@ -139,7 +134,6 @@ void item_use(Player *player,char response,int choice_item,Supemon *defender){
             scanf("%d", &choice_item);
             if (choice_item != 1 || choice_item < 1 || choice_item > 4) {
                 printf("Invalid input. Please enter a number between 1 and 4.\n");
-                return 0;
             } else {
                 switch (choice_item) {
                     case 1:
@@ -153,13 +147,11 @@ void item_use(Player *player,char response,int choice_item,Supemon *defender){
                         break;
                     case 4:
                         printf("You chose not to use an item.\n");
-                        return 0;
+                        break;
                 }
-                return 0;
             }
         } else {
             printf("You don't want to use item! The game continue!");
-            return 0;
         }
 }
 
