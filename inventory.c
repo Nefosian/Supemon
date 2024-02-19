@@ -95,9 +95,9 @@ void removeSupemon(Player *player, Supemon supemon) {
     }
 }
 
-int hasItem(const Player *player, Items item) {
+int hasItem(const Player *player, Items *item) {
     for (int i = 0; i < player->numberItems; i++) {
-        if (player->objets[i] == item) {
+        if (player->objets[i] == item->name) {
             return 1;
             printf("Item found in inventory.\n"); 
         }
