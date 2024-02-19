@@ -23,7 +23,7 @@ void Buy(Player *player, Items item, Items price, char temp[], char response) {
     if (player->supcoins >= price) {
         if (player->numberItems < maxItem) {
             player->supcoins -= price;
-            player->objets[player->numberItems++] = item;
+            addItem(player, item, 1);
             printf("Item purchased successfully! You now have %d Supcoins remaining.\n", player->supcoins);
             verify(temp, response, player);
         } else {
@@ -31,7 +31,7 @@ void Buy(Player *player, Items item, Items price, char temp[], char response) {
             verify(temp, response, player);
         }
     } else {
-        printf("You don't have enough Supcoins! You have already %d\n", player->supcoins);
+        printf("You don't have enough Supcoins! You have %d Supcoins.\n", player->supcoins);
         verify(temp, response, player);
     }
 }

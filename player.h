@@ -10,7 +10,7 @@
 
 #define maxSize 300 
 #define deckSize 6 
-#define maxItem 20 
+
 
 typedef struct{
     char name[80];
@@ -21,7 +21,7 @@ typedef struct{
     int numberDeckSupemons;
     Supemon *supemonSelected;
     int supcoins;
-    Items objets[maxItem];
+    Item_quantity objets[maxItem];
     int numberItems;
 } Player;
 

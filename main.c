@@ -18,8 +18,8 @@ int main() {
     initializeSupasaur(&supasaur);
     initializeSupmander(&supmander);
     initializePlayer(&player);
-    addItem(&player, Supeball,1);
     addItem(&player, Potion,1);
+    addItem(&player, Supeball,1);
     affichage(&supasaur, &supmander, &player);
     action();
     shop(&player);

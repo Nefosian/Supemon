@@ -5,57 +5,31 @@
 #include "items.h"
 
 void addItem(Player *player, Items item, int quantity) {
-    if (player == NULL) {
-        printf("Error: Player does not exist.\n");
-        return;
-    }
-    if (quantity <= 0) {
-        printf("Error: Invalid quantity to add.\n");
-        return;
-    }
-    int added = 0;
-    for (int i = 0; i < maxItem; i++) {
-        if (player->objets[i] == EmptySlot || player->objets[i] == item) {
-            player->objets[i] = item;
-            added = 1;
-            player->numberItems++;
-            printf("Item successfully added.\n");
-            break;
+    for (int i = 0; i < player->numberItems; i++) {
+        if (player->objets[i].item == item) {
+            player->objets[i].quantity += quantity;
+            return;
         }
     }
-    if (!added) {
-        printf("Error: Inventory full, unable to add item.\n");
-    }
+    
+    player->objets[player->numberItems].item = item;
+    player->objets[player->numberItems].quantity = quantity;
+    player->numberItems++;
 }
 
 
 void removeItem(Player *player, Items item, int quantity) {
-    if (player == NULL) {
-        printf("Error: Player does not exist.\n");
-        return;
-    }
-    if (quantity <= 0) {
-        printf("Error: Invalid quantity to remove.\n");
-        return;
-    }
-    for (int i = 0; i < maxItem && quantity > 0; ) {
-        if (player->objets[i] == item) {
-            for (int j = i; j < player->numberItems - 1; j++) {
-                player->objets[j] = player->objets[j + 1];
-            }
-            player->objets[player->numberItems - 1] = EmptySlot;
-            player->numberItems--;
-            quantity--;
-        } else {
-            i++;
+    for (int i = 0; i < player->numberItems; i++) {
+        if (player->objets[i].item == item) {
+            player->objets[i].quantity -= quantity;
+            
+            if (player->objets[i].quantity < 0)
+                player->objets[i].quantity = 0;
+            return;
         }
     }
-    if (quantity > 0) {
-        printf("Error: Not enough items to remove.\n");
-    } else {
-        printf("Items successfully removed.\n");
-    }
 }
+
 
 void addSupemon(Player *player, Supemon newSupemon) {
     if (player->numberSupemons < maxSize) {
@@ -93,27 +67,21 @@ void removeSupemon(Player *player, Supemon supemon) {
     }
 }
 
-int hasItem(const Player *player, Items item) {
+int nbitem(const Player *player, Items item) {
     for (int i = 0; i < player->numberItems; i++) {
-        if (player->objets[i] == item) {
-            return 1;
-            printf("Item found in inventory.\n");
+        if (player->objets[i].item == item) {
+            return player->objets[i].quantity;
         }
     }
-    printf("Item not found in inventory.\n");
     return 0;
 }
 
-
-int nbitem(const Player *player, Items item) {
-    int count = 0;
-    for (int i = 0; i < maxItem; i++) {
-        if (player->objets[i] == item) {
-            count++;
-        }
-    }
-    return count;
+int hasItem(const Player *player, Items item) {
+    return nbitem(player, item) > 0;
 }
+
+
+
 
 
 void useItem(Player *player, Items item) {
