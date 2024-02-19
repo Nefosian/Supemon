@@ -117,6 +117,7 @@ void fct_for_item(Player *player,Supemon *defender,Item_info *item){
     }
 }
 
+
 void item_use(Player *player,char response,int choice_item,Supemon *defender){
     do {
         printf("Do you want to use a Potion, SuperPotion or RareCandy? Y for yes N for no\n");
