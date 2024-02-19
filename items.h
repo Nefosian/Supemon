@@ -6,6 +6,7 @@
 #define SUPEMON_ITEMS_H
 
 typedef enum{
+    EmptySlot,
     Potion,
     SuperPotion,
     RareCandy,
@@ -13,13 +14,5 @@ typedef enum{
     SuperSupeball,
     NetBall,
 }Items;
-
-typedef struct {
-    Items itemName[80];
-    int price;
-    int quantity;
-    int maxQuantity[5];
-} Shop;
-
 
 #endif

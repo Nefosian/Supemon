@@ -19,10 +19,10 @@ void verify(char temp[], char response, Player *player) {
     }
 }
 
-void Buy(Player *player, Items item, int cost, char temp[], char response) {
-    if (player->supcoins >= cost) {
+void Buy(Player *player, Items item, Items price, char temp[], char response) {
+    if (player->supcoins >= price) {
         if (player->numberItems < maxItem) {
-            player->supcoins -= cost;
+            player->supcoins -= price;
             player->objets[player->numberItems++] = item;
             printf("Item purchased successfully! You now have %d Supcoins remaining.\n", player->supcoins);
             verify(temp, response, player);
