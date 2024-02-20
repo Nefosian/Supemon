@@ -72,10 +72,11 @@ void check_ball(Supemon *attacker, Supemon *defender, Player *player,char respon
                         }
                     case 2:
                         if (hasItem(player, SuperSupeball)){
-                            printf("You used a SuperSupeball your chance to Capture is now increased by 2!\n");
+                            printf("You used a SuperSupeball your chance to Capture is now increased by 4!\n");
                             printf("You throw a SuperSupeball!\n");
                             removeItem(player, SuperSupeball, 1);
                             capture(attacker, defender, player,0.25);
+                            printf("You have %d Supeball, %d SuperSupeball and %d NetBall\n",nbitem(player, Supeball),nbitem(player, SuperSupeball),nbitem(player, NetBall));
                             break;
                         } else {
                             printf("You don't have any SuperSupeball!\n");
@@ -84,10 +85,11 @@ void check_ball(Supemon *attacker, Supemon *defender, Player *player,char respon
                         }
                     case 3:
                         if (hasItem(player, NetBall)){
-                            printf("You used a NetBall your chance to Capture is now increased by 2!\n");
+                            printf("You used a NetBall your chance to Capture is now increased by 6!\n");
                             printf("You throw a NetBall!\n");
                             removeItem(player,NetBall, 1);
-                            capture(attacker, defender, player,0.25);
+                            capture(attacker, defender, player,0);
+                            printf("You have %d Supeball, %d SuperSupeball and %d NetBall\n",nbitem(player, Supeball),nbitem(player, SuperSupeball),nbitem(player, NetBall));
                             break;
                         } else {
                             printf("You don't have any NetBall!\n");
@@ -172,7 +174,7 @@ void item_use(Player *player,char response,int choice_item,Supemon *defender){
                 return ;
             }
         } else {
-            printf("You don't want to use item! The fight continue!");
+            printf("You don't want to use item! The fight continue!\n");
             return ;
         }
 }
@@ -184,7 +186,6 @@ void affichage(Supemon *attacker, Supemon *defender, Player *player){
     int choice_item = 0;
     char response;
     
-
     printf("%s (Enemy)\n", attacker->name);
     printf("--------------------------------\n");
     printf("HP:    %d/%d           Level:   %d\n", attacker->currentLife, attacker->maxLife, attacker->level);
