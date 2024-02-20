@@ -206,32 +206,38 @@ void affichage(Supemon *attacker, Supemon *defender, Player *player){
     printf("| 5 - Run away         |\n");
     printf("+----------------------+\n");
     
+    char temp[100];
 
-    if (scanf("%d", &choice) != 1) {
-        printf("Invalid input. Please enter a number.\n");
+    while (choice < 1 || choice > 5) {
+        fgets(temp, sizeof(temp), stdin);
+        if (sscanf(temp, "%d", &choice) != 1) {
+            printf("Invalid input. Please enter a number.\n");
+        } else if (choice < 1 || choice > 5) {
+            printf("Invalid choice. Please choose a number between 1 and 5.\n");
+        }
     }
 
     switch (choice) {
         case 1:
+            displayMoves(defender);
             printf("Choose a move.\n");
-            printf("1 - %s\n", defender->Move[0]);
-            printf("2 - %s\n", defender->Move[1]);
-            if (defender->Move[2] != NULL) {
-                printf("3 - %s\n", defender->Move[2]);
-            }
-            scanf("%d", &choice_move);
-            if (choice_move < 1 || choice_move > 3) {
-                printf("Invalid input. Please enter a number between 1 and 3.\n");
+            while (choice_move < 1 || choice_move > 3) {
+                fgets(temp, sizeof(temp), stdin);
+                if (sscanf(temp, "%d", &choice_move) != 1) {
+                    printf("Invalid input. Please enter a number.\n");
+                } else if (choice_move < 1 || choice_move > 3) {
+                    printf("Invalid choice. Please choose a number between 1 and 3.\n");
+                }
             }
             switch (choice_move) {
                 case 1:
-                    printf("%s used %s!\n", defender->name, defender->Move[0]);
+                    printf("%s\n",displayUsed(defender, attacker, 1));
                     break;
                 case 2:
-                    printf("%s used %s!\n", defender->name, defender->Move[1]);
+                    printf("%s\n",displayUsed(defender, attacker, 2));
                     break;
                 case 3:
-                    printf("%s used %s!\n", defender->name, defender->Move[2]);
+                    printf("%s\n",displayUsed(defender,attacker, 3));
                     break;
             }
             break;
@@ -247,10 +253,6 @@ void affichage(Supemon *attacker, Supemon *defender, Player *player){
             break;
         case 5:
             run_away(attacker, defender);
-            break;
-
-        default:
-            printf("Invalid input. Please enter a number between 1 and 5.\n");
             break;
     }
 }
