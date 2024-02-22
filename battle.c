@@ -23,8 +23,7 @@ void run_away(Supemon *attacker, Supemon *defender){
     } else {
         printf("You failed to escape!\n");
     }
-
-    return ;
+    return;
 }
 
 void capture(Supemon *attacker, Supemon *defender, Player *player,float chance_ball){
@@ -101,15 +100,26 @@ void check_ball(Supemon *attacker, Supemon *defender, Player *player,char respon
                         printf("You chose not to use a special ball.\n");
                         printf("You throw a Ball!\n");
                         capture(attacker, defender, player,0.5);
-                        return ;
+                        return 0;
                 }
             }
         } else {
             printf("You chose not to use a special ball.\n");
             printf("You throw a Ball!\n");
             capture(attacker, defender, player,0.5);
-            return 0;
         }
+}
+
+void fct_for_item(Player *player,Supemon *defender,Items item){
+    if (hasItem(player, item)){
+        printf("You used a %c!\n",item);
+        useItem(player, item);
+        removeItem(player, item, 1);
+        return ;
+    } else {
+        printf("You don't have any %c!\n",item);
+        return ;
+    }
 }
 
 
@@ -171,6 +181,7 @@ void item_use(Player *player,char response,int choice_item,Supemon *defender){
                         printf("You chose to not use an item.\n");
                         return ;
                 }
+                return ;
             }
         } else {
             printf("You don't want to use item! The fight continue!\n");
@@ -188,13 +199,13 @@ void affichage(Supemon *attacker, Supemon *defender, Player *player){
     
     printf("%s (Enemy)\n", attacker->name);
     printf("--------------------------------\n");
-    printf("HP:    %d/%d           Level:   %d\n", attacker->currentLife, attacker->maxLife, attacker->level);
+    printf("HP:    %d/%d          Level:   %d\n", attacker->currentLife, attacker->maxLife, attacker->level);
     printf("Attack: %d            Defense: %d\n", attacker->Attack, attacker->Defense);
     printf("Speed:  %d            Dodge:   %d\n",attacker->Speed, attacker->Dodge);
     printf("--------------------------------\n");
     printf("%s (%s)\n", defender->name, player->name);
     printf("--------------------------------\n");
-    printf("HP:    %d/%d           Level:   %d\n", defender->currentLife, defender->maxLife, defender->level);
+    printf("HP:    %d/%d          Level:   %d\n", defender->currentLife, defender->maxLife, defender->level);
     printf("Attack: %d            Defense: %d\n", defender->Attack, defender->Defense);
     printf("Speed:  %d            Dodge:   %d\n",defender->Speed, defender->Dodge);
     printf("--------------------------------\n\n");
