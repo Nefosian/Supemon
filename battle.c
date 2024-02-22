@@ -198,13 +198,13 @@ void affichage(Supemon *attacker, Supemon *defender, Player *player){
     
     printf("%s (Enemy)\n", attacker->name);
     printf("--------------------------------\n");
-    printf("HP:    %d/%d           Level:   %d\n", attacker->currentLife, attacker->maxLife, attacker->level);
+    printf("HP:    %d/%d          Level:   %d\n", attacker->currentLife, attacker->maxLife, attacker->level);
     printf("Attack: %d            Defense: %d\n", attacker->Attack, attacker->Defense);
     printf("Speed:  %d            Dodge:   %d\n",attacker->Speed, attacker->Dodge);
     printf("--------------------------------\n");
     printf("%s (%s)\n", defender->name, player->name);
     printf("--------------------------------\n");
-    printf("HP:    %d/%d           Level:   %d\n", defender->currentLife, defender->maxLife, defender->level);
+    printf("HP:    %d/%d          Level:   %d\n", defender->currentLife, defender->maxLife, defender->level);
     printf("Attack: %d            Defense: %d\n", defender->Attack, defender->Defense);
     printf("Speed:  %d            Dodge:   %d\n",defender->Speed, defender->Dodge);
     printf("--------------------------------\n\n");
