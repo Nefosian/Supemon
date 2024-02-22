@@ -11,5 +11,7 @@ void initializePlayer(Player *player);
 void startNewGame(Player *player);
 void loadGame(Player *player);
 void welcomeScreen(Player *player);
+void itemNameChoose(Items item, char* outName);
+Items itemNameToEnum(const char* itemName);
 
 #endif

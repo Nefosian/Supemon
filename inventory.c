@@ -80,9 +80,6 @@ int hasItem(const Player *player, Items item) {
 }
 
 
-
-
-
 void useItem(Player *player,Supemon *supemon, Items item) {
     if (hasItem(player, item)) {
         printf("Item used successfully.\n");

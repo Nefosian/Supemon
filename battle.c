@@ -113,7 +113,7 @@ void check_ball(Supemon *attacker, Supemon *defender, Player *player,char respon
 void fct_for_item(Player *player,Supemon *defender,Items item){
     if (hasItem(player, item)){
         printf("You used a %c!\n",item);
-        useItem(player, item);
+        useItem(player, defender, item);
         removeItem(player, item, 1);
         return ;
     } else {
