@@ -108,43 +108,48 @@ void itemNameChoose(Items item, char* outName) {
     }
 }
 
-
 void loadGame(Player *player){
     char filename[256];
     printf("Enter the filename to load: \n");
     scanf("%255s", filename);
-    while (getchar() != '\n');
+    while (getchar() != '\n'); // Nettoie le buffer d'entrée
 
     FILE *file = fopen(filename, "r");
     if (!file) {
         printf("Error opening file %s for loading.\n", filename);
         return;
     }
-    memset(player, 0, sizeof(Player));
+    memset(player, 0, sizeof(Player)); // Réinitialise la structure Player
 
+    // Lecture des informations de base du joueur
     fscanf(file, "Name: %79[^\n]\n", player->name);
     fscanf(file, "Age: %d\n", &player->age);
     fscanf(file, "Supcoins: %d\n", &player->supcoins);
 
+    // Lecture des objets dans l'inventaire
     fscanf(file, "Number of Items in inventory: %d\n", &player->numberItems);
     for (int i = 0; i < player->numberItems && i < maxItem; i++) {
+        int dummy; // Utilisé pour lire l'index sans l'utiliser
         char itemName[30];
         int quantity;
-        fscanf(file, "Item %d: %29[^,], Quantity: %d\n", &i, itemName, &quantity);
+        fscanf(file, "Item %d: %29[^,], Quantity: %d\n", &dummy, itemName, &quantity);
         player->objets[i].item = itemNameToEnum(itemName);
         player->objets[i].quantity = quantity;
     }
+    printf("Number of Items in inventory: %d\n", player->numberItems);
 
     fscanf(file, "Number of Supemons in Deck: %d\n", &player->numberDeckSupemons);
     for (int i = 0; i < player->numberDeckSupemons && i < deckSize; i++) {
+        int nb;
         fscanf(file, "Deck Supemon %d: %79[^,], Level: %d, HP: %d, Attack: %d, Defense: %d, Speed: %d, Dodge: %d\n",
-               &i, player->deckSupemons[i].name, &player->deckSupemons[i].level, &player->deckSupemons[i].currentLife,
+               &nb, player->deckSupemons[i].name, &player->deckSupemons[i].level, &player->deckSupemons[i].currentLife,
                &player->deckSupemons[i].Attack, &player->deckSupemons[i].Defense, &player->deckSupemons[i].Speed,
                &player->deckSupemons[i].Dodge);
     }
+    printf("Number of Supemon in deck: %d\n", player->numberDeckSupemons);
 
     fscanf(file, "Number of Supemons in collection: %d\n", &player->numberSupemons);
-    for (int i = 0; i < player->numberSupemons && i < maxSize; i++) {
+    for (int i = 0; i < player->numberSupemons && i < 300; i++) {
         fscanf(file, "Collection Supemon %d: %79[^,], Level: %d, HP: %d, Attack: %d, Defense: %d, Speed: %d, Dodge: %d\n",
                &i, player->collectionSupemons[i].name, &player->collectionSupemons[i].level, &player->collectionSupemons[i].currentLife,
                &player->collectionSupemons[i].Attack, &player->collectionSupemons[i].Defense, &player->collectionSupemons[i].Speed,
@@ -156,7 +161,6 @@ void loadGame(Player *player){
     printf("Welcome back %s!\n", player->name);
     action();
 }
-
 
 Items itemNameToEnum(const char* itemName) {
     if (strcmp(itemName, "Potion") == 0) return Potion;
