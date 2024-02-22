@@ -109,12 +109,11 @@ void itemNameChoose(Items item, char* outName) {
     }
 }
 
-
 void loadGame(Player *player){
     char filename[256];
     printf("Enter the filename to load: \n");
     scanf("%255s", filename);
-    while (getchar() != '\n');
+    while (getchar() != '\n'); 
 
     FILE *file = fopen(filename, "r");
     if (!file) {
@@ -129,35 +128,40 @@ void loadGame(Player *player){
 
     fscanf(file, "Number of Items in inventory: %d\n", &player->numberItems);
     for (int i = 0; i < player->numberItems && i < maxItem; i++) {
+        int nb; 
         char itemName[30];
         int quantity;
-        fscanf(file, "Item %d: %29[^,], Quantity: %d\n", &i, itemName, &quantity);
+        fscanf(file, "Item %d: %29[^,], Quantity: %d\n", &nb, itemName, &quantity);
         player->objets[i].item = itemNameToEnum(itemName);
         player->objets[i].quantity = quantity;
     }
+    printf("Number of Items in inventory: %d\n", player->numberItems);
 
     fscanf(file, "Number of Supemons in Deck: %d\n", &player->numberDeckSupemons);
     for (int i = 0; i < player->numberDeckSupemons && i < deckSize; i++) {
+        int nb;
         fscanf(file, "Deck Supemon %d: %79[^,], Level: %d, HP: %d, Attack: %d, Defense: %d, Speed: %d, Dodge: %d\n",
-               &i, player->deckSupemons[i].name, &player->deckSupemons[i].level, &player->deckSupemons[i].currentLife,
+               &nb, player->deckSupemons[i].name, &player->deckSupemons[i].level, &player->deckSupemons[i].currentLife,
                &player->deckSupemons[i].Attack, &player->deckSupemons[i].Defense, &player->deckSupemons[i].Speed,
                &player->deckSupemons[i].Dodge);
     }
+    printf("Number of Supemon in deck: %d\n", player->numberDeckSupemons);
 
     fscanf(file, "Number of Supemons in collection: %d\n", &player->numberSupemons);
     for (int i = 0; i < player->numberSupemons && i < maxSize; i++) {
+        int nb;
         fscanf(file, "Collection Supemon %d: %79[^,], Level: %d, HP: %d, Attack: %d, Defense: %d, Speed: %d, Dodge: %d\n",
-               &i, player->collectionSupemons[i].name, &player->collectionSupemons[i].level, &player->collectionSupemons[i].currentLife,
+               &nb, player->collectionSupemons[i].name, &player->collectionSupemons[i].level, &player->collectionSupemons[i].currentLife,
                &player->collectionSupemons[i].Attack, &player->collectionSupemons[i].Defense, &player->collectionSupemons[i].Speed,
                &player->collectionSupemons[i].Dodge);
     }
+    printf("Number of Supemon in collection: %d\n", player->numberSupemons);
 
     fclose(file);
     printf("Game successfully loaded from %s\n", filename);
     printf("Welcome back %s!\n", player->name);
     action();
 }
-
 
 Items itemNameToEnum(const char* itemName) {
     if (strcmp(itemName, "Potion") == 0) return Potion;
