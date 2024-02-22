@@ -8,6 +8,8 @@
 #include "move_cat.h"
 #include "skill_cat.h"
 
+#define max_moves 4
+
 typedef struct{
     char name[80];
     char type[80];
@@ -21,12 +23,15 @@ typedef struct{
     int Defense;
     int Dodge;
     int Precision;
-    int currentPrecision;
     int Speed;
-    SupemonMove Move[6];
-    SupemonSkill Skill[6];
+    char *Move[max_moves];
+    SupemonSkill Skill1;
+    SupemonSkill Skill2;
+    SupemonSkill Skill3;
+    int skill1damage;
     int luck;
 }Supemon;
+
 
 void initializeSupemon(Supemon *supemon, int choice);
 void initializeSupmander(Supemon *supemon);
@@ -39,5 +44,6 @@ void initializeSupsnake(Supemon *supemon);
 void initializeSupbear(Supemon *supemon);
 void initializeSupwolf(Supemon *supemon);
 void initializeSupbat(Supemon *supemon);
+void displayMoves(Supemon *supemon);
 
 #endif

@@ -71,10 +71,11 @@ void check_ball(Supemon *attacker, Supemon *defender, Player *player,char respon
                         }
                     case 2:
                         if (hasItem(player, SuperSupeball)){
-                            printf("You used a SuperSupeball your chance to Capture is now increased by 2!\n");
+                            printf("You used a SuperSupeball your chance to Capture is now increased by 4!\n");
                             printf("You throw a SuperSupeball!\n");
                             removeItem(player, SuperSupeball, 1);
                             capture(attacker, defender, player,0.25);
+                            printf("You have %d Supeball, %d SuperSupeball and %d NetBall\n",nbitem(player, Supeball),nbitem(player, SuperSupeball),nbitem(player, NetBall));
                             break;
                         } else {
                             printf("You don't have any SuperSupeball!\n");
@@ -83,10 +84,11 @@ void check_ball(Supemon *attacker, Supemon *defender, Player *player,char respon
                         }
                     case 3:
                         if (hasItem(player, NetBall)){
-                            printf("You used a NetBall your chance to Capture is now increased by 2!\n");
+                            printf("You used a NetBall your chance to Capture is now increased by 6!\n");
                             printf("You throw a NetBall!\n");
                             removeItem(player,NetBall, 1);
-                            capture(attacker, defender, player,0.25);
+                            capture(attacker, defender, player,0);
+                            printf("You have %d Supeball, %d SuperSupeball and %d NetBall\n",nbitem(player, Supeball),nbitem(player, SuperSupeball),nbitem(player, NetBall));
                             break;
                         } else {
                             printf("You don't have any NetBall!\n");
@@ -182,7 +184,7 @@ void item_use(Player *player,char response,int choice_item,Supemon *defender){
                 return 0;
             }
         } else {
-            printf("You don't want to use item! The game continue!");
+            printf("You don't want to use item! The fight continue!\n");
             return ;
         }
 }
@@ -194,7 +196,6 @@ void affichage(Supemon *attacker, Supemon *defender, Player *player){
     int choice_item = 0;
     char response;
     
-
     printf("%s (Enemy)\n", attacker->name);
     printf("--------------------------------\n");
     printf("HP:    %d/%d           Level:   %d\n", attacker->currentLife, attacker->maxLife, attacker->level);
@@ -216,35 +217,40 @@ void affichage(Supemon *attacker, Supemon *defender, Player *player){
     printf("| 5 - Run away         |\n");
     printf("+----------------------+\n");
     
+    char temp[100];
 
-    if (scanf("%d", &choice) != 1) {
-        printf("Invalid input. Please enter a number.\n");
+    while (choice < 1 || choice > 5) {
+        fgets(temp, sizeof(temp), stdin);
+        if (sscanf(temp, "%d", &choice) != 1) {
+            printf("Invalid input. Please enter a number.\n");
+        } else if (choice < 1 || choice > 5) {
+            printf("Invalid choice. Please choose a number between 1 and 5.\n");
+        }
     }
 
     switch (choice) {
         case 1:
+            displayMoves(defender);
             printf("Choose a move.\n");
-            printf("1 - %s\n", defender->Move[0]);
-            printf("2 - %s\n", defender->Move[1]);
-            if (defender->Move[2] != NULL) {
-                printf("3 - %s\n", defender->Move[2]);
-            }
-            scanf("%d", &choice_move);
-            if (choice_move < 1 || choice_move > 3) {
-                printf("Invalid input. Please enter a number between 1 and 3.\n");
+            while (choice_move < 1 || choice_move > 3) {
+                fgets(temp, sizeof(temp), stdin);
+                if (sscanf(temp, "%d", &choice_move) != 1) {
+                    printf("Invalid input. Please enter a number.\n");
+                } else if (choice_move < 1 || choice_move > 3) {
+                    printf("Invalid choice. Please choose a number between 1 and 3.\n");
+                }
             }
             switch (choice_move) {
                 case 1:
-                    printf("%s used %s!\n", defender->name, defender->Move[0]);
+                    printf("%s\n",displayUsed(defender, attacker, 1));
                     break;
                 case 2:
-                    printf("%s used %s!\n", defender->name, defender->Move[1]);
+                    printf("%s\n",displayUsed(defender, attacker, 2));
                     break;
                 case 3:
-                    printf("%s used %s!\n", defender->name, defender->Move[2]);
+                    printf("%s\n",displayUsed(defender,attacker, 3));
                     break;
             }
-            break;
         case 2:
             printf("Choose a Supemon\n");
             break;
@@ -257,10 +263,6 @@ void affichage(Supemon *attacker, Supemon *defender, Player *player){
             break;
         case 5:
             run_away(attacker, defender);
-            break;
-
-        default:
-            printf("Invalid input. Please enter a number between 1 and 5.\n");
             break;
     }
 }

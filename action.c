@@ -27,7 +27,7 @@ void action() {
             printf("Invalid input. Please enter a number.\n");
             choice = 0;
         } else if (choice < 1 || choice > 4) {
-            printf("Invalid choice. Please choose 1, 2, or 3.\n");
+            printf("Invalid choice. Please choose 1, 2, 3 or 4.\n");
         }
     }
 

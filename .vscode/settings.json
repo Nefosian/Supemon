@@ -6,6 +6,7 @@
         "supemon.h": "c",
         "battle.h": "c",
         "items.h": "c",
-        "inventory.h": "c"
+        "inventory.h": "c",
+        "skill_cat.h": "c"
     }
 }

@@ -13,14 +13,14 @@
 int main() {
     Player player;
     Supemon supasaur;
-    Supemon supmander;
+    Supemon supfox;
     player.supcoins = 1000;
     initializeSupasaur(&supasaur);
-    initializeSupmander(&supmander);
+    initializeSupfox(&supfox);
     initializePlayer(&player);
     addItem(&player, RareCandy,1);
     addItem(&player, Supeball,1);
-    affichage(&supasaur, &supmander, &player);
+    affichage(&supasaur, &supfox, &player);
     action();
     shop(&player);
     return 0;
