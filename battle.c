@@ -241,7 +241,6 @@ void affichage(Supemon *attacker, Supemon *defender, Player *player){
                     printf("%s\n",displayUsed(defender,attacker, 3));
                     break;
             }
-            break;
         case 2:
             printf("Choose a Supemon\n");
             break;
