@@ -18,7 +18,7 @@ int main() {
     initializeSupasaur(&supasaur);
     initializeSupfox(&supfox);
     initializePlayer(&player);
-    addItem(&player, RareCandy,1);
+    addItem(&player, Potion,1);
     addItem(&player, Supeball,1);
     affichage(&supasaur, &supfox, &player);
     action();

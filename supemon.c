@@ -116,10 +116,8 @@ void initializeSupfox(Supemon *supemon) {
     supemon->Speed = 1;
     supemon->Move[0] = Wink;
     supemon->Move[1] = Roll;
-    supemon->Move[2] = Dance;
     supemon->Skill1 = Charm;
     supemon->Skill2 = FireTornado;
-    supemon->Skill3 = Slash;
     supemon->skill1damage = 2;
 }
 
@@ -299,75 +297,75 @@ void skill_condition(Supemon *defender, Supemon *attacker){
         switch (defender->Skill2) {
             case Scratch:
                 defender->Speed +=1;
-                printf("You have now : %d Speed\n",defender->Speed);
+                printf("You have now : %d point of Speed\n",defender->Speed);
                 break;
             case Grawl:
                 defender->Attack +=1;
-                printf("You have now : %d Attack\n",defender->Attack);
+                printf("You have now : %d point of Attack\n",defender->Attack);
                 break;
             case FireTornado:
                 defender->Attack +=1;
-                printf("You have now : %d Attack\n",defender->Attack);
+                printf("You have now : %d point of Attack\n",defender->Attack);
                 break;
             case Pound:
                 defender->Dodge +=1;
-                printf("You have now : %d Dodge\n",defender->Dodge);
+                printf("You have now : %d point of Dodge\n",defender->Dodge);
                 break;
             case Foliage:
                 defender->Defense +=1;
-                printf("You have now : %d Defense\n",defender->Defense);
+                printf("You have now : %d point of Defense\n",defender->Defense);
                 break;
             case Shell:
                 defender->Defense +=1;
-                printf("You have now : %d Defense\n",defender->Defense);
+                printf("You have now : %d point of Defense\n",defender->Defense);
                 break;
             case Charm:
                 defender->Precision +=1;
-                printf("You have now : %d Precision\n",defender->Precision);
+                printf("You have now : %d point of Precision\n",defender->Precision);
                 break;
             case Intimidation:
                 defender->Precision +=1;
-                printf("You have now : %d Precision\n",defender->Precision);
+                printf("You have now : %d point of Precision\n",defender->Precision);
                 break;
             case Tornado:
                 defender->Dodge +=1;
-                printf("You have now : %d Dodge\n",defender->Dodge);
+                printf("You have now : %d point of Dodge\n",defender->Dodge);
                 break;
             case Peck:
                 defender->Precision +=1;
-                printf("You have now : %d Precision\n",defender->Precision);
+                printf("You have now : %d point of Precision\n",defender->Precision);
                 break;
             case Poison:
                 defender->Attack +=1;
-                printf("You have now : %d Attack\n",defender->Attack);
+                printf("You have now : %d point of Attack\n",defender->Attack);
                 break;
             case Hipnosis:
                 defender->Dodge +=1;
-                printf("You have now : %d Dodge\n",defender->Dodge);
+                printf("You have now : %d point of Dodge\n",defender->Dodge);
                 break;
             case Suplex:
                 defender->Attack +=1;
-                printf("You have now : %d Attack\n",defender->Attack);
+                printf("You have now : %d point of Attack\n",defender->Attack);
                 break;
             case Earthquake:
                 defender->Defense +=1;
-                printf("You have now : %d Defense\n",defender->Defense);
+                printf("You have now : %d point of Defense\n",defender->Defense);
                 break;
             case Fang:
                 defender->Attack +=1;
-                printf("You have now : %d Attack\n",defender->Attack);
+                printf("You have now : %d point of Attack\n",defender->Attack);
                 break;
             case IronTail:
                 defender->Defense +=1;
-                printf("You have now : %d Defense\n",defender->Defense);
+                printf("You have now : %d point of Defense\n",defender->Defense);
                 break;
             case Shockwave:
                 defender->Precision +=1;
-                printf("You have now : %d Precision\n",defender->Precision);
+                printf("You have now : %d point of Precision\n",defender->Precision);
                 break;
             case Slash:
                 defender->Attack +=1;
-                printf("You have now : %d Attack\n",defender->Attack);
+                printf("You have now : %d point of Attack\n",defender->Attack);
                 break;
             case Vampirism:
                 defender->currentLife +=1;
@@ -380,6 +378,7 @@ void skill_condition(Supemon *defender, Supemon *attacker){
                 printf("Unknown Skill");
                 break;
         }
+    return;
 }
 
 void displayUsed(Supemon *defender, Supemon *attacker, int i) {
@@ -393,11 +392,35 @@ void displayUsed(Supemon *defender, Supemon *attacker, int i) {
         if (random_number <= dodge_percent) {
             float calcul = (defender->Attack * defender->skill1damage) / attacker->Defense;
             attacker->currentLife -= calcul;
+            printf("Your opponent don't dodge the attack\n");
             printf("Your opponent has now : %d/%d HP\n",attacker->currentLife,attacker->maxLife);
         } else {                        
             printf("Your opponent dodged the attack\n");
+            printf("Your opponent has now : %d/%d HP\n",attacker->currentLife,attacker->maxLife);
         }
-    } else if (i == 2 || i==3) {
+    } else if (i == 2) {
         skill_condition(defender,attacker);
+    }
+    return;
+}
+
+void moove(Supemon *defender, Supemon *attacker, int choice_move, char temp[255]) {
+    displayMoves(defender);
+    printf("Choose a move.\n");
+    while (choice_move < 1 || choice_move > 3) {
+        fgets(temp, sizeof(temp), stdin);
+        if (sscanf(temp, "%d", &choice_move) != 1) {
+            printf("Invalid input. Please enter a number.\n");
+        } else if (choice_move < 1 || choice_move > 3) {
+            printf("Invalid choice. Please choose a number between 1 and 3.\n");
+        }
+    }
+    switch (choice_move) {
+        case 1:
+            displayUsed(defender, attacker, 1);
+            break;
+        case 2:
+            displayUsed(defender, attacker, 2);
+            break;
     }
 }

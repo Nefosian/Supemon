@@ -7,6 +7,7 @@
         "battle.h": "c",
         "items.h": "c",
         "inventory.h": "c",
-        "skill_cat.h": "c"
+        "skill_cat.h": "c",
+        "shop.h": "c"
     }
 }

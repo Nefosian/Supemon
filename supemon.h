@@ -45,5 +45,6 @@ void initializeSupbear(Supemon *supemon);
 void initializeSupwolf(Supemon *supemon);
 void initializeSupbat(Supemon *supemon);
 void displayMoves(Supemon *supemon);
+void displayUsed(Supemon *defender, Supemon *attacker, int i);
 
 #endif

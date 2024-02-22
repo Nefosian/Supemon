@@ -83,32 +83,35 @@ int hasItem(const Player *player, Items item) {
 
 
 
-void useItem(Player *player, Items item) {
+void useItem(Player *player,Supemon *supemon, Items item) {
     if (hasItem(player, item)) {
-        removeItem(player, item, 1);
         printf("Item used successfully.\n");
         if (item == Potion) {
-            player->supemonSelected->currentLife += 5;
+            supemon->currentLife += 5;
             printf("Supemon healed by 5 HP.\n");
-            if (player->supemonSelected->currentLife > player->supemonSelected->maxLife) {
-                player->supemonSelected->currentLife = player->supemonSelected->maxLife;
+            if (supemon->currentLife > supemon->maxLife) {
+                supemon->currentLife = supemon->maxLife;
                 printf("Supemon reached maximum life.\n");
             }
+            return;
         } else if (item == SuperPotion) {
-            player->supemonSelected->currentLife += 10;
+            supemon->currentLife += 10;
             printf("Supemon's life increased by 10.\n");
-            if (player->supemonSelected->currentLife > player->supemonSelected->maxLife) {
-                player->supemonSelected->currentLife = player->supemonSelected->maxLife;
+            if (supemon->currentLife > supemon->maxLife) {
+                supemon->currentLife = supemon->maxLife;
                 printf("Supemon reached maximum life.\n");
             }
+            return; 
         } else if (item == RareCandy) {
             printf("Supemon's level increased by 1.\n");
-            player->supemonSelected->level += 1;
-            if (player->supemonSelected->level > 100) {
-                player->supemonSelected->level = 100;
+            supemon->level += 1;
+            if (supemon->level > 100) {
+                supemon->level = 100;
                 printf("Supemon reached maximum level.\n");
             }
+            return; 
         }
+        removeItem(player, item, 1);
 
     } else {
         printf("Error: Item not found in inventory, cannot be used.\n");
