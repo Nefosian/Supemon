@@ -392,9 +392,24 @@ void displayUsedDefender(Supemon *defender, Supemon *attacker, int i) {
         if (random_number <= dodge_percent) {
             float calcul = (float)(defender->Attack * defender->skill1damage) / attacker->Defense;
             int calculInt = (int)(defender->Attack * defender->skill1damage) / attacker->Defense;
-            attacker->currentLife -= (int)calcul+1;
+            if (calcul != calculInt) {
+                int random_number2 = rand() % 100;
+                if (random_number2 < 50) {
+                    attacker->currentLife -= (int)calcul;
+                } else {
+                    attacker->currentLife -= (int)calcul+1;
+                }
+            } else {
+                attacker->currentLife -= calculInt;
+            }
+            if (attacker->currentLife <= 0){
+                attacker->currentLife = 0;
+            }
             printf("Your opponent don't dodge the attack\n");
             printf("Your opponent has now : %d/%d HP\n",attacker->currentLife,attacker->maxLife);
+            if (attacker->currentLife <= 0){
+                printf("You win the game\n");
+            }
         } else {                        
             printf("Your opponent dodged the attack\n");
             printf("Your opponent has already : %d/%d HP\n",attacker->currentLife,attacker->maxLife);
@@ -415,32 +430,79 @@ void displayUsedAttacker(Supemon *defender, Supemon *attacker, int i) {
     if (random_number <= dodge_percent) {
         float calcul = (float)(attacker->Attack * attacker->skill1damage) / defender->Defense;
         int calculInt = (int)(attacker->Attack * attacker->skill1damage) / defender->Defense;
-        defender->currentLife -= (int)calcul+1;
-        printf("Your opponent don't dodge the attack\n");
-        printf("Your opponent has now : %d/%d HP\n",defender->currentLife,defender->maxLife);
+        if (calcul != calculInt) {
+            int random_number2 = rand() % 100;
+            if (random_number2 < 50) {
+                defender->currentLife -= (int)calcul;
+            } else {
+                defender->currentLife -= (int)calcul+1;
+            }
+        } else {
+            defender->currentLife -= calculInt;
+        }
+        if (defender->currentLife <= 0){
+            defender->currentLife = 0;
+        }
+        printf("You don't dodged the attack\n");
+        printf("You have now : %d/%d HP\n",defender->currentLife,defender->maxLife);
+        if (defender->currentLife <= 0){
+                printf("You loose the game\n");
+        }
     } else {                        
-        printf("Your opponent dodged the attack\n");
-        printf("Your opponent has already : %d/%d HP\n",defender->currentLife,defender->maxLife);
+        printf("You dodged the attack\n");
+        printf("You have already : %d/%d HP\n",defender->currentLife,defender->maxLife);
     }
 }
 
-void moove(Supemon *defender, Supemon *attacker, int choice_move, char temp[255]) {
+void defenderMove(Supemon *defender, Supemon *attacker, int choice_move,char temp[255]) {
     displayMoves(defender);
-    printf("Choose a move.\n");
-    while (choice_move < 1 || choice_move > 3) {
-        fgets(temp, sizeof(temp), stdin);
-        if (sscanf(temp, "%d", &choice_move) != 1) {
-            printf("Invalid input. Please enter a number.\n");
-        } else if (choice_move < 1 || choice_move > 3) {
-            printf("Invalid choice. Please choose a number between 1 and 3.\n");
+        printf("Choose a move.\n");
+        while (choice_move < 1 || choice_move > 3) {
+            fgets(temp, sizeof(temp), stdin);
+            if (sscanf(temp, "%d", &choice_move) != 1) {
+                printf("Invalid input. Please enter a number.\n");
+            } else if (choice_move < 1 || choice_move > 3) {
+                printf("Invalid choice. Please choose a number between 1 and 3.\n");
+            }
         }
+        switch (choice_move) {
+            case 1:
+                displayUsedDefender(defender, attacker, 1);
+                break;
+            case 2:
+                displayUsedDefender(defender, attacker, 2);
+                break;
     }
-    switch (choice_move) {
-        case 1:
-            displayUsedDefender(defender, attacker, 1);
+}
+
+
+void firstMove(Supemon *defender, Supemon *attacker, int choice_move, char temp[255]) {
+    if (defender->Speed > attacker->Speed){
+        defenderMove(defender, attacker, choice_move, temp);
+    } if (defender->Speed == attacker->Speed){
+        srand(time(NULL));
+        int random_number = rand() % 100;
+        if (random_number < 50){
+            defenderMove(defender, attacker, choice_move, temp);
+        } else {
+            displayUsedAttacker(defender, attacker, 1);
+        }
+    } else {
+        displayUsedAttacker(defender, attacker, 1);
+    }    
+}
+
+void Move(Supemon *defender, Supemon *attacker, int choice_move, char temp[255]) {
+    firstMove(defender, attacker, choice_move, temp);
+    while (defender->currentLife > 0 && attacker->currentLife > 0){
+        if (defender->currentLife <= 0){
             break;
-        case 2:
-            displayUsedDefender(defender, attacker, 2);
+        } else {
+            displayUsedAttacker(defender, attacker, 1);
+        } if (attacker->currentLife <= 0){
             break;
+        } else {
+            defenderMove(defender, attacker, choice_move, temp);
+        }
     }
 }

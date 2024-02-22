@@ -247,7 +247,7 @@ void affichage(Supemon *attacker, Supemon *defender, Player *player){
 
     switch (choice) {
         case 1:
-            moove(defender,attacker,choice_move,temp);
+            Move(defender,attacker,choice_move,temp);
             break;  
         case 2:
             changeSup(player,choice);
