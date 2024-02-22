@@ -15,9 +15,9 @@ int main() {
     Supemon supasaur;
     Supemon supfox;
     player.supcoins = 1000;
+    welcomeScreen(&player);
     initializeSupasaur(&supasaur);
     initializeSupfox(&supfox);
-    initializePlayer(&player);
     addItem(&player, RareCandy,1);
     addItem(&player, Supeball,1);
     affichage(&supasaur, &supfox, &player);
