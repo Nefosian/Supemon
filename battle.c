@@ -189,11 +189,29 @@ void item_use(Player *player,char response,int choice_item,Supemon *defender){
         }
 }
 
+void changeSup(Player *player,int choice_supermon){
+    char temp[100];
+    int i = 0;
+    printf("Choose a Supemon\n");
+    displayDeck(player);
+    while (i < 1 || i > player->numberDeckSupemons) {
+        fgets(temp, sizeof(temp), stdin);
+        if (sscanf(temp, "%d", &i) != 1) {
+            printf("Invalid input. Please enter a number.\n");
+        } else if (i < 1 || i > player->numberDeckSupemons) {
+            printf("Invalid choice. Please choose a number between 1 and %d.\n", player->numberDeckSupemons);
+        }
+    }
+    changeSupemon(player, i);
+    return ;
+}
+
 void affichage(Supemon *attacker, Supemon *defender, Player *player){
     int choice = 0;
     int choice_move = 0;
     int choice_ball = 0;
     int choice_item = 0;
+    int choice_supermon = 0;
     char response;
     char temp[100];
     
@@ -229,14 +247,11 @@ void affichage(Supemon *attacker, Supemon *defender, Player *player){
 
     switch (choice) {
         case 1:
-            moove(attacker,defender,choice_move,temp);
+            moove(defender,attacker,choice_move,temp);
             break;  
         case 2:
-            printf("Choose a Supemon\n");
-            displayDeck(player);
-            changeSupemon(player,1);
+            changeSup(player,choice);
             break;
-            
         case 3:
             item_use(player,response,choice_item,defender);
             break;

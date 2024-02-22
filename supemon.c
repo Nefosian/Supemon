@@ -381,7 +381,7 @@ void skill_condition(Supemon *defender, Supemon *attacker){
     return;
 }
 
-void displayUsed(Supemon *defender, Supemon *attacker, int i) {
+void displayUsedDefender(Supemon *defender, Supemon *attacker, int i) {
     printf("%s used %s\n", defender->name, moveToString(defender->Move[i-1]));
     if (i == 1) {
         srand(time(NULL));
@@ -390,18 +390,38 @@ void displayUsed(Supemon *defender, Supemon *attacker, int i) {
         int dodge_percent = dodge * 100;
         int random_number = rand() % 100;
         if (random_number <= dodge_percent) {
-            float calcul = (defender->Attack * defender->skill1damage) / attacker->Defense;
-            attacker->currentLife -= calcul;
+            float calcul = (float)(defender->Attack * defender->skill1damage) / attacker->Defense;
+            int calculInt = (int)(defender->Attack * defender->skill1damage) / attacker->Defense;
+            attacker->currentLife -= (int)calcul+1;
             printf("Your opponent don't dodge the attack\n");
             printf("Your opponent has now : %d/%d HP\n",attacker->currentLife,attacker->maxLife);
         } else {                        
             printf("Your opponent dodged the attack\n");
-            printf("Your opponent has now : %d/%d HP\n",attacker->currentLife,attacker->maxLife);
+            printf("Your opponent has already : %d/%d HP\n",attacker->currentLife,attacker->maxLife);
         }
     } else if (i == 2) {
         skill_condition(defender,attacker);
     }
     return;
+}
+
+void displayUsedAttacker(Supemon *defender, Supemon *attacker, int i) {
+    printf("%s used %s\n", attacker->name, moveToString(attacker->Move[0]));
+    srand(time(NULL));
+    printf("Attack : %s\n",skillToString(defender->Skill1));
+    float dodge = (float)attacker->Precision / (attacker->Precision + defender->Dodge)+0.1;
+    int dodge_percent = dodge * 100;
+    int random_number = rand() % 100;
+    if (random_number <= dodge_percent) {
+        float calcul = (float)(attacker->Attack * attacker->skill1damage) / defender->Defense;
+        int calculInt = (int)(attacker->Attack * attacker->skill1damage) / defender->Defense;
+        defender->currentLife -= (int)calcul+1;
+        printf("Your opponent don't dodge the attack\n");
+        printf("Your opponent has now : %d/%d HP\n",defender->currentLife,defender->maxLife);
+    } else {                        
+        printf("Your opponent dodged the attack\n");
+        printf("Your opponent has already : %d/%d HP\n",defender->currentLife,defender->maxLife);
+    }
 }
 
 void moove(Supemon *defender, Supemon *attacker, int choice_move, char temp[255]) {
@@ -417,10 +437,10 @@ void moove(Supemon *defender, Supemon *attacker, int choice_move, char temp[255]
     }
     switch (choice_move) {
         case 1:
-            displayUsed(defender, attacker, 1);
+            displayUsedDefender(defender, attacker, 1);
             break;
         case 2:
-            displayUsed(defender, attacker, 2);
+            displayUsedDefender(defender, attacker, 2);
             break;
     }
 }
