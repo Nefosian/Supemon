@@ -9,6 +9,7 @@
 #include <time.h>
 #include "player.h"
 #include "inventory.h"
+#include "deck.h"
 
 
 void run_away(Supemon *attacker, Supemon *defender){
@@ -218,8 +219,11 @@ void affichage(Supemon *attacker, Supemon *defender, Player *player){
     switch (choice) {
         case 1:
             moove(attacker,defender,choice_move,temp);
+            break;  
         case 2:
             printf("Choose a Supemon\n");
+            displayDeck(player);
+            changeSupemon(player,1);
             break;
             
         case 3:

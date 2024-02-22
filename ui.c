@@ -118,6 +118,7 @@ void initializePlayer(Player *player){
         case 1:
             strcpy(starterName, "Supmander");
             printf("You have chosen Supmander!\n");
+            
             break;
         case 2:
             strcpy(starterName, "Supasaur");

@@ -10,5 +10,6 @@ void displayDeck(const Player *player);
 void addSupemonToDeck(Player *player, Supemon newSupemon);
 void replaceSupemonInDeck(Player *player, int deckPosition, Supemon newSupemon);
 void removeSupemonFromDeck(Player *player, int deckPosition);
+void changeSupemon(Player *player, int deckPosition);
 
 #endif 
