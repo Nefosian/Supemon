@@ -8,6 +8,7 @@
 #include "skill_cat.h"
 #include <stdio.h>
 #include <time.h>
+#include "player.h"
 
 void initializeSupemon(Supemon *supemon, int choice) {
     switch(choice) {
@@ -492,17 +493,70 @@ void firstMove(Supemon *defender, Supemon *attacker, int choice_move, char temp[
     }    
 }
 
-void Move(Supemon *defender, Supemon *attacker, int choice_move, char temp[255]) {
+
+void affiche(Supemon *defender, Supemon *attacker, int choice_move, char temp[255], Player *player){
+    int choice_item = 0;
+    int choice_ball = 0;
+    int response = 0;
+    int choice = 0;
+    printf("%s (Enemy)\n", attacker->name);
+    printf("--------------------------------\n");
+    printf("HP:    %d/%d          Level:   %d\n", attacker->currentLife, attacker->maxLife, attacker->level);
+    printf("Attack: %d            Defense: %d\n", attacker->Attack, attacker->Defense);
+    printf("Speed:  %d            Dodge:   %d\n",attacker->Speed, attacker->Dodge);
+    printf("--------------------------------\n");
+    printf("%s (%s)\n", defender->name, player->name);
+    printf("--------------------------------\n");
+    printf("HP:    %d/%d          Level:   %d\n", defender->currentLife, defender->maxLife, defender->level);
+    printf("Attack: %d            Defense: %d\n", defender->Attack, defender->Defense);
+    printf("Speed:  %d            Dodge:   %d\n",defender->Speed, defender->Dodge);
+    printf("--------------------------------\n\n");
+    printf("+----------------------+\n");
+    printf("|What will you do?     |\n");
+    printf("| 1 - Move             |\n");
+    printf("| 2 - Change Supremon  |\n");
+    printf("| 3 - Use item         |\n");
+    printf("| 4 - Capture          |\n");
+    printf("| 5 - Run away         |\n");
+    printf("+----------------------+\n");
+   
+    while (choice < 1 || choice > 5) {
+        fgets(temp, sizeof(temp), stdin);
+        if (sscanf(temp, "%d", &choice) != 1) {
+            printf("Invalid input. Please enter a number.\n");
+        } else if (choice < 1 || choice > 5) {
+            printf("Invalid choice. Please choose a number between 1 and 5.\n");
+        }
+    }
+    switch (choice) {
+        case 1:
+            defenderMove(defender, attacker, choice_move, temp);
+            break;  
+        case 2:
+            changeSup(player,choice);
+            break;
+        case 3:
+            item_use(player,response,choice_item,defender);
+            break;
+        case 4:
+            check_ball(attacker, defender, player,response,choice_ball);
+            break;
+        case 5:
+            run_away(attacker, defender);
+            break;
+    }
+}
+void Move(Supemon *defender, Supemon *attacker, int choice_move, char temp[255], Player *player) {
     firstMove(defender, attacker, choice_move, temp);
     while (defender->currentLife > 0 && attacker->currentLife > 0){
-        if (defender->currentLife <= 0){
+        if (defender->currentLife <= 0){  
             break;
         } else {
             displayUsedAttacker(defender, attacker, 1);
-        } if (attacker->currentLife <= 0){
+        } if (attacker->currentLife <= 0 ){   // rajouter la condition if capture pour verif si il est cpaturer on a arrete le programme
             break;
         } else {
-            defenderMove(defender, attacker, choice_move, temp);
+            affiche(defender, attacker, choice_move, temp, player);
         }
     }
 }

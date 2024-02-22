@@ -33,7 +33,8 @@ void capture(Supemon *attacker, Supemon *defender, Player *player,float chance_b
     int random_number = rand() % 100;
     if (random_number <= capture_chance) {
         printf("You captured the Supemon!\n");
-        //addSupemon(player, defender);
+        addSupemonToDeck(player, *attacker);
+        return;
     } else {
         printf("The Supemon broke free!\n");
     }
@@ -247,7 +248,7 @@ void affichage(Supemon *attacker, Supemon *defender, Player *player){
 
     switch (choice) {
         case 1:
-            Move(defender,attacker,choice_move,temp);
+            Move(defender,attacker,choice_move,temp,player);
             break;  
         case 2:
             changeSup(player,choice);
