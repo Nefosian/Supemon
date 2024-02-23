@@ -20,7 +20,7 @@ int main() {
     initializeSupfox(&supfox);
     addItem(&player, RareCandy,1);
     addItem(&player, Supeball,1);
-    affichage(&supasaur, &supfox, &player);
+    affichage(&supasaur, &supfox,&player);
     action();
     shop(&player);
     return 0;

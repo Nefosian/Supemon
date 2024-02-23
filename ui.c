@@ -9,7 +9,6 @@
 #include "items.h"
 #include "supemon.h"
 #include "action.h"
-#include "deck.h"
 
 
 void welcomeScreen(Player *player){

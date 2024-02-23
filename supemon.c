@@ -574,9 +574,11 @@ void affiche(Supemon *defender, Supemon *attacker, int choice_move, char temp[25
 void winExp(Supemon *defender, Supemon *attacker) {
     srand(time(NULL));
     int experience = 0;
-    int random_coins= rand() % 401 + 100;
-
+    int random_exp= rand() % 401 + 100;
     defender->experience += attacker->level*100;
+    printf("You gained %d experience points.\n", defender->experience);
+    printf("You have now %d/%d XP and your supemon is level %d\n",defender->experience,defender->experienceToNextLevel,defender->level);
+    levelUp(defender);
 }
 
 
@@ -594,16 +596,9 @@ void levelUp(Supemon *supemon){
         supemon->experience -= supemon->experienceToNextLevel; 
         supemon->experienceToNextLevel += 1000; 
     } else {
-        printf("Supemon %s needs more experience to level up.\n", supemon->name);
+        return;
     }
 }
-
-void gainExperience(Supemon *supemon, int exp) {
-    supemon->experience += exp;
-    printf("Supemon %s gained %d experience points.\n", supemon->name, exp);
-    levelUp(supemon);
-}
-
 
 
 void Move(Supemon *defender, Supemon *attacker, int choice_move, char temp[255], Player *player) {
@@ -620,6 +615,8 @@ void Move(Supemon *defender, Supemon *attacker, int choice_move, char temp[255],
                 int random_coins= rand() % 401 + 100;
                 player->supcoins += random_coins;
                 printf("You have now : %d supcoins\n",player->supcoins);
+                winExp(defender, attacker);
+
                 break;
             } else if (attacker->isCaptured == 1) {
                 break;
