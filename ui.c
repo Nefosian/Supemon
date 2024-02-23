@@ -135,8 +135,6 @@ void itemNameChoose(Items item, char* outName) {
     }
 }
 
-
-
 void loadGame(Player *player){
     char filename[256];
     printf("Enter the filename to load: \n");
