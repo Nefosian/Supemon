@@ -1,5 +1,6 @@
 #ifndef CENTER_H
 #define center_H
+#include "player.h"
 
 #include "player.h"
 
