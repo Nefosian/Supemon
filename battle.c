@@ -209,6 +209,10 @@ void changeSup(Player *player,int choice_supermon){
 }
 
 void affichage(Supemon *attacker, Supemon *defender, Player *player){
+    if (defender->currentLife <= 0) {
+        printf("Your supemon doesn't have enough life to fight!\n");
+        return;
+    }
     int choice = 0;
     int choice_move = 0;
     int choice_ball = 0;

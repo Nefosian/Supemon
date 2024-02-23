@@ -13,10 +13,9 @@
 int main() {
     Player player;
     Supemon defender;
-    
     player.supcoins = 1000;
     welcomeScreen(&player);
-    initializeSupasaur(&defender);
+    initializeSupfox(&defender);
     action(&defender,&player);
     shop(&player);
     return 0;

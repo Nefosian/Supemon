@@ -51,7 +51,7 @@ void shop(Player *player){
     printf("| 4 - Buy a Supeball (250 Supcoins)                                 |\n");
     printf("| 5 - Buy a SuperSupeball (500 Supcoins)                            |\n");
     printf("| 6 - Buy a NetBall (750 Supcoins)                                  |\n");
-    printf("| 7 - Leave the game                                                |\n");
+    printf("| 7 - Leave the shop                                                |\n");
     printf("+-------------------------------------------------------------------+\n\n");
 
     printf("What would you like to buy? (Enter number):\n");
