@@ -28,9 +28,9 @@ void displayDeck(const Player *player) {
     }
 
     printf("+-<3----<3----<3----<3----<3----<3-----+\n");
-    printf("| Your current Supemon deck:           |\n");
+    printf("| Your current Supemon deck:           \n");
     for (int i = 0; i < player->numberDeckSupemons; i++) {
-        printf("| %d - %s, Level: %d, HP: %d/%d    |\n", 
+        printf("| %d - %s, Level: %d, HP: %d/%d    \n", 
                i + 1, 
                player->deckSupemons[i].name, 
                player->deckSupemons[i].level, 
@@ -52,6 +52,7 @@ void addSupemonToDeck(Player *player, Supemon newSupemon) {
     }
 
     player->deckSupemons[player->numberDeckSupemons++] = newSupemon;
+    player->numberSupemons+=1;
     printf("Supemon %s successfully added to the deck.\n", newSupemon.name);
 }
 
