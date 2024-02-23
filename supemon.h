@@ -28,7 +28,6 @@ typedef struct{
     char *Move[max_moves];
     SupemonSkill Skill1;
     SupemonSkill Skill2;
-    SupemonSkill Skill3;
     int skill1damage;
     int luck;
     int isCaptured;

@@ -473,6 +473,9 @@ void displayUsedAttacker(Supemon *defender, Supemon *attacker, int i) {
         }
         printf("You don't dodged the attack\n");
         printf("You have now : %d/%d HP\n",defender->currentLife,defender->maxLife);
+        if (defender->currentLife <= 0) {
+            printf("You lose the fight\n");
+        }
     } else {                        
         printf("You dodged the attack\n");
         printf("You have already : %d/%d HP\n",defender->currentLife,defender->maxLife);
@@ -605,7 +608,6 @@ void Move(Supemon *defender, Supemon *attacker, int choice_move, char temp[255],
     firstMove(defender, attacker, choice_move, temp,player);
     while (defender->currentLife > 0 && attacker->currentLife > 0 && attacker->isCaptured == 0) {
         if (defender->currentLife <= 0) {  
-            printf("You lose the fight\n");
             break;
         }
         affiche(defender, attacker, choice_move, temp, player);
@@ -625,3 +627,41 @@ void Move(Supemon *defender, Supemon *attacker, int choice_move, char temp[255],
         displayUsedAttacker(defender, attacker, 1);
     }
 }
+
+void randomSupemon(Supemon *supemon) {
+    srand(time(NULL));
+    int randomIndex = rand() % 10+1;
+    switch (randomIndex) {
+        case 1:
+            initializeSupmander(supemon);
+            break;
+        case 2:
+            initializeSupasaur(supemon);
+            break;
+        case 3:
+            initializeSupirtle(supemon);
+            break;
+        case 4:
+            initializeSupfox(supemon);
+            break;
+        case 5:
+            initializeSuplion(supemon);
+            break;
+        case 6:
+            initializeSuphawk(supemon);
+            break;
+        case 7:
+            initializeSupsnake(supemon);
+            break;
+        case 8:
+            initializeSupbear(supemon);
+            break;
+        case 9:
+            initializeSupwolf(supemon);
+            break;
+        case 10:
+            initializeSupbat(supemon);
+            break;
+    }
+}
+

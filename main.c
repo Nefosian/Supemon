@@ -12,16 +12,12 @@
 
 int main() {
     Player player;
-    Supemon supasaur;
-    Supemon supfox;
+    Supemon defender;
+    
     player.supcoins = 1000;
     welcomeScreen(&player);
-    initializeSupasaur(&supasaur);
-    initializeSupfox(&supfox);
-    addItem(&player, RareCandy,1);
-    addItem(&player, Supeball,1);
-    affichage(&supasaur, &supfox,&player);
-    action();
+    initializeSupasaur(&defender);
+    action(&defender,&player);
     shop(&player);
     return 0;
 }

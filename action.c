@@ -5,9 +5,14 @@
 #include "action.h"
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+#include "ui.h"
+#include "items.h"
+#include "supemon.h"
+#include "player.h"
 
 
-void action() {
+void action(Supemon *defender, Player *player) {
     int choice = 0;
     char place[80];
     char temp[256];
@@ -30,22 +35,27 @@ void action() {
             printf("Invalid choice. Please choose 1, 2, 3 or 4.\n");
         }
     }
+    while (choice != 4){
+        switch(choice) {
+            case 1:
+                printf("You go into the wild!\n");
+                Supemon attacker;
+                randomSupemon(&attacker);
+                affichage(attacker, defender, player);
+                break;
+            case 2:
+                strcpy(place, "Shop");
+                printf("You go in the shop!\n");
+                break;
+            case 3:
+                strcpy(place, "Center");
+                printf("You go in the Supemon Center!\n");
+                break;
+            case 4:
+                printf("You leave the game!\n");
+                break;
+        }
 
-    switch(choice) {
-        case 1:
-            strcpy(place, "Wild");
-            printf("You go into the wild!\n");
-            break;
-        case 2:
-            strcpy(place, "Shop");
-            printf("You go in the shop!\n");
-            break;
-        case 3:
-            strcpy(place, "Center");
-            printf("You go in the Supemon Center!\n");
-            break;
-        case 4:
-            printf("You leave the game!\n");
-            break;
-    }
+    } 
+    return;
 }
