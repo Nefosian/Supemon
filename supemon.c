@@ -392,7 +392,7 @@ void skill_condition(Supemon *defender, Supemon *attacker){
     return;
 }
 
-void displayUsedDefender(Supemon *defender, Supemon *attacker, int i) {
+void displayUsedDefender(Supemon *defender, Supemon *attacker, int i,Player *player) {
     printf("%s used %s\n", defender->name, moveToString(defender->Move[i-1]));
     if (i == 1) {
         srand(time(NULL));
@@ -418,9 +418,6 @@ void displayUsedDefender(Supemon *defender, Supemon *attacker, int i) {
             }
             printf("Your opponent don't dodge the attack\n");
             printf("Your opponent has now : %d/%d HP\n",attacker->currentLife,attacker->maxLife);
-            if (attacker->currentLife <= 0){
-                printf("You win the fight\n");
-            }
         } else {                        
             printf("Your opponent dodged the attack\n");
             printf("Your opponent has already : %d/%d HP\n",attacker->currentLife,attacker->maxLife);
@@ -456,16 +453,13 @@ void displayUsedAttacker(Supemon *defender, Supemon *attacker, int i) {
         }
         printf("You don't dodged the attack\n");
         printf("You have now : %d/%d HP\n",defender->currentLife,defender->maxLife);
-        if (defender->currentLife <= 0){
-                printf("You loose the fight\n");
-        }
     } else {                        
         printf("You dodged the attack\n");
         printf("You have already : %d/%d HP\n",defender->currentLife,defender->maxLife);
     }
 }
 
-void defenderMove(Supemon *defender, Supemon *attacker, int choice_move,char temp[255]) {
+void defenderMove(Supemon *defender, Supemon *attacker, int choice_move,char temp[255],Player *player) {
     displayMoves(defender);
         printf("Choose a move.\n");
         while (choice_move < 1 || choice_move > 3) {
@@ -478,23 +472,23 @@ void defenderMove(Supemon *defender, Supemon *attacker, int choice_move,char tem
         }
         switch (choice_move) {
             case 1:
-                displayUsedDefender(defender, attacker, 1);
+                displayUsedDefender(defender, attacker, 1,player);
                 break;
             case 2:
-                displayUsedDefender(defender, attacker, 2);
+                displayUsedDefender(defender, attacker, 2,player);
                 break;
     }
 }
 
 
-void firstMove(Supemon *defender, Supemon *attacker, int choice_move, char temp[255]) {
+void firstMove(Supemon *defender, Supemon *attacker, int choice_move, char temp[255],Player *player) {
     if (defender->Speed > attacker->Speed){
-        defenderMove(defender, attacker, choice_move, temp);
+        defenderMove(defender, attacker, choice_move, temp,player);
     } if (defender->Speed == attacker->Speed){
         srand(time(NULL));
         int random_number = rand() % 100;
         if (random_number < 50){
-            defenderMove(defender, attacker, choice_move, temp);
+            defenderMove(defender, attacker, choice_move, temp,player);
         } else {
             displayUsedAttacker(defender, attacker, 1);
         }
@@ -540,7 +534,7 @@ void affiche(Supemon *defender, Supemon *attacker, int choice_move, char temp[25
     }
     switch (choice) {
         case 1:
-            defenderMove(defender, attacker, choice_move, temp);
+            defenderMove(defender, attacker, choice_move, temp,player);
             break;  
         case 2:
             changeSup(player,choice);
@@ -556,15 +550,60 @@ void affiche(Supemon *defender, Supemon *attacker, int choice_move, char temp[25
             break;
     }
 }
+
+void winExp(Supemon *defender, Supemon *attacker) {
+    srand(time(NULL));
+    int experience = 0;
+    int random_coins= rand() % 401 + 100;
+
+    defender->experience += attacker->level*100;
+}
+
+
+void levelUp(Supemon *supemon){
+    if (supemon->experience >= supemon->experienceToNextLevel) {
+        supemon->level++;
+        supemon->maxLife += (int)(supemon->maxLife * 0.3);
+        supemon->currentLife = supemon->maxLife;
+        supemon->Attack += (int)(supemon->Attack * 0.3);
+        supemon->Defense += (int)(supemon->Defense * 0.3);
+        supemon->Speed += (int)(supemon->Speed * 0.3);
+        supemon->Dodge += (int)(supemon->Dodge * 0.3);
+        printf("Supemon %s leveled up to level %d!\n", supemon->name, supemon->level);
+
+        supemon->experience -= supemon->experienceToNextLevel; 
+        supemon->experienceToNextLevel += 1000; 
+    } else {
+        printf("Supemon %s needs more experience to level up.\n", supemon->name);
+    }
+}
+
+void gainExperience(Supemon *supemon, int exp) {
+    supemon->experience += exp;
+    printf("Supemon %s gained %d experience points.\n", supemon->name, exp);
+    levelUp(supemon);
+}
+
+
+
 void Move(Supemon *defender, Supemon *attacker, int choice_move, char temp[255], Player *player) {
-    firstMove(defender, attacker, choice_move, temp);
+    firstMove(defender, attacker, choice_move, temp,player);
     while (defender->currentLife > 0 && attacker->currentLife > 0 && attacker->isCaptured == 0) {
         if (defender->currentLife <= 0) {  
+            printf("You lose the fight\n");
             break;
         }
         affiche(defender, attacker, choice_move, temp, player);
         if (attacker->currentLife <= 0 || attacker->isCaptured == 1) {
-            break;
+            if (attacker->currentLife <= 0) {
+                printf("You win the fight\n");
+                int random_coins= rand() % 401 + 100;
+                player->supcoins += random_coins;
+                printf("You have now : %d supcoins\n",player->supcoins);
+                break;
+            } else if (attacker->isCaptured == 1) {
+                break;
+            }
         }
         displayUsedAttacker(defender, attacker, 1);
     }
