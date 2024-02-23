@@ -16,7 +16,6 @@ void addItem(Player *player, Items item, int quantity) {
     player->numberItems++;
 }
 
-
 void removeItem(Player *player, Items item, int quantity) {
     for (int i = 0; i < player->numberItems; i++) {
         if (player->objets[i].item == item) {
@@ -28,7 +27,6 @@ void removeItem(Player *player, Items item, int quantity) {
         }
     }
 }
-
 
 void addSupemon(Player *player, Supemon newSupemon) {
     if (player->numberSupemons < maxSize) {

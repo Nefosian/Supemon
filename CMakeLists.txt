@@ -10,4 +10,6 @@ add_executable(SUPEMON supemon.h supemon.c player.h player.c shop.h shop.c items
         inventory.c
         deck.c
         deck.h
+        center.c
+        center.h
 )

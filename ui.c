@@ -50,7 +50,26 @@ void PlayerData(Player *player) {
     char filename[100];
     sprintf(filename, "%s.txt", player->name);
 
-    FILE *file = fopen(filename, "w");
+    FILE *file = fopen(filename, "r");
+    if (file != NULL) {
+        fclose(file);
+        char choice = '\0';
+        while (choice != 'y' && choice != 'Y' && choice != 'n' && choice != 'N') {
+            printf("A file with the name %s already exists.\n", filename);
+            printf("Do you want to overwrite it? (y/n): \n");
+            scanf("%c", &choice);
+            while (getchar() != '\n');
+
+            if (choice == 'n' || choice == 'N') {
+                printf("Operation cancelled. No data was saved.\n");
+                return;
+            } else if (choice != 'y' && choice != 'Y') {
+                printf("Invalid input. Please enter 'y' for yes or 'n' for no.\n");
+            }
+        }
+    }
+
+    file = fopen(filename, "w");
     if (!file) {
         printf("Error creating file %s.\n", filename);
         return;
@@ -113,7 +132,7 @@ void loadGame(Player *player){
     char filename[256];
     printf("Enter the filename to load: \n");
     scanf("%255s", filename);
-    while (getchar() != '\n'); 
+    while (getchar() != '\n');
 
     FILE *file = fopen(filename, "r");
     if (!file) {
@@ -128,7 +147,7 @@ void loadGame(Player *player){
 
     fscanf(file, "Number of Items in inventory: %d\n", &player->numberItems);
     for (int i = 0; i < player->numberItems && i < maxItem; i++) {
-        int nb; 
+        int nb;
         char itemName[30];
         int quantity;
         fscanf(file, "Item %d: %29[^,], Quantity: %d\n", &nb, itemName, &quantity);
@@ -177,12 +196,17 @@ void initializePlayer(Player *player){
     int choice = 0;
     char temp[256];
 
-    printf("Enter your name: \n");
-    fgets(player->name, sizeof(player->name), stdin);
-    size_t ln = strlen(player->name) - 1;
-    if (player->name[ln] == '\n') {
-        player->name[ln] = '\0';
-    }
+    do {
+        printf("Enter your name (at least 3 characters): \n");
+        fgets(player->name, sizeof(player->name), stdin);
+        size_t ln = strlen(player->name) - 1;
+        if (player->name[ln] == '\n') {
+            player->name[ln] = '\0';
+        }
+        if (strlen(player->name) < 3) {
+            printf("The name is too short. Please enter a name with at least 3 characters.\n");
+        }
+    } while (strlen(player->name) < 3);
 
     printf("Enter your age: \n");
     while (fgets(temp, sizeof(temp), stdin)) {
@@ -191,10 +215,10 @@ void initializePlayer(Player *player){
     }
 
     printf("Hello %s!\n", player->name);
-    printf("Welcome in Supemon World! Have a good game\n");
+    printf("Welcome to the Supemon World! Have a good game\n");
 
     printf("+-<3----<3----<3----<3----<3----<3-------+\n");
-    printf("|Choose your starter Supemon:            |\n");
+    printf("| Choose your starter Supemon:           |\n");
     printf("| 1 - Supmander                          |\n");
     printf("| 2 - Supasaur                           |\n");
     printf("| 3 - Supirtle                           |\n");
@@ -214,8 +238,8 @@ void initializePlayer(Player *player){
     Supemon starterSupemon;
     initializeSupemon(&starterSupemon, choice);
     player->supcoins = 1000;
-    addItem(player,Potion,5);
-    addItem(player,Supeball,5);
+    addItem(player, Potion, 5);
+    addItem(player, Supeball, 5);
     player->numberSupemons = 0;
     player->numberDeckSupemons = 0;
     printf("You have chosen %s as your starter Supemon!\n", starterSupemon.name);

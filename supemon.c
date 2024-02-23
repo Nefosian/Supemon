@@ -57,6 +57,8 @@ void initializeSupmander(Supemon *supemon) {
     supemon->Dodge = 1;
     supemon->Precision = 2;
     supemon->Speed = 1;
+    supemon->experience = 0;
+    supemon->experienceToNextLevel = 500;
     supemon->Move[0] = Slap;
     supemon->Move[1] = Roar;
     supemon->Skill1 = Scratch;
@@ -77,6 +79,8 @@ void initializeSupasaur(Supemon *supemon) {
     supemon->Dodge = 3;
     supemon->Precision = 2;
     supemon->Speed = 2;
+    supemon->experience = 0;
+    supemon->experienceToNextLevel = 500;
     supemon->Move[0] = Bit;
     supemon->Move[1] = Whip;
     supemon->Skill1 = Pound;
@@ -98,6 +102,8 @@ void initializeSupirtle(Supemon *supemon) {
     supemon->Dodge = 2;
     supemon->Precision = 1;
     supemon->Speed = 1;
+    supemon->experience = 0;
+    supemon->experienceToNextLevel = 500;
     supemon->Move[0] = Bit;
     supemon->Move[1] = Curve;
     supemon->Skill1 = Pound;
@@ -118,6 +124,8 @@ void initializeSupfox(Supemon *supemon) {
     supemon->Dodge = 1;
     supemon->Precision = 2;
     supemon->Speed = 1;
+    supemon->experience = 0;
+    supemon->experienceToNextLevel = 500;
     supemon->Move[0] = Wink;
     supemon->Move[1] = Roll;
     supemon->Skill1 = Charm;
@@ -138,6 +146,8 @@ void initializeSuplion(Supemon *supemon) {
     supemon->Dodge = 3;
     supemon->Precision = 2;
     supemon->Speed = 3;
+    supemon->experience = 0;
+    supemon->experienceToNextLevel = 500;
     supemon->Move[0] = Roar;
     supemon->Move[1] = Bit;
     supemon->Skill1 = Intimidation;
@@ -158,6 +168,8 @@ void initializeSuphawk(Supemon *supemon) {
     supemon->Dodge = 3;
     supemon->Precision = 2;
     supemon->Speed = 2;
+    supemon->experience = 0;
+    supemon->experienceToNextLevel = 500;
     supemon->Move[0] = Fly;
     supemon->Move[1] = Bit;
     supemon->Skill1 = Tornado;
@@ -178,6 +190,8 @@ void initializeSupsnake(Supemon *supemon) {
     supemon->Dodge = 3;
     supemon->Precision = 2;
     supemon->Speed = 1;
+    supemon->experience = 0;
+    supemon->experienceToNextLevel = 500;
     supemon->Move[0] = Spit;
     supemon->Move[1] = Watch;
     supemon->Skill1 = Poison;
@@ -198,6 +212,8 @@ void initializeSupbear(Supemon *supemon) {
     supemon->Dodge = 3;
     supemon->Precision = 3;
     supemon->Speed = 2;
+    supemon->experience = 0;
+    supemon->experienceToNextLevel = 500;
     supemon->Move[0] = Charge;
     supemon->Move[1] = Jump;
     supemon->Skill1 = Suplex;
@@ -218,6 +234,8 @@ void initializeSupwolf(Supemon *supemon) {
     supemon->Dodge = 3;
     supemon->Precision = 1;
     supemon->Speed = 1;
+    supemon->experience = 0;
+    supemon->experienceToNextLevel = 500;
     supemon->Move[0] = Bit;
     supemon->Move[1] = Backflip;
     supemon->Skill1 = Pound;
@@ -238,6 +256,8 @@ void initializeSupbat(Supemon *supemon) {
     supemon->Dodge = 3;
     supemon->Precision = 2;
     supemon->Speed = 3;
+    supemon->experience = 0;
+    supemon->experienceToNextLevel = 500;
     supemon->Move[0] = Cry;
     supemon->Move[1] = Bit;
     supemon->Skill1 = Shockwave;

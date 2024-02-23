@@ -265,5 +265,3 @@ void affichage(Supemon *attacker, Supemon *defender, Player *player){
             break;
     }
 }
-
-
