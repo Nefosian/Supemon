@@ -17,6 +17,7 @@ typedef struct{
     char weakness[80];
     int level;
     int experience;
+    int experienceToNextLevel;
     int maxLife;
     int currentLife;
     int Attack;
