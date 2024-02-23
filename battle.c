@@ -33,6 +33,7 @@ void capture(Supemon *attacker, Supemon *defender, Player *player,float chance_b
     int random_number = rand() % 100;
     if (random_number <= capture_chance) {
         printf("You captured the Supemon!\n");
+        attacker->isCaptured = 1;
         addSupemonToDeck(player, *attacker);
         return;
     } else {
@@ -239,7 +240,7 @@ void affichage(Supemon *attacker, Supemon *defender, Player *player){
     
     while (choice < 1 || choice > 5) {
         fgets(temp, sizeof(temp), stdin);
-        if (sscanf(temp, "%d", &choice) != 1) {
+        if (sscanf(temp, "%d", &choice) != 1) {;
             printf("Invalid input. Please enter a number.\n");
         } else if (choice < 1 || choice > 5) {
             printf("Invalid choice. Please choose a number between 1 and 5.\n");

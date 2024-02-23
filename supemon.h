@@ -30,6 +30,7 @@ typedef struct{
     SupemonSkill Skill3;
     int skill1damage;
     int luck;
+    int isCaptured;
 }Supemon;
 
 

@@ -62,6 +62,7 @@ void initializeSupmander(Supemon *supemon) {
     supemon->Skill1 = Scratch;
     supemon->Skill2 = Grawl;
     supemon->skill1damage = 2;
+    supemon->isCaptured = 0;
 }
 
 void initializeSupasaur(Supemon *supemon) {
@@ -81,6 +82,7 @@ void initializeSupasaur(Supemon *supemon) {
     supemon->Skill1 = Pound;
     supemon->Skill2 = Foliage;
     supemon->skill1damage = 2;
+    supemon->isCaptured = 0;
 
 }
 
@@ -101,6 +103,7 @@ void initializeSupirtle(Supemon *supemon) {
     supemon->Skill1 = Pound;
     supemon->Skill2 = Shell;
     supemon->skill1damage = 2;
+    supemon->isCaptured = 0;
 }
 
 void initializeSupfox(Supemon *supemon) {
@@ -120,6 +123,7 @@ void initializeSupfox(Supemon *supemon) {
     supemon->Skill1 = Charm;
     supemon->Skill2 = FireTornado;
     supemon->skill1damage = 2;
+    supemon->isCaptured = 0;
 }
 
 void initializeSuplion(Supemon *supemon) {
@@ -139,6 +143,7 @@ void initializeSuplion(Supemon *supemon) {
     supemon->Skill1 = Intimidation;
     supemon->Skill2 = Fang;
     supemon->skill1damage = 2;
+    supemon->isCaptured = 0;
 }
 
 void initializeSuphawk(Supemon *supemon) {
@@ -158,6 +163,7 @@ void initializeSuphawk(Supemon *supemon) {
     supemon->Skill1 = Tornado;
     supemon->Skill2 = Peck;
     supemon->skill1damage = 2;
+    supemon->isCaptured = 0;
 }
 
 void initializeSupsnake(Supemon *supemon) {
@@ -177,6 +183,7 @@ void initializeSupsnake(Supemon *supemon) {
     supemon->Skill1 = Poison;
     supemon->Skill2 = Hipnosis;
     supemon->skill1damage = 2;
+    supemon->isCaptured = 0;
 }
 
 void initializeSupbear(Supemon *supemon) {
@@ -196,6 +203,7 @@ void initializeSupbear(Supemon *supemon) {
     supemon->Skill1 = Suplex;
     supemon->Skill2 = Earthquake;
     supemon->skill1damage = 2;
+    supemon->isCaptured = 0;
 }
 
 void initializeSupwolf(Supemon *supemon) {
@@ -215,6 +223,7 @@ void initializeSupwolf(Supemon *supemon) {
     supemon->Skill1 = Pound;
     supemon->Skill2 = IronTail;
     supemon->skill1damage = 2;
+    supemon->isCaptured = 0;
 }
 
 void initializeSupbat(Supemon *supemon) {
@@ -234,6 +243,7 @@ void initializeSupbat(Supemon *supemon) {
     supemon->Skill1 = Shockwave;
     supemon->Skill2 = Vampirism;
     supemon->skill1damage = 2;
+    supemon->isCaptured = 0;
 }
 
 
@@ -409,7 +419,7 @@ void displayUsedDefender(Supemon *defender, Supemon *attacker, int i) {
             printf("Your opponent don't dodge the attack\n");
             printf("Your opponent has now : %d/%d HP\n",attacker->currentLife,attacker->maxLife);
             if (attacker->currentLife <= 0){
-                printf("You win the game\n");
+                printf("You win the fight\n");
             }
         } else {                        
             printf("Your opponent dodged the attack\n");
@@ -447,7 +457,7 @@ void displayUsedAttacker(Supemon *defender, Supemon *attacker, int i) {
         printf("You don't dodged the attack\n");
         printf("You have now : %d/%d HP\n",defender->currentLife,defender->maxLife);
         if (defender->currentLife <= 0){
-                printf("You loose the game\n");
+                printf("You loose the fight\n");
         }
     } else {                        
         printf("You dodged the attack\n");
@@ -548,15 +558,14 @@ void affiche(Supemon *defender, Supemon *attacker, int choice_move, char temp[25
 }
 void Move(Supemon *defender, Supemon *attacker, int choice_move, char temp[255], Player *player) {
     firstMove(defender, attacker, choice_move, temp);
-    while (defender->currentLife > 0 && attacker->currentLife > 0){
-        if (defender->currentLife <= 0){  
+    while (defender->currentLife > 0 && attacker->currentLife > 0 && attacker->isCaptured == 0) {
+        if (defender->currentLife <= 0) {  
             break;
-        } else {
-            displayUsedAttacker(defender, attacker, 1);
-        } if (attacker->currentLife <= 0 ){   // rajouter la condition if capture pour verif si il est cpaturer on a arrete le programme
-            break;
-        } else {
-            affiche(defender, attacker, choice_move, temp, player);
         }
+        affiche(defender, attacker, choice_move, temp, player);
+        if (attacker->currentLife <= 0 || attacker->isCaptured == 1) {
+            break;
+        }
+        displayUsedAttacker(defender, attacker, 1);
     }
 }
