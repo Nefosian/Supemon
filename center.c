@@ -35,7 +35,7 @@ void displayPC(const Player *player){
     printf("+-<3----<3----<3----<3----<3----<3-----+\n");
     printf("| Your current Supemon PC:             |\n");
     for (int i = 0; i < player->numberSupemons; i++) {
-        printf("| %d - %s, Level: %d, HP: %d/%d    |\n", 
+        printf("| %d - %s, Level: %d, HP: %d/%d    \n", 
                i + 1, 
                player->collectionSupemons[i].name, 
                player->collectionSupemons[i].level, 

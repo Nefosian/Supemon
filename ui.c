@@ -277,5 +277,5 @@ void initializePlayer(Player *player){
     player->numberSupemons = 0;
     player->numberDeckSupemons = 0;
     printf("You have chosen %s as your starter Supemon!\n", starterSupemon.name);
-    addSupemonToDeck(player, starterSupemon);
+    addSupemon(player, starterSupemon);
 }

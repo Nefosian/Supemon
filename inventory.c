@@ -33,9 +33,8 @@ void addSupemon(Player *player, Supemon newSupemon) {
         if (player->numberDeckSupemons < deckSize) {
             player->deckSupemons[player->numberDeckSupemons++] = newSupemon;
             printf("Supemon successfully added to the deck.\n");
-        } else {
             player->collectionSupemons[player->numberSupemons++] = newSupemon;
-            printf("Deck is full. Supemon successfully added to the collection.\n");
+            printf("Supemon successfully added to the collection.\n");
         }
     } else {
         printf("Error: Both deck and collection are full, unable to add new Supemon.\n");

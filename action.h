@@ -4,5 +4,8 @@
 
 #ifndef SUPEMON_ACTION_H
 #define SUPEMON_ACTION_H
-void action();
+
+#include "player.h"
+#include "supemon.h"
+
 #endif //SUPEMON_ACTION_H
