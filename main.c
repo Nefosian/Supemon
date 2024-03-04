@@ -14,6 +14,7 @@ int main() {
     Player player;
     Supemon defender;
     player.supcoins = 1000;
+    initializeSupfox(&player);
     welcomeScreen(&player);
     return 0;
 }
