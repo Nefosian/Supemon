@@ -200,6 +200,32 @@ Items itemNameToEnum(const char* itemName) {
     return EmptySlot;
 }
 
+void quitGame(Player *player) {
+    char choice;
+    int saveSuccess = 0; 
+
+    printf("Do you want to save the game before quitting? (Y/N/Q to cancel quitting): ");
+    scanf(" %c", &choice);
+    while (getchar() != '\n'); 
+
+    if (choice == 'Y' || choice == 'y') {
+        saveSuccess = playerData(player); 
+        if (saveSuccess) {
+            printf("Game saved successfully.\n");
+        } else {
+            printf("Failed to save the game.\n");
+        }
+    } else if (choice == 'Q' || choice == 'q') {
+        printf("Quitting cancelled. Returning to the game.\n");
+        return; 
+    } else if (choice != 'N' && choice != 'n') {
+        printf("Invalid input. Exiting without saving.\n");
+    }
+
+    printf("Exiting the game. Goodbye!\n");
+    exit(0);
+}
+
 void initializePlayer(Player *player){
     int choice = 0;
     char temp[256];
