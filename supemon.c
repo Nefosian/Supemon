@@ -586,12 +586,12 @@ void winExp(Supemon *defender, Supemon *attacker) {
 
 
 void increaseStats(Supemon *supemon) {
-    supemon->maxLife += (int)(supemon->maxLife * 0.3);
+    supemon->maxLife += (int)(supemon->maxLife + (supemon->maxLife * 0.3));
     supemon->currentLife = supemon->maxLife;
-    supemon->Attack += (int)(supemon->Attack * 0.3);
-    supemon->Defense += (int)(supemon->Defense * 0.3);
-    supemon->Speed += (int)(supemon->Speed * 0.3);
-    supemon->Dodge += (int)(supemon->Dodge * 0.3);
+    supemon->Attack += (int)(supemon->Attack + (supemon->Attack * 0.3));
+    supemon->Defense += (int)(supemon->Defense + (supemon->Defense * 0.3));
+    supemon->Speed += (int)(supemon->Speed + (supemon->Speed * 0.3));
+    supemon->Dodge += (int)(supemon->Dodge + (supemon->Dodge * 0.3));
 }
 
 void levelUp(Supemon *supemon){
