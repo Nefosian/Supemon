@@ -111,7 +111,7 @@ void changeSupemon(Player *player, int deckPosition) {
         return;
     }
 
-    if (player->supemonSelected == &player->deckSupemons[deckPosition - 1]) {
+    if (player->supemonSelected->name == &player->deckSupemons[deckPosition - 1].name) {
         printf("Error: The selected Supemon is already the one in battle.\n");
         return;
     }
