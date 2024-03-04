@@ -54,8 +54,7 @@ void action(Supemon *defender, Player *player) {
                 initializeSupemonCenter(player);
                 break;
             case 4:
-                printf("You leave the game!\n");
-                exit(0);
+                quitGame(player);
                 break;
         }
     } 
