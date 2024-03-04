@@ -37,7 +37,7 @@ void displayDeck(const Player *player) {
                player->deckSupemons[i].currentLife, 
                player->deckSupemons[i].maxLife);
     }
-    printf("+---------------------------------------+\n\n");
+    printf("+--------------------------------------+\n\n");
 }
 
 

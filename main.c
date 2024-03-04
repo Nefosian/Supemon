@@ -16,7 +16,7 @@ int main() {
     player.supcoins = 1000;
     welcomeScreen(&player);
     initializeSupfox(&defender);
-    addSupemonToDeck(&player, defender);
+    addSupemon(&player, defender);
     displayDeck(&player);
     action(&defender,&player);
     return 0;
