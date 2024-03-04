@@ -183,8 +183,6 @@ void loadGame(Player *player){
                &player->collectionSupemons[i].Dodge, &player->collectionSupemons[i].Precision);
     }
     printf("Number of Supemon in collection: %d\n", player->numberSupemons);
-    printf("%d", player->supcoins);
-    printf("%s", player->deckSupemons->name);
     fclose(file);
     printf("Game successfully loaded from %s\n", filename);
     printf("Welcome back %s!\n", player->name);

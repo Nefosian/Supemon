@@ -208,7 +208,7 @@ void changeSup(Player *player,int choice_supermon){
     return ;
 }
 
-void affichage(Supemon *attacker, Supemon *defender, Player *player){
+void affichage_battle(Supemon *attacker, Supemon *defender, Player *player){
     if (defender->currentLife <= 0) {
         printf("Your supemon doesn't have enough life to fight!\n");
         return;
@@ -220,7 +220,7 @@ void affichage(Supemon *attacker, Supemon *defender, Player *player){
     int choice_supermon = 0;
     char response;
     char temp[100];
-    
+
     printf("%s (Enemy)\n", attacker->name);
     printf("--------------------------------\n");
     printf("HP:    %d/%d          Level:   %d\n", attacker->currentLife, attacker->maxLife, attacker->level);
@@ -267,5 +267,11 @@ void affichage(Supemon *attacker, Supemon *defender, Player *player){
         case 5:
             run_away(attacker, defender);
             break;
+    }
+}
+
+void affichage(Supemon *attacker, Supemon *defender, Player *player){
+    while (defender->currentLife > 0 && attacker->currentLife > 0) {
+        affichage_battle(attacker, defender, player);
     }
 }
