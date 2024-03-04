@@ -578,7 +578,7 @@ void winExp(Supemon *defender, Supemon *attacker) {
     srand(time(NULL));
     int experience = 0;
     int random_exp= rand() % 401 + 100;
-    defender->experience += attacker->level*100;
+    defender->experience += attacker->level*random_exp;
     printf("You gained %d experience points.\n", defender->experience);
     printf("You have now %d/%d XP and your supemon is level %d\n",defender->experience,defender->experienceToNextLevel,defender->level);
     levelUp(defender);
