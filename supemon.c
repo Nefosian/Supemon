@@ -485,12 +485,12 @@ void displayUsedAttacker(Supemon *defender, Supemon *attacker, int i) {
 void defenderMove(Supemon *defender, Supemon *attacker, int choice_move,char temp[255],Player *player) {
     displayMoves(defender);
         printf("Choose a move.\n");
-        while (choice_move < 1 || choice_move > 3) {
+        while (choice_move < 1 || choice_move > 2) {
             fgets(temp, sizeof(temp), stdin);
             if (sscanf(temp, "%d", &choice_move) != 1) {
                 printf("Invalid input. Please enter a number.\n");
-            } else if (choice_move < 1 || choice_move > 3) {
-                printf("Invalid choice. Please choose a number between 1 and 3.\n");
+            } else if (choice_move < 1 || choice_move > 2) {
+                printf("Invalid choice. Please choose a number between 1 and 2.\n");
             }
         }
         switch (choice_move) {
@@ -586,12 +586,20 @@ void winExp(Supemon *defender, Supemon *attacker) {
 
 
 void increaseStats(Supemon *supemon) {
-    supemon->maxLife += (int)(supemon->maxLife * 0.3);
+    srand(time(NULL));
+    int rando = rand()%2;
+    float random = 0;
+    if (rando == 1){
+        random = 0.5;
+    } else {
+        random= 0;
+    }
+    supemon->maxLife = (int)(supemon->maxLife + (supemon->maxLife * 0.3)+random);
     supemon->currentLife = supemon->maxLife;
-    supemon->Attack += (int)(supemon->Attack * 0.3);
-    supemon->Defense += (int)(supemon->Defense * 0.3);
-    supemon->Speed += (int)(supemon->Speed * 0.3);
-    supemon->Dodge += (int)(supemon->Dodge * 0.3);
+    supemon->Attack = (int)(supemon->Attack + (supemon->Attack * 0.3)+random);
+    supemon->Defense = (int)(supemon->Defense + (supemon->Defense * 0.3)+random);
+    supemon->Speed = (int)(supemon->Speed + (supemon->Speed * 0.3)+random);
+    supemon->Dodge = (int)(supemon->Dodge + (supemon->Dodge * 0.3)+random);
 }
 
 void levelUp(Supemon *supemon){
