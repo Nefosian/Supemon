@@ -12,8 +12,6 @@
 
 int main() {
     Player player;
-    Supemon defender;
-    player.supcoins = 1000;
     welcomeScreen(&player);
     return 0;
 }
