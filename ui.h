@@ -16,5 +16,6 @@ void welcomeScreen(Player *player);
 void resetPlayer(Player *player);
 void itemNameChoose(Items item, char* outName);
 Items itemNameToEnum(const char* itemName);
+void quitGame(Player *player);
 
 #endif
