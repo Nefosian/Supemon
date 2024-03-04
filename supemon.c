@@ -585,15 +585,19 @@ void winExp(Supemon *defender, Supemon *attacker) {
 }
 
 
+void increaseStats(Supemon *supemon) {
+    supemon->maxLife += (int)(supemon->maxLife * 0.3);
+    supemon->currentLife = supemon->maxLife;
+    supemon->Attack += (int)(supemon->Attack * 0.3);
+    supemon->Defense += (int)(supemon->Defense * 0.3);
+    supemon->Speed += (int)(supemon->Speed * 0.3);
+    supemon->Dodge += (int)(supemon->Dodge * 0.3);
+}
+
 void levelUp(Supemon *supemon){
     if (supemon->experience >= supemon->experienceToNextLevel) {
         supemon->level++;
-        supemon->maxLife += (int)(supemon->maxLife * 0.3);
-        supemon->currentLife = supemon->maxLife;
-        supemon->Attack += (int)(supemon->Attack * 0.3);
-        supemon->Defense += (int)(supemon->Defense * 0.3);
-        supemon->Speed += (int)(supemon->Speed * 0.3);
-        supemon->Dodge += (int)(supemon->Dodge * 0.3);
+        increaseStats(supemon); 
         printf("Supemon %s leveled up to level %d!\n", supemon->name, supemon->level);
 
         supemon->experience -= supemon->experienceToNextLevel; 
@@ -602,7 +606,6 @@ void levelUp(Supemon *supemon){
         return;
     }
 }
-
 
 void Move(Supemon *defender, Supemon *attacker, int choice_move, char temp[255], Player *player) {
     firstMove(defender, attacker, choice_move, temp,player);

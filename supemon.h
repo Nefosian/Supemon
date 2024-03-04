@@ -47,5 +47,7 @@ void initializeSupwolf(Supemon *supemon);
 void initializeSupbat(Supemon *supemon);
 void displayMoves(Supemon *supemon);
 void displayUsed(Supemon *defender, Supemon *attacker, int i);
+void increaseStats(Supemon *supemon);
+void levelUp(Supemon *supemon);
 
 #endif
