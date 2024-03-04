@@ -99,6 +99,7 @@ void useItem(Player *player,Supemon *supemon, Items item) {
         } else if (item == RareCandy) {
             printf("Supemon's level increased by 1.\n");
             supemon->level += 1;
+            increaseStats(supemon); 
             if (supemon->level > 100) {
                 supemon->level = 100;
                 printf("Supemon reached maximum level.\n");
