@@ -10,6 +10,7 @@
 #include "player.h"
 #include "inventory.h"
 #include "deck.h"
+#include "items.h"
 
 
 void run_away(Supemon *attacker, Supemon *defender){
@@ -270,7 +271,7 @@ void affichage_battle(Supemon *attacker, Supemon *defender, Player *player){
 }
 
 void affichage(Supemon *attacker, Supemon *defender, Player *player){
-    while (defender->currentLife > 0 && attacker->currentLife > 0) {
+    while (defender->currentLife > 0 && attacker->currentLife > 0 || attacker->isCaptured == 1) {
         affichage_battle(attacker, defender, player);
     }
 }

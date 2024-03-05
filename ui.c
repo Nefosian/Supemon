@@ -7,6 +7,8 @@
 #include <stdlib.h>
 #include "ui.h"
 #include "items.h"
+#include "player.h"
+#include "inventory.h"
 #include "supemon.h"
 #include "action.h"
 
