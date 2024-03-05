@@ -8,17 +8,13 @@ void healSupemons(Player *player){
         printf("Error: Player data is null.\n");
         return;
     }
-
-    if (player->numberDeckSupemons == 1 && player->supemonSelected != NULL){
-        player->supemonSelected->currentLife = player->supemonSelected->maxLife;
-        printf("Your selected Supemon is now healed and at full life!\n");
-    } else {
-        for (int i = 0; i < player->numberDeckSupemons; i++) {
-            player->deckSupemons[i].currentLife = player->deckSupemons[i].maxLife;
-        }
-        printf("Your Supemons are now healed and at full life!\n");
+    player->supemonSelected->currentLife = player->supemonSelected->maxLife;
+    for (int i = 0; i < player->numberDeckSupemons; i++) {
+        player->deckSupemons[i].currentLife = player->deckSupemons[i].maxLife;
     }
+    printf("Your Supemons are now healed and at full life!\n");
 }
+
 
 void displayPC(const Player *player){
     if (player == NULL) {
@@ -37,10 +33,10 @@ void displayPC(const Player *player){
     for (int i = 0; i < player->numberSupemons; i++) {
         printf("| %d - %s, Level: %d, HP: %d/%d    \n", 
                i + 1, 
-               player->collectionSupemons[i].name, 
-               player->collectionSupemons[i].level, 
-               player->collectionSupemons[i].currentLife, 
-               player->collectionSupemons[i].maxLife);
+               player->supemonSelected[i].name, 
+               player->supemonSelected[i].level, 
+               player->supemonSelected[i].currentLife, 
+               player->supemonSelected[i].maxLife);
     }
     printf("+---------------------------------------+\n\n");
 }

@@ -11,7 +11,7 @@
 void supemonAttack(Supemon *attacker, Supemon *defender);
 void supemonBattle(Supemon *supemon1, Supemon *supemon2);
 void affichage(Supemon *supemon1, Supemon *supemon2, Player *player);
-void run_away(Supemon *attacker, Supemon *defender);
+void run_away(Supemon *attacker, Supemon *defender,Player *player);
 void capture(Supemon *attacker, Supemon *defender, Player *player, float chance_ball);
 void check_ball(Supemon *attacker, Supemon *defender, Player *player, char response, int choice_ball);
 void fct_for_item(Player *player, Supemon *defender, Items item);

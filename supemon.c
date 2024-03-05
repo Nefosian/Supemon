@@ -610,7 +610,7 @@ void affiche(Supemon *defender, Supemon *attacker, int choice_move, char temp[25
             check_ball(attacker, defender, player,response,choice_ball);
             break;
         case 5:
-            run_away(attacker, defender);
+            run_away(attacker, defender,player);
             break;
     }
 }
