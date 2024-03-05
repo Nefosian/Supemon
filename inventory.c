@@ -29,15 +29,21 @@ void removeItem(Player *player, Items item, int quantity) {
 }
 
 void addSupemon(Player *player, Supemon newSupemon) {
-    if (player->numberSupemons < maxSize) {
-        if (player->numberDeckSupemons < deckSize) {
-            player->deckSupemons[player->numberDeckSupemons++] = newSupemon;
-            printf("Supemon successfully added to the deck.\n");
-            player->collectionSupemons[player->numberSupemons++] = newSupemon;
-            printf("Supemon successfully added to the collection.\n");
-        }
+    if (player->numberSupemons >= maxSize) {
+        printf("Error: Collection is full, unable to add new Supemon.\n");
+        return;
+    }
+
+    player->collectionSupemons[player->numberSupemons] = newSupemon;
+    printf("Supemon successfully added to the collection.\n");
+    player->numberSupemons++;
+
+    if (player->numberDeckSupemons < deckSize) {
+        player->deckSupemons[player->numberDeckSupemons] = newSupemon;
+        printf("Supemon successfully added to the deck.\n");
+        player->numberDeckSupemons++;
     } else {
-        printf("Error: Both deck and collection are full, unable to add new Supemon.\n");
+        printf("Note: Deck is full, Supemon added only to the collection.\n");
     }
 }
 

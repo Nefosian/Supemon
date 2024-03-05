@@ -19,4 +19,4 @@ void item_use(Player *player, char response, int choice_item, Supemon *defender)
 void changeSup(Player *player, int choice_supermon);
 void affichage(Supemon *attacker, Supemon *defender, Player *player);
 
-#endif //SUPEMON_BATTLE_H
+#endif
