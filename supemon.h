@@ -49,5 +49,7 @@ void displayMoves(Supemon *supemon);
 void displayUsed(Supemon *defender, Supemon *attacker, int i);
 void increaseStats(Supemon *supemon);
 void levelUp(Supemon *supemon);
+const char* moveToString(move);
+const char* skillToString(skill);
 
 #endif
