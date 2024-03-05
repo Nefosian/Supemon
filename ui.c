@@ -163,6 +163,8 @@ void loadGame(Player *player){
     }
     printf("Number of Items in inventory: %d\n", player->numberItems);
 
+    player->supemonSelected = &player->deckSupemons[0];
+
     fscanf(file, "Number of Supemons in Deck: %d\n", &player->numberDeckSupemons);
     for (int i = 0; i < player->numberDeckSupemons && i < deckSize; i++) {
         int nb;

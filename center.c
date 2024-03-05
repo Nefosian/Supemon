@@ -9,7 +9,7 @@ void healSupemons(Player *player){
         return;
     }
 
-    if (player->numberDeckSupemons == 0 && player->supemonSelected != NULL){
+    if (player->numberDeckSupemons == 1 && player->supemonSelected != NULL){
         player->supemonSelected->currentLife = player->supemonSelected->maxLife;
         printf("Your selected Supemon is now healed and at full life!\n");
     } else {
