@@ -187,26 +187,25 @@ void item_use(Player *player,char response,int choice_item,Supemon *defender){
             }
         } else {
             printf("You don't want to use item! The fight continue!\n");
-            return 0;
+            return;
         }
 }
 
-void changeSup(Player *player,int choice_supermon){
+void changeSup(Player *player,int choice_supermon) {
     char temp[100];
     int i = 0;
     printf("Choose a Supemon\n");
     displayDeck(player);
-    while (i < 1 || i > player->numberDeckSupemons) {
+    while (1) {
         fgets(temp, sizeof(temp), stdin);
-        if (sscanf(temp, "%d", &i) != 1) {
-            printf("Invalid input. Please enter a number.\n");
-        } else if (i < 1 || i > player->numberDeckSupemons) {
-            printf("Invalid choice. Please choose a number between 1 and %d.\n", player->numberDeckSupemons);
+        if (sscanf(temp, "%d", &i) == 1 && i >= 1 && i <= player->numberDeckSupemons) {
+            break;
         }
+        printf("Invalid choice. Please choose a number between 1 and %d.\n", player->numberDeckSupemons);
     }
     changeSupemon(player, i);
-    return ;
 }
+
 
 void affichage_battle(Supemon *attacker, Supemon *defender, Player *player){
     if (defender->currentLife <= 0) {
@@ -227,11 +226,11 @@ void affichage_battle(Supemon *attacker, Supemon *defender, Player *player){
     printf("Attack: %d            Defense: %d\n", attacker->Attack, attacker->Defense);
     printf("Speed:  %d            Dodge:   %d\n",attacker->Speed, attacker->Dodge);
     printf("--------------------------------\n");
-    printf("%s (%s)\n", defender->name, player->name);
+    printf("%s (%s)\n", player->supemonSelected->name, player->name);
     printf("--------------------------------\n");
-    printf("HP:    %d/%d          Level:   %d\n", defender->currentLife, defender->maxLife, defender->level);
-    printf("Attack: %d            Defense: %d\n", defender->Attack, defender->Defense);
-    printf("Speed:  %d            Dodge:   %d\n",defender->Speed, defender->Dodge);
+    printf("HP:    %d/%d          Level:   %d\n", player->supemonSelected->currentLife, player->supemonSelected->maxLife, player->supemonSelected->level);
+    printf("Attack: %d            Defense: %d\n", player->supemonSelected->Attack, player->supemonSelected->Defense);
+    printf("Speed:  %d            Dodge:   %d\n",player->supemonSelected->Speed, player->supemonSelected->Dodge);
     printf("--------------------------------\n\n");
     printf("+----------------------+\n");
     printf("|What will you do?     |\n");

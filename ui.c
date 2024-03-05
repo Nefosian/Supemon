@@ -272,5 +272,9 @@ void initializePlayer(Player *player){
     player->numberDeckSupemons = 0;
     printf("You have chosen %s as your starter Supemon!\n", starterSupemon.name);
     addSupemon(player, starterSupemon);
+    Supemon supfox;
+    initializeSupfox(&supfox);
+    addSupemon(player, supfox);;
+    player->supemonSelected = &starterSupemon;
     action(&starterSupemon, player);
 }
