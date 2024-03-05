@@ -25,7 +25,7 @@ typedef struct{
     int Dodge;
     int Precision;
     int Speed;
-    char *Move[max_moves];
+    SupemonMove Move[max_moves];
     SupemonSkill Skill1;
     SupemonSkill Skill2;
     int skill1damage;
@@ -51,5 +51,7 @@ void increaseStats(Supemon *supemon);
 void levelUp(Supemon *supemon);
 const char* moveToString(move);
 const char* skillToString(skill);
+SupemonSkill StringToSkill(const char* skillString);
+SupemonMove StringToMove(const char* moveString);
 
 #endif

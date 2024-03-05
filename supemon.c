@@ -3,12 +3,14 @@
 //
 
 #include <string.h>
+#include <stdio.h>
+#include <time.h>
+#include <stdlib.h>
 #include "supemon.h"
 #include "move_cat.h"
 #include "skill_cat.h"
-#include <stdio.h>
-#include <time.h>
 #include "player.h"
+#include "battle.h"
 
 void initializeSupemon(Supemon *supemon, int choice) {
     switch(choice) {
@@ -313,6 +315,45 @@ const char* skillToString(skill) {
     }
 }
 
+SupemonMove StringToMove(const char* moveString) {
+    if (strcmp(moveString, "Curve") == 0) return Curve;
+    if (strcmp(moveString, "Jump") == 0) return Jump;
+    if (strcmp(moveString, "Roll") == 0) return Roll;
+    if (strcmp(moveString, "Roar") == 0) return Roar;
+    if (strcmp(moveString, "Dance") == 0) return Dance;
+    if (strcmp(moveString, "Whip") == 0) return Whip;
+    if (strcmp(moveString, "Slap") == 0) return Slap;
+    if (strcmp(moveString, "Bit") == 0) return Bit;
+    if (strcmp(moveString, "Backflip") == 0) return Backflip;
+    if (strcmp(moveString, "Wink") == 0) return Wink;
+    if (strcmp(moveString, "Fly") == 0) return Fly;
+    if (strcmp(moveString, "Spit") == 0) return Spit;
+    if (strcmp(moveString, "Watch") == 0) return Watch;
+    if (strcmp(moveString, "Charge") == 0) return Charge;
+    if (strcmp(moveString, "Cry") == 0) return Cry;
+}
+
+SupemonSkill StringToSkill(const char* skillString) {
+    if (strcmp(skillString, "Scratch") == 0) return Scratch;
+    if (strcmp(skillString, "Grawl") == 0) return Grawl;
+    if (strcmp(skillString, "FireTornado") == 0) return FireTornado;
+    if (strcmp(skillString, "Pound") == 0) return Pound;
+    if (strcmp(skillString, "Foliage") == 0) return Foliage;
+    if (strcmp(skillString, "Shell") == 0) return Shell;
+    if (strcmp(skillString, "Charm") == 0) return Charm;
+    if (strcmp(skillString, "Intimidation") == 0) return Intimidation;
+    if (strcmp(skillString, "Tornado") == 0) return Tornado;
+    if (strcmp(skillString, "Peck") == 0) return Peck;
+    if (strcmp(skillString, "Poison") == 0) return Poison;
+    if (strcmp(skillString, "Hipnosis") == 0) return Hipnosis;
+    if (strcmp(skillString, "Suplex") == 0) return Suplex;
+    if (strcmp(skillString, "Earthquake") == 0) return Earthquake;
+    if (strcmp(skillString, "Fang") == 0) return Fang;
+    if (strcmp(skillString, "IronTail") == 0) return IronTail;
+    if (strcmp(skillString, "Shockwave") == 0) return Shockwave;
+    if (strcmp(skillString, "Slash") == 0) return Slash;
+    if (strcmp(skillString, "Vampirism") == 0) return Vampirism;
+}
 
 void displayMoves(Supemon *supemon) {
     printf("1. %s\n", moveToString(supemon->Move[0]));
