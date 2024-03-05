@@ -96,15 +96,15 @@ void PlayerData(Player *player) {
                 player->deckSupemons[i].Speed,
                 player->deckSupemons[i].Dodge,
                 player->deckSupemons[i].Precision,
-                player->deckSupemons[i].Move[0],
-                player->deckSupemons[i].Move[1],
-                player->deckSupemons[i].Skill1,
-                player->deckSupemons[i].Skill2,
+                moveToString(player->deckSupemons[i].Move[0]),
+                moveToString(player->deckSupemons[i].Move[1]),
+                skillToString(player->deckSupemons[i].Skill1),
+                skillToString(player->deckSupemons[i].Skill2),
                 player->deckSupemons[i].skill1damage);
     }
     fprintf(file, "Number of Supemons in collection: %d\n", player->numberSupemons);
     for (int i = 0; i < player->numberSupemons; i++) {
-        fprintf(file, "Collection Supemon %d: %s, Level: %d, HP: %d/%d, Exp : %d/%d, Attack: %d, Defense: %d, Speed: %d, Dodge: %d, Precision: %d, Move 1 : %s, Move 2 : %s, Skill 1 : %s, Skill 2 : %S, Skill1 Damage : %d\n",
+        fprintf(file, "Collection Supemon %d: %s, Level: %d, HP: %d/%d, Exp : %d/%d, Attack: %d, Defense: %d, Speed: %d, Dodge: %d, Precision: %d, Move 1 : %s, Move 2 : %s, Skill 1 : %s, Skill 2 : %s, Skill1 Damage : %d\n",
                 i + 1,
                 player->collectionSupemons[i].name,
                 player->collectionSupemons[i].level,
@@ -117,10 +117,10 @@ void PlayerData(Player *player) {
                 player->collectionSupemons[i].Speed,
                 player->collectionSupemons[i].Dodge,
                 player->collectionSupemons[i].Precision,
-                player->collectionSupemons[i].Move[0],
-                player->collectionSupemons[i].Move[1],
-                player->collectionSupemons[i].Skill1,
-                player->collectionSupemons[i].Skill2,
+                moveToString(player->collectionSupemons[i].Move[0]),
+                moveToString(player->collectionSupemons[i].Move[1]),
+                skillToString(player->collectionSupemons[i].Skill1),
+                skillToString(player->collectionSupemons[i].Skill2),
                 player->collectionSupemons[i].skill1damage);
     }
 
@@ -144,6 +144,7 @@ void itemNameChoose(Items item, char* outName) {
         default: strcpy(outName, "Invalid item"); break;
     }
 }
+
 
 void loadGame(Player *player){
     char filename[256];
@@ -174,28 +175,36 @@ void loadGame(Player *player){
     printf("Number of Items in inventory: %d\n", player->numberItems);
 
     player->supemonSelected = &player->deckSupemons[0];
+    char move1Str[30], move2Str[30], skill1Str[30], skill2Str[30];
 
     fscanf(file, "Number of Supemons in Deck: %d\n", &player->numberDeckSupemons);
     for (int i = 0; i < player->numberDeckSupemons && i < deckSize; i++) {
         int nb;
-        fscanf(file, "Deck Supemon %d: %79[^,], Level: %d, HP: %d/%d, Exp : %d/%d, Attack: %d, Defense: %d, Speed: %d, Dodge: %d, Precision: %d, Move 1 : %s, Move 2 : %s, Skill 1 : %s, Skill 2 : %S, Skill1 Damage : %d\n",
-               &nb, player->deckSupemons[i].name, &player->deckSupemons[i].level, &player->deckSupemons[i].currentLife,&player->deckSupemons[i].maxLife,&player->deckSupemons[i].experience,
-               &player->deckSupemons[i].experienceToNextLevel,&player->deckSupemons[i].Attack, &player->deckSupemons[i].Defense, &player->deckSupemons[i].Speed,
-               &player->deckSupemons[i].Dodge, &player->deckSupemons[i].Precision, &player->deckSupemons[i].Move[0], &player->deckSupemons[i].Move[1], 
-               &player->deckSupemons[i].Skill1, &player->deckSupemons[i].Skill2, &player->deckSupemons[i].skill1damage);
-    }
+        fscanf(file, "Deck Supemon %d: %79[^,], Level: %d, HP: %d/%d, Exp : %d/%d, Attack: %d, Defense: %d, Speed: %d, Dodge: %d, Precision: %d, Move 1 : %29[^,], Move 2 : %29[^,], Skill 1 : %29[^,], Skill 2 : %29[^,], Skill1 Damage : %d\n",
+           &nb, player->deckSupemons[i].name, &player->deckSupemons[i].level, &player->deckSupemons[i].currentLife, &player->deckSupemons[i].maxLife, &player->deckSupemons[i].experience,
+           &player->deckSupemons[i].experienceToNextLevel, &player->deckSupemons[i].Attack, &player->deckSupemons[i].Defense, &player->deckSupemons[i].Speed,
+           &player->deckSupemons[i].Dodge, &player->deckSupemons[i].Precision, move1Str, move2Str, skill1Str, skill2Str, &player->deckSupemons[i].skill1damage);
+    
+        player->deckSupemons[i].Move[0] = StringToMove(move1Str);
+        player->deckSupemons[i].Move[1] = StringToMove(move2Str);
+        player->deckSupemons[i].Skill1 = StringToSkill(skill1Str);
+        player->deckSupemons[i].Skill2 = StringToSkill(skill2Str);
+}
     printf("Number of Supemon in deck: %d\n", player->numberDeckSupemons);
 
     fscanf(file, "Number of Supemons in collection: %d\n", &player->numberSupemons);
     for (int i = 0; i < player->numberSupemons && i < maxSize; i++) {
         int nb;
-        fscanf(file, "Collection Supemon %d: %79[^,], Level: %d, HP: %d/%d, Exp : %d/%d, Attack: %d, Defense: %d, Speed: %d, Dodge: %d, Precision: %d, Move 1 : %s, Move 2 : %s, Skill 1 : %s, Skill 2 : %S, Skill1 Damage : %d\n",
+        fscanf(file, "Collection Supemon %d: %79[^,], Level: %d, HP: %d/%d, Exp : %d/%d, Attack: %d, Defense: %d, Speed: %d, Dodge: %d, Precision: %d, Move 1 : %29[^,], Move 2 : %29[^,], Skill 1 : %29[^,], Skill 2 : %29[^,], Skill1 Damage : %d\n",
                &nb, player->collectionSupemons[i].name, &player->collectionSupemons[i].level, &player->collectionSupemons[i].currentLife,&player->collectionSupemons[i].maxLife,&player->collectionSupemons[i].experience,
                &player->collectionSupemons[i].experienceToNextLevel,
                &player->collectionSupemons[i].Attack, &player->collectionSupemons[i].Defense, &player->collectionSupemons[i].Speed,
-               &player->collectionSupemons[i].Dodge, &player->collectionSupemons[i].Precision, &player->collectionSupemons[i].Move[0], 
-               &player->collectionSupemons[i].Move[1], &player->collectionSupemons[i].Skill1, &player->collectionSupemons[i].Skill2,
-               &player->collectionSupemons[i].skill1damage);
+               &player->collectionSupemons[i].Dodge, &player->collectionSupemons[i].Precision, move1Str, move2Str, skill1Str, skill2Str, &player->collectionSupemons[i].skill1damage);
+            
+        player->collectionSupemons[i].Move[0] = StringToMove(move1Str);
+        player->collectionSupemons[i].Move[1] = StringToMove(move2Str);
+        player->collectionSupemons[i].Skill1 = StringToSkill(skill1Str);
+        player->collectionSupemons[i].Skill2 = StringToSkill(skill2Str);
     }
     printf("Number of Supemon in collection: %d\n", player->numberSupemons);
     fclose(file);
