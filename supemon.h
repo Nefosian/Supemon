@@ -25,7 +25,7 @@ typedef struct{
     int Dodge;
     int Precision;
     int Speed;
-    char *Move[max_moves];
+    SupemonMove Move[max_moves];
     SupemonSkill Skill1;
     SupemonSkill Skill2;
     int skill1damage;

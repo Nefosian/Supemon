@@ -3,12 +3,14 @@
 //
 
 #include <string.h>
+#include <stdio.h>
+#include <time.h>
+#include <stdlib.h>
 #include "supemon.h"
 #include "move_cat.h"
 #include "skill_cat.h"
-#include <stdio.h>
-#include <time.h>
 #include "player.h"
+#include "battle.h"
 
 void initializeSupemon(Supemon *supemon, int choice) {
     switch(choice) {
