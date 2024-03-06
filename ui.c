@@ -267,7 +267,6 @@ void initializePlayer(Player *player){
     initializeSupemon(&starterSupemon, choice);
     player->supcoins = 1000;
     addItem(player, Potion, 5);
-    addItem(player, Supeball, 5);
     player->numberDeckSupemons = 0;
     printf("You have chosen %s as your starter Supemon!\n", starterSupemon.name);
     addSupemonToDeck(player, starterSupemon);
