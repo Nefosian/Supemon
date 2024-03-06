@@ -202,7 +202,7 @@ Items itemNameToEnum(const char* itemName) {
 void quitGame(Player *player) {
     char choice;
 
-    printf("Do you want to save the game before quitting? (Y/N/Q to cancel quitting): ");
+    printf("Do you want to save the game before quitting? (Y/N/Q to cancel quitting):\n");
     scanf(" %c", &choice);
     while (getchar() != '\n');
 

@@ -273,5 +273,13 @@ void affichage_battle(Supemon *attacker, Supemon *defender, Player *player){
 }
 
 void affichage(Supemon *attacker, Supemon *defender, Player *player){
-    affichage_battle(attacker, defender, player);
+    while (defender->currentLife > 0 && attacker->currentLife > 0 && attacker->isCaptured == 0){
+        affichage_battle(attacker, defender, player);
+        if (defender->currentLife <= 0) {
+            return;
+        }
+        if (attacker->currentLife <= 0) {
+            return;
+        }
+    }
 }

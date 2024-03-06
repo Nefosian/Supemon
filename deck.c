@@ -52,7 +52,6 @@ void addSupemonToDeck(Player *player, Supemon newSupemon) {
     }
 
     player->deckSupemons[player->numberDeckSupemons++] = newSupemon;
-    player->numberDeckSupemons+=1;
     printf("Supemon %s successfully added to the deck.\n", newSupemon.name);
 }
 
