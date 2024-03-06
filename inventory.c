@@ -28,47 +28,6 @@ void removeItem(Player *player, Items item, int quantity) {
     }
 }
 
-void addSupemon(Player *player, Supemon newSupemon) {
-    if (player->numberSupemons >= maxSize) {
-        printf("Error: Collection is full, unable to add new Supemon.\n");
-        return;
-    }
-
-    player->collectionSupemons[player->numberSupemons] = newSupemon;
-    printf("Supemon successfully added to the collection.\n");
-    player->numberSupemons++;
-
-    if (player->numberDeckSupemons < deckSize) {
-        player->deckSupemons[player->numberDeckSupemons] = newSupemon;
-        printf("Supemon successfully added to the deck.\n");
-        player->numberDeckSupemons++;
-    } else {
-        printf("Note: Deck is full, Supemon added only to the collection.\n");
-    }
-}
-
-void removeSupemon(Player *player, Supemon supemon) {
-    if (player == NULL) {
-        printf("Error: Player does not exist.\n");
-        return;
-    }
-    int removed = 0;
-    for (int i = 0; i < player->numberSupemons; i++) {
-        if (strcmp(player->collectionSupemons[i].name, supemon.name) == 0) {
-            for (int j = i; j < player->numberSupemons - 1; j++) {
-                player->collectionSupemons[j] = player->collectionSupemons[j + 1];
-            }
-            player->numberSupemons--;
-            removed = 1;
-            printf("Supemon successfully removed from the collection.\n");
-            break;
-        }
-    }
-    if (!removed) {
-        printf("Error: Supemon not found in collection.\n");
-    }
-}
-
 int nbitem(const Player *player, Items item) {
     for (int i = 0; i < player->numberItems; i++) {
         if (player->objets[i].item == item) {

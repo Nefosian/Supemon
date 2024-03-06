@@ -22,21 +22,28 @@ void displayPC(const Player *player){
         return;
     }
 
-    printf("Number of Supemons in PC: %d\n", player->numberSupemons);
-    if (player->numberSupemons == 0) {
+    printf("Number of Supemons in PC: %d\n", player-> numberDeckSupemons);
+    if (player->numberDeckSupemons == 0) {
         printf("The PC is currently empty.\n");
         return;
     }
 
     printf("+-<3----<3----<3----<3----<3----<3-----+\n");
     printf("| Your current Supemon PC:             \n");
-    for (int i = 0; i < player->numberSupemons; i++) {
+    for (int i = 0; i < 1; i++) {
+        printf("| 1 - %s, Level: %d, HP: %d/%d    \n", 
+               player->supemonSelected->name,
+               player->supemonSelected->level,
+               player->supemonSelected->currentLife,
+               player->supemonSelected->maxLife);
+    }
+    for (int i = 1; i < player->numberDeckSupemons; i++) {
         printf("| %d - %s, Level: %d, HP: %d/%d    \n", 
                i + 1, 
-               player->supemonSelected[i].name, 
-               player->supemonSelected[i].level, 
-               player->supemonSelected[i].currentLife, 
-               player->supemonSelected[i].maxLife);
+               player->deckSupemons[i].name, 
+               player->deckSupemons[i].level, 
+               player->deckSupemons[i].currentLife, 
+               player->deckSupemons[i].maxLife);
     }
     printf("+---------------------------------------+\n\n");
 }
