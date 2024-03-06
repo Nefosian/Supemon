@@ -10,9 +10,11 @@
 #include "player.h"
 #include "inventory.h"
 #include "deck.h"
+#include "items.h"
+#include "action.h"
 
 
-void run_away(Supemon *attacker, Supemon *defender){
+void run_away(Supemon *attacker, Supemon *defender,Player *player){
     printf("You try to run away!\n");
     srand(time(NULL));
     float chance_to_escape = (float)defender->Speed / ((float)defender->Speed + (float)attacker->Speed);
@@ -20,6 +22,7 @@ void run_away(Supemon *attacker, Supemon *defender){
     int random_number = rand() % 100;
     if (random_number <= escape_chance) {
         printf("You successfully escaped!\n");
+        action(defender,player);
     } else {
         printf("You failed to escape!\n");
     }
@@ -264,13 +267,19 @@ void affichage_battle(Supemon *attacker, Supemon *defender, Player *player){
             check_ball(attacker, defender, player,response,choice_ball);
             break;
         case 5:
-            run_away(attacker, defender);
+            run_away(attacker, defender,player);
             break;
     }
 }
 
 void affichage(Supemon *attacker, Supemon *defender, Player *player){
-    while (defender->currentLife > 0 && attacker->currentLife > 0) {
+    while (defender->currentLife > 0 && attacker->currentLife > 0 && attacker->isCaptured == 0){
         affichage_battle(attacker, defender, player);
+        if (defender->currentLife <= 0) {
+            return;
+        }
+        if (attacker->currentLife <= 0) {
+            return;
+        }
     }
 }

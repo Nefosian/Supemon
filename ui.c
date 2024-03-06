@@ -101,27 +101,6 @@ void PlayerData(Player *player) {
                 skillToString(player->deckSupemons[i].Skill2),
                 player->deckSupemons[i].skill1damage);
     }
-    fprintf(file, "Number of Supemons in collection: %d\n", player->numberSupemons);
-    for (int i = 0; i < player->numberSupemons; i++) {
-        fprintf(file, "Collection Supemon %d: %s, Level: %d, HP: %d/%d, Exp : %d/%d, Attack: %d, Defense: %d, Speed: %d, Dodge: %d, Precision: %d, Move 1 : %s, Move 2 : %s, Skill 1 : %s, Skill 2 : %s, Skill1 Damage : %d\n",
-                i + 1,
-                player->collectionSupemons[i].name,
-                player->collectionSupemons[i].level,
-                player->collectionSupemons[i].currentLife,
-                player->deckSupemons[i].maxLife,
-                player->deckSupemons[i].experience,
-                player->deckSupemons[i].experienceToNextLevel,
-                player->collectionSupemons[i].Attack,
-                player->collectionSupemons[i].Defense,
-                player->collectionSupemons[i].Speed,
-                player->collectionSupemons[i].Dodge,
-                player->collectionSupemons[i].Precision,
-                moveToString(player->collectionSupemons[i].Move[0]),
-                moveToString(player->collectionSupemons[i].Move[1]),
-                skillToString(player->collectionSupemons[i].Skill1),
-                skillToString(player->collectionSupemons[i].Skill2),
-                player->collectionSupemons[i].skill1damage);
-    }
 
     fclose(file);
     printf("Game data saved to %s\n", filename);
@@ -203,35 +182,6 @@ void loadGame(Player *player){
         player->deckSupemons[i].Skill2 = StringToSkill(skill2Str);
 }
     printf("Number of Supemon in deck: %d\n", player->numberDeckSupemons);
-
-    fscanf(file, "Number of Supemons in collection: %d\n", &player->numberSupemons);
-    for (int i = 0; i < player->numberSupemons && i < maxSize; i++) {
-        int nb;
-        char move1Str[30], move2Str[30], skill1Str[30], skill2Str[30];
-        fscanf(file, "Collection Supemon %d: %79[^,], Level: %d, HP: %d/%d, Exp : %d/%d, Attack: %d, Defense: %d, Speed: %d, Dodge: %d, Precision: %d, Move 1 : %29s, Move 2 : %29s, Skill 1 : %29[^,], Skill 2 : %29[^,], Skill1 Damage : %d\n",
-               &nb, player->collectionSupemons[i].name,
-               &player->collectionSupemons[i].level,
-               &player->collectionSupemons[i].currentLife,
-               &player->collectionSupemons[i].maxLife,
-               &player->collectionSupemons[i].experience,
-               &player->collectionSupemons[i].experienceToNextLevel,
-               &player->collectionSupemons[i].Attack,
-               &player->collectionSupemons[i].Defense,
-               &player->collectionSupemons[i].Speed,
-               &player->collectionSupemons[i].Dodge,
-               &player->collectionSupemons[i].Precision,
-               move1Str,
-               move2Str,
-               skill1Str,
-               skill2Str,
-               &player->collectionSupemons[i].skill1damage);
-
-        player->collectionSupemons[i].Move[0] = StringToMove(move1Str);
-        player->collectionSupemons[i].Move[1] = StringToMove(move2Str);
-        player->collectionSupemons[i].Skill1 = StringToSkill(skill1Str);
-        player->collectionSupemons[i].Skill2 = StringToSkill(skill2Str);
-    }
-    printf("Number of Supemon in collection: %d\n", player->numberSupemons);
     fclose(file);
     printf("Game successfully loaded from %s\n", filename);
     printf("Welcome back %s!\n", player->name);
@@ -251,7 +201,7 @@ Items itemNameToEnum(const char* itemName) {
 void quitGame(Player *player) {
     char choice;
 
-    printf("Do you want to save the game before quitting? (Y/N/Q to cancel quitting): ");
+    printf("Do you want to save the game before quitting? (Y/N/Q to cancel quitting):\n");
     scanf(" %c", &choice);
     while (getchar() != '\n');
 
@@ -317,13 +267,9 @@ void initializePlayer(Player *player){
     player->supcoins = 1000;
     addItem(player, Potion, 5);
     addItem(player, Supeball, 5);
-    player->numberSupemons = 0;
     player->numberDeckSupemons = 0;
     printf("You have chosen %s as your starter Supemon!\n", starterSupemon.name);
-    addSupemon(player, starterSupemon);
-    Supemon supfox;
-    initializeSupfox(&supfox);
-    addSupemon(player, supfox);
+    addSupemonToDeck(player, starterSupemon);
     player->supemonSelected = &starterSupemon;
     action(&starterSupemon, player);
 }

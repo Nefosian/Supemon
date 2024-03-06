@@ -610,7 +610,7 @@ void affiche(Supemon *defender, Supemon *attacker, int choice_move, char temp[25
             check_ball(attacker, defender, player,response,choice_ball);
             break;
         case 5:
-            run_away(attacker, defender);
+            run_away(attacker, defender,player);
             break;
     }
 }
@@ -620,7 +620,7 @@ void winExp(Supemon *defender, Supemon *attacker) {
     int experience = 0;
     int random_exp= rand() % 401 + 100;
     defender->experience += attacker->level*random_exp;
-    printf("You gained %d experience points.\n", defender->experience);
+    printf("You gained %d experience points.\n", attacker->level*random_exp);
     printf("You have now %d/%d XP and your supemon is level %d\n",defender->experience,defender->experienceToNextLevel,defender->level);
     levelUp(defender);
 }
