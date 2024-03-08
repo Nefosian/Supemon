@@ -48,8 +48,8 @@ void check_ball(Supemon *attacker, Supemon *defender, Player *player,char respon
     do {
         printf("Do you want to use a Supeball, SuperSupeball or NetBall? Y for yes N for no\n");
         if (scanf(" %c", &response) != 1 || (response != 'y' && response != 'Y' && response != 'n' && response != 'N')) {
-            printf("Invalid response. Please enter 'Y' for yes or 'N' for no.\n"); 
-        } 
+            printf("Invalid response. Please enter 'Y' for yes or 'N' for no.\n");
+        }
         } while (response != 'Y' && response != 'y' && response != 'N' && response != 'n');
         if (response == 'Y' || response == 'y') {
             printf("You have %d Supeball, %d SuperSupeball and %d NetBall\n",nbitem(player, Supeball),nbitem(player, SuperSupeball),nbitem(player, NetBall));
@@ -132,8 +132,8 @@ void item_use(Player *player,char response,int choice_item,Supemon *defender){
     do {
         printf("Do you want to use a Potion, SuperPotion or RareCandy? Y for yes N for no\n");
         if (scanf(" %c", &response) != 1 || (response != 'y' && response != 'Y' && response != 'n' && response != 'N')) {
-            printf("Invalid response. Please enter 'Y' for yes or 'N' for no.\n"); 
-        } 
+            printf("Invalid response. Please enter 'Y' for yes or 'N' for no.\n");
+        }
         } while (response != 'Y' && response != 'y' && response != 'N' && response != 'n');
         if (response == 'Y' || response == 'y') {
             printf("You have %d Potion, %d SuperPotion and %d RareCandy\n",nbitem(player, Potion),nbitem(player, SuperPotion),nbitem(player, RareCandy));
@@ -243,7 +243,7 @@ void affichage_battle(Supemon *attacker, Supemon *defender, Player *player){
     printf("| 4 - Capture          |\n");
     printf("| 5 - Run away         |\n");
     printf("+----------------------+\n");
-    
+
     while (choice < 1 || choice > 5) {
         fgets(temp, sizeof(temp), stdin);
         if (sscanf(temp, "%d", &choice) != 1) {;
@@ -256,7 +256,7 @@ void affichage_battle(Supemon *attacker, Supemon *defender, Player *player){
     switch (choice) {
         case 1:
             Move(defender,attacker,choice_move,temp,player);
-            break;  
+            break;
         case 2:
             changeSup(player,choice);
             break;

@@ -44,6 +44,18 @@ void initializeSupemon(Supemon *supemon, int choice) {
         case 10:
             initializeSupbat(supemon);
             break;
+        case 11:
+            initializeSupragon(supemon);
+            break;
+        case 12:
+            initializeSuphoenix(supemon);
+            break;
+        case 13:
+            initializeSupicorn(supemon);
+            break;
+        case 14:
+            initializeSupraken(supemon);
+            break;
     }
 }
 
@@ -268,6 +280,94 @@ void initializeSupbat(Supemon *supemon) {
     supemon->isCaptured = 0;
 }
 
+void initializeSupragon(Supemon *supemon) {
+    strcpy(supemon->name, "Supdragon");
+    strcpy(supemon->type, "Dragon/Fire");
+    strcpy(supemon->weakness, "Dragon, Ice, Fairy");
+    supemon->level = 1;
+    supemon->maxLife = 15;
+    supemon->currentLife = 15;
+    supemon->Attack = 4;
+    supemon->Defense = 4;
+    supemon->Dodge = 2;
+    supemon->Precision = 3;
+    supemon->Speed = 3;
+    supemon->experience = 0;
+    supemon->experienceToNextLevel = 1000;
+    supemon->Move[0] = FlameBreath;
+    supemon->Move[1] = DragonRoar;
+    supemon->Skill1 = WingFlap;
+    supemon->Skill2 = FireBlast;
+    supemon->skill1damage = 4;
+    supemon->isCaptured = 0;
+}
+
+void initializeSuphoenix(Supemon *supemon) {
+    strcpy(supemon->name, "Supphoenix");
+    strcpy(supemon->type, "Fire/Flying");
+    strcpy(supemon->weakness, "Water, Electric, Rock");
+    supemon->level = 1;
+    supemon->maxLife = 14;
+    supemon->currentLife = 14;
+    supemon->Attack = 3;
+    supemon->Defense = 3;
+    supemon->Dodge = 4;
+    supemon->Precision = 4;
+    supemon->Speed = 4;
+    supemon->experience = 0;
+    supemon->experienceToNextLevel = 1000;
+    supemon->Move[0] = BlazeWing;
+    supemon->Move[1] = SkyDive;
+    supemon->Skill1 = Rebirth;
+    supemon->Skill2 = SolarFlare;
+    supemon->skill1damage = 3;
+    supemon->isCaptured = 0;
+}
+
+void initializeSupicorn(Supemon *supemon) {
+    strcpy(supemon->name, "Supunicorn");
+    strcpy(supemon->type, "Fairy");
+    strcpy(supemon->weakness, "Steel, Poison");
+    supemon->level = 1;
+    supemon->maxLife = 12;
+    supemon->currentLife = 12;
+    supemon->Attack = 2;
+    supemon->Defense = 3;
+    supemon->Dodge = 4;
+    supemon->Precision = 3;
+    supemon->Speed = 5;
+    supemon->experience = 0;
+    supemon->experienceToNextLevel = 1000;
+    supemon->Move[0] = MagicHorn;
+    supemon->Move[1] = MysticalVeil;
+    supemon->Skill1 = HealingWish;
+    supemon->Skill2 = StarBlast;
+    supemon->skill1damage = 3;
+    supemon->isCaptured = 0;
+}
+
+void initializeSupraken(Supemon *supemon) {
+    strcpy(supemon->name, "Supkraken");
+    strcpy(supemon->type, "Water/Dark");
+    strcpy(supemon->weakness, "Electric, Grass, Bug, Fairy");
+    supemon->level = 1;
+    supemon->maxLife = 16;
+    supemon->currentLife = 16;
+    supemon->Attack = 5;
+    supemon->Defense = 4;
+    supemon->Dodge = 1;
+    supemon->Precision = 3;
+    supemon->Speed = 2;
+    supemon->experience = 0;
+    supemon->experienceToNextLevel = 1000;
+    supemon->Move[0] = AbyssalGrip;
+    supemon->Move[1] = DarkWave;
+    supemon->Skill1 = InkCloud;
+    supemon->Skill2 = Tsunami;
+    supemon->skill1damage = 5;
+    supemon->isCaptured = 0;
+}
+
 
 const char* moveToString(move) {
     switch(move) {
@@ -286,6 +386,14 @@ const char* moveToString(move) {
         case Watch:return "Watch";
         case Charge:return "Charge";
         case Cry:return "Cry";
+        case FlameBreath:return "FlameBreath";
+        case DragonRoar:return "DragonRoar";
+        case BlazeWing:return "BlazeWing";
+        case SkyDive:return "SkyDive";
+        case MagicHorn:return "MagicHorn";
+        case MysticalVeil:return "MysticalVeil";
+        case AbyssalGrip:return "AbyssalGrip";
+        case DarkWave:return "DarkWave";
         default: return "Unknown Move";
     }
 }
@@ -311,6 +419,14 @@ const char* skillToString(skill) {
         case Shockwave:return "Shockwave";
         case Slash:return "Slash";
         case Vampirism:return "Vampirism";
+        case WingFlap:return "WingFlap";
+        case FireBlast:return "FireBlast";
+        case Rebirth:return "Rebirth";
+        case SolarFlare:return "SolarFlare";
+        case HealingWish:return "HealingWish";
+        case StarBlast:return "StarBlast";
+        case InkCloud:return "InkCloud";
+        case Tsunami:return "Tsunami";
         default: return "Unknown Skill";
     }
 }
@@ -331,6 +447,14 @@ SupemonMove StringToMove(const char* moveString) {
     if (strcmp(moveString, "Watch") == 0) return Watch;
     if (strcmp(moveString, "Charge") == 0) return Charge;
     if (strcmp(moveString, "Cry") == 0) return Cry;
+    if (strcmp(moveString, "FlameBreath") == 0) return FlameBreath;
+    if (strcmp(moveString, "DragonRoar") == 0) return DragonRoar;
+    if (strcmp(moveString, "BlazeWing") == 0) return BlazeWing;
+    if (strcmp(moveString, "SkyDive") == 0) return SkyDive;
+    if (strcmp(moveString, "MagicHorn") == 0) return MagicHorn;
+    if (strcmp(moveString, "MysticalVeil") == 0) return MysticalVeil;
+    if (strcmp(moveString, "AbyssalGrip") == 0) return AbyssalGrip;
+    if (strcmp(moveString, "DarkWave") == 0) return DarkWave;
 }
 
 SupemonSkill StringToSkill(const char* skillString) {
@@ -353,6 +477,14 @@ SupemonSkill StringToSkill(const char* skillString) {
     if (strcmp(skillString, "Shockwave") == 0) return Shockwave;
     if (strcmp(skillString, "Slash") == 0) return Slash;
     if (strcmp(skillString, "Vampirism") == 0) return Vampirism;
+    if (strcmp(skillString, "WingFlap") == 0) return WingFlap;
+    if (strcmp(skillString, "FireBlast") == 0) return FireBlast;
+    if (strcmp(skillString, "Rebirth") == 0) return Rebirth;
+    if (strcmp(skillString, "SolarFlare") == 0) return SolarFlare;
+    if (strcmp(skillString, "HealingWish") == 0) return HealingWish;
+    if (strcmp(skillString, "StarBlast") == 0) return StarBlast;
+    if (strcmp(skillString, "InkCloud") == 0) return InkCloud;
+    if (strcmp(skillString, "Tsunami") == 0) return Tsunami;
 }
 
 void displayMoves(Supemon *supemon) {
@@ -445,6 +577,38 @@ void skill_condition(Supemon *defender, Supemon *attacker){
                 printf("You stole 1 HP to your opponent\n");
                 printf("Your opponent has now : %d/%d HP\n",attacker->currentLife,attacker->maxLife);
                 printf("You have now : %d/%d HP\n",defender->currentLife,defender->maxLife);
+                break;
+            case WingFlap:
+                defender->Speed +=1;
+                printf("You have now : %d point of Speed\n",defender->Speed);
+                break;
+            case FireBlast:
+                defender->Attack +=1;
+                printf("You have now : %d point of Attack\n",defender->Attack);
+                break;
+            case Rebirth:
+                defender->currentLife = defender->maxLife;
+                printf("You have now : %d/%d HP\n",defender->currentLife,defender->maxLife);
+                break;
+            case SolarFlare:
+                defender->Attack +=1;
+                printf("You have now : %d point of Attack\n",defender->Attack);
+                break;
+            case HealingWish:
+                defender->currentLife = defender->maxLife;
+                printf("You have now : %d/%d HP\n",defender->currentLife,defender->maxLife);
+                break;
+            case StarBlast:
+                defender->Precision +=1;
+                printf("You have now : %d point of Precision\n",defender->Precision);
+                break;
+            case InkCloud:
+                defender->Dodge +=1;
+                printf("You have now : %d point of Dodge\n",defender->Dodge);
+                break;
+            case Tsunami:
+                defender->Attack +=1;
+                printf("You have now : %d point of Attack\n",defender->Attack);
                 break;
             default:
                 printf("Unknown Skill");
@@ -716,4 +880,3 @@ void randomSupemon(Supemon *supemon) {
             break;
     }
 }
-
