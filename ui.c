@@ -21,7 +21,6 @@ void welcomeScreen(Player *player){
     printf("| 3- Leave the game               |\n");
     printf("+-<3----<3----<3----<3----<3------+\n");
 
-
     while (choice < 1 || choice > 2) {
         printf("Choice 1, 2 or 3 : \n");
         scanf("%d", &choice);

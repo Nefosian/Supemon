@@ -878,5 +878,17 @@ void randomSupemon(Supemon *supemon) {
         case 10:
             initializeSupbat(supemon);
             break;
+        case 11:
+            initializeSupragon(supemon);
+            break;
+        case 12:
+            initializeSuphoenix(supemon);
+            break;
+        case 13:
+            initializeSupicorn(supemon);
+            break;
+        case 14:
+            initializeSupraken(supemon);
+            break;
     }
 }
