@@ -98,7 +98,6 @@ void removeSupemonFromDeck(Player *player, int deckPosition) {
     printf("Supemon successfully removed from position %d of the deck.\n", deckPosition);
 }
 
-
 void changeSupemon(Player *player, int deckPosition) {
     if (player == NULL) {
         printf("Error: Cannot change Supemon, player data is null.\n");
@@ -118,7 +117,6 @@ void changeSupemon(Player *player, int deckPosition) {
     Supemon temp = player->deckSupemons[0];
     player->deckSupemons[0] = player->deckSupemons[deckPosition - 1];
     player->deckSupemons[deckPosition - 1] = temp;
-
-    player->supemonSelected = &player->deckSupemons[0];
+    player->supemonSelected = &player->deckSupemons[0]; 
     printf("Supemon %s is now selected for battle!\n", player->supemonSelected->name);
 }

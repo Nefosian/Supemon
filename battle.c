@@ -194,7 +194,7 @@ void item_use(Player *player,char response,int choice_item,Supemon *defender){
         }
 }
 
-void changeSup(Player *player,int choice_supermon) {
+void changeSup(Player *player, int choice_supermon) {
     char temp[100];
     int i = 0;
     printf("Choose a Supemon\n");
@@ -207,6 +207,7 @@ void changeSup(Player *player,int choice_supermon) {
         printf("Invalid choice. Please choose a number between 1 and %d.\n", player->numberDeckSupemons);
     }
     changeSupemon(player, i);
+    player->supemonSelected = &player->deckSupemons[0]; 
 }
 
 
