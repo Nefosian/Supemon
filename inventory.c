@@ -4,16 +4,27 @@
 #include "player.h"
 #include "items.h"
 
+
 void addItem(Player *player, Items item, int quantity) {
+    if (player == NULL) {
+        printf("Error: Cannot add item to inventory, player data is null.\n");
+        return;
+    }
+    if (player->numberItems >= maxItem) {
+        printf("Error: Inventory is full. Please remove an item before adding a new one.\n");
+        return;
+    }
     for (int i = 0; i < player->numberItems; i++) {
         if (player->objets[i].item == item) {
             player->objets[i].quantity += quantity;
+            printf("Item %d successfully added to the inventory.\n", item);
             return;
         }
     }
     player->objets[player->numberItems].item = item;
     player->objets[player->numberItems].quantity = quantity;
     player->numberItems++;
+    printf("Item %d successfully added to the inventory.\n", item);
 }
 
 void removeItem(Player *player, Items item, int quantity) {
@@ -25,41 +36,6 @@ void removeItem(Player *player, Items item, int quantity) {
                 player->objets[i].quantity = 0;
             return;
         }
-    }
-}
-
-void addSupemon(Player *player, Supemon newSupemon) {
-    if (player->numberSupemons < maxSize) {
-        if (player->numberDeckSupemons < deckSize) {
-            player->deckSupemons[player->numberDeckSupemons++] = newSupemon;
-            printf("Supemon successfully added to the deck.\n");
-            player->collectionSupemons[player->numberSupemons++] = newSupemon;
-            printf("Supemon successfully added to the collection.\n");
-        }
-    } else {
-        printf("Error: Both deck and collection are full, unable to add new Supemon.\n");
-    }
-}
-
-void removeSupemon(Player *player, Supemon supemon) {
-    if (player == NULL) {
-        printf("Error: Player does not exist.\n");
-        return;
-    }
-    int removed = 0;
-    for (int i = 0; i < player->numberSupemons; i++) {
-        if (strcmp(player->collectionSupemons[i].name, supemon.name) == 0) {
-            for (int j = i; j < player->numberSupemons - 1; j++) {
-                player->collectionSupemons[j] = player->collectionSupemons[j + 1];
-            }
-            player->numberSupemons--;
-            removed = 1;
-            printf("Supemon successfully removed from the collection.\n");
-            break;
-        }
-    }
-    if (!removed) {
-        printf("Error: Supemon not found in collection.\n");
     }
 }
 
