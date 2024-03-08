@@ -60,5 +60,3 @@ void action(Supemon *defender, Player *player) {
     } 
     return;
 }
-
-

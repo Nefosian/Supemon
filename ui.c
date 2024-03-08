@@ -266,6 +266,7 @@ void initializePlayer(Player *player){
     Supemon starterSupemon;
     initializeSupemon(&starterSupemon, choice);
     player->supcoins = 1000;
+    player->numberItems = 0;
     addItem(player, Potion, 5);
     addItem(player, Supeball, 5);
     player->numberDeckSupemons = 0;
