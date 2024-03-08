@@ -25,6 +25,14 @@ typedef enum {
     Shockwave,
     Slash,
     Vampirism,
+    WingFlap,
+    FireBlast,
+    Rebirth,
+    SolarFlare,
+    HealingWish,
+    StarBlast,
+    InkCloud,
+    Tsunami,
 } SupemonSkill;
 
 #endif

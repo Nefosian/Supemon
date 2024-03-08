@@ -21,6 +21,14 @@ typedef enum {
     Watch,
     Charge,
     Cry,
+    FlameBreath,
+    DragonRoar,
+    BlazeWing,
+    SkyDive,
+    MagicHorn,
+    MysticalVeil,
+    AbyssalGrip,
+    DarkWave,
 } SupemonMove;
 
 #endif

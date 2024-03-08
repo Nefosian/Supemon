@@ -4,16 +4,27 @@
 #include "player.h"
 #include "items.h"
 
+
 void addItem(Player *player, Items item, int quantity) {
+    if (player == NULL) {
+        printf("Error: Cannot add item to inventory, player data is null.\n");
+        return;
+    }
+    if (player->numberItems >= maxItem) {
+        printf("Error: Inventory is full. Please remove an item before adding a new one.\n");
+        return;
+    }
     for (int i = 0; i < player->numberItems; i++) {
         if (player->objets[i].item == item) {
             player->objets[i].quantity += quantity;
+            printf("Item %d successfully added to the inventory.\n", item);
             return;
         }
     }
     player->objets[player->numberItems].item = item;
     player->objets[player->numberItems].quantity = quantity;
     player->numberItems++;
+    printf("Item %d successfully added to the inventory.\n", item);
 }
 
 void removeItem(Player *player, Items item, int quantity) {

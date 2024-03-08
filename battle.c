@@ -37,7 +37,7 @@ void capture(Supemon *attacker, Supemon *defender, Player *player,float chance_b
     if (random_number <= capture_chance) {
         printf("You captured the Supemon!\n");
         attacker->isCaptured = 1;
-        addSupemon(player, *attacker);
+        addSupemonToDeck(player, *attacker);
         return;
     } else {
         printf("The Supemon broke free!\n");
