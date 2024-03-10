@@ -275,5 +275,5 @@ void initializePlayer(Player *player){
     Supemon Supdragon;
     initializeSupragon(&Supdragon);
     addSupemonToDeck(player, Supdragon);
-    action(&starterSupemon, player);
+    action(player->supemonSelected, player);
 }

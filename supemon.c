@@ -737,11 +737,11 @@ void affiche(Supemon *defender, Supemon *attacker, int choice_move, char temp[25
     printf("Attack: %d            Defense: %d\n", attacker->Attack, attacker->Defense);
     printf("Speed:  %d            Dodge:   %d\n",attacker->Speed, attacker->Dodge);
     printf("--------------------------------\n");
-    printf("%s (%s)\n", defender->name, player->name);
+    printf("%s (%s)\n", player->supemonSelected->name, player->name);
     printf("--------------------------------\n");
-    printf("HP:    %d/%d          Level:   %d\n", defender->currentLife, defender->maxLife, defender->level);
-    printf("Attack: %d            Defense: %d\n", defender->Attack, defender->Defense);
-    printf("Speed:  %d            Dodge:   %d\n",defender->Speed, defender->Dodge);
+    printf("HP:    %d/%d          Level:   %d\n", player->supemonSelected->currentLife, player->supemonSelected->maxLife, player->supemonSelected->level);
+    printf("Attack: %d            Defense: %d\n", player->supemonSelected->Attack, player->supemonSelected->Defense);
+    printf("Speed:  %d            Dodge:   %d\n",player->supemonSelected->Speed, player->supemonSelected->Dodge);
     printf("--------------------------------\n\n");
     printf("+----------------------+\n");
     printf("|What will you do?     |\n");
@@ -751,7 +751,7 @@ void affiche(Supemon *defender, Supemon *attacker, int choice_move, char temp[25
     printf("| 4 - Capture          |\n");
     printf("| 5 - Run away         |\n");
     printf("+----------------------+\n");
-   
+
     while (choice < 1 || choice > 5) {
         fgets(temp, sizeof(temp), stdin);
         if (sscanf(temp, "%d", &choice) != 1) {
@@ -762,8 +762,8 @@ void affiche(Supemon *defender, Supemon *attacker, int choice_move, char temp[25
     }
     switch (choice) {
         case 1:
-            defenderMove(defender, attacker, choice_move, temp,player);
-            break;  
+            defenderMove(player->supemonSelected, attacker, choice_move, temp,player);
+            break;
         case 2:
             changeSup(player,choice);
             break;
