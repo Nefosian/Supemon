@@ -272,8 +272,5 @@ void initializePlayer(Player *player){
     printf("You have chosen %s as your starter Supemon!\n", starterSupemon.name);
     addSupemonToDeck(player, starterSupemon);
     player->supemonSelected = &starterSupemon;
-    Supemon Supdragon;
-    initializeSupragon(&Supdragon);
-    addSupemonToDeck(player, Supdragon);
     action(player->supemonSelected, player);
 }
