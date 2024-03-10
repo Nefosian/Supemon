@@ -48,8 +48,8 @@ void check_ball(Supemon *attacker, Supemon *defender, Player *player,char respon
     do {
         printf("Do you want to use a Supeball, SuperSupeball or NetBall? Y for yes N for no\n");
         if (scanf(" %c", &response) != 1 || (response != 'y' && response != 'Y' && response != 'n' && response != 'N')) {
-            printf("Invalid response. Please enter 'Y' for yes or 'N' for no.\n"); 
-        } 
+            printf("Invalid response. Please enter 'Y' for yes or 'N' for no.\n");
+        }
         } while (response != 'Y' && response != 'y' && response != 'N' && response != 'n');
         if (response == 'Y' || response == 'y') {
             printf("You have %d Supeball, %d SuperSupeball and %d NetBall\n",nbitem(player, Supeball),nbitem(player, SuperSupeball),nbitem(player, NetBall));
@@ -132,8 +132,8 @@ void item_use(Player *player,char response,int choice_item,Supemon *defender){
     do {
         printf("Do you want to use a Potion, SuperPotion or RareCandy? Y for yes N for no\n");
         if (scanf(" %c", &response) != 1 || (response != 'y' && response != 'Y' && response != 'n' && response != 'N')) {
-            printf("Invalid response. Please enter 'Y' for yes or 'N' for no.\n"); 
-        } 
+            printf("Invalid response. Please enter 'Y' for yes or 'N' for no.\n");
+        }
         } while (response != 'Y' && response != 'y' && response != 'N' && response != 'n');
         if (response == 'Y' || response == 'y') {
             printf("You have %d Potion, %d SuperPotion and %d RareCandy\n",nbitem(player, Potion),nbitem(player, SuperPotion),nbitem(player, RareCandy));
@@ -194,7 +194,7 @@ void item_use(Player *player,char response,int choice_item,Supemon *defender){
         }
 }
 
-void changeSup(Player *player,int choice_supermon) {
+void changeSup(Player *player, int choice_supermon) {
     char temp[100];
     int i = 0;
     printf("Choose a Supemon\n");
@@ -207,6 +207,7 @@ void changeSup(Player *player,int choice_supermon) {
         printf("Invalid choice. Please choose a number between 1 and %d.\n", player->numberDeckSupemons);
     }
     changeSupemon(player, i);
+    player->supemonSelected = &player->deckSupemons[0]; 
 }
 
 
@@ -229,11 +230,11 @@ void affichage_battle(Supemon *attacker, Supemon *defender, Player *player){
     printf("Attack: %d            Defense: %d\n", attacker->Attack, attacker->Defense);
     printf("Speed:  %d            Dodge:   %d\n",attacker->Speed, attacker->Dodge);
     printf("--------------------------------\n");
-    printf("%s (%s)\n", player->supemonSelected->name, player->name);
+    printf("%s (%s)\n", defender->name, player->name);
     printf("--------------------------------\n");
-    printf("HP:    %d/%d          Level:   %d\n", player->supemonSelected->currentLife, player->supemonSelected->maxLife, player->supemonSelected->level);
-    printf("Attack: %d            Defense: %d\n", player->supemonSelected->Attack, player->supemonSelected->Defense);
-    printf("Speed:  %d            Dodge:   %d\n",player->supemonSelected->Speed, player->supemonSelected->Dodge);
+    printf("HP:    %d/%d          Level:   %d\n", defender->currentLife, defender->maxLife, defender->level);
+    printf("Attack: %d            Defense: %d\n", defender->Attack, defender->Defense);
+    printf("Speed:  %d            Dodge:   %d\n",defender->Speed, defender->Dodge);
     printf("--------------------------------\n\n");
     printf("+----------------------+\n");
     printf("|What will you do?     |\n");
@@ -243,7 +244,7 @@ void affichage_battle(Supemon *attacker, Supemon *defender, Player *player){
     printf("| 4 - Capture          |\n");
     printf("| 5 - Run away         |\n");
     printf("+----------------------+\n");
-    
+
     while (choice < 1 || choice > 5) {
         fgets(temp, sizeof(temp), stdin);
         if (sscanf(temp, "%d", &choice) != 1) {;
@@ -256,7 +257,7 @@ void affichage_battle(Supemon *attacker, Supemon *defender, Player *player){
     switch (choice) {
         case 1:
             Move(defender,attacker,choice_move,temp,player);
-            break;  
+            break;
         case 2:
             changeSup(player,choice);
             break;
@@ -272,10 +273,10 @@ void affichage_battle(Supemon *attacker, Supemon *defender, Player *player){
     }
 }
 
-void affichage(Supemon *attacker, Supemon *defender, Player *player){
-    while (defender->currentLife > 0 && attacker->currentLife > 0 && attacker->isCaptured == 0){
-        affichage_battle(attacker, defender, player);
-        if (defender->currentLife <= 0) {
+void affichage(Supemon *attacker,Supemon *defender, Player *player){
+    while (player->supemonSelected->currentLife > 0 && attacker->currentLife > 0 && attacker->isCaptured == 0){
+        affichage_battle(attacker, player->supemonSelected, player);
+        if (player->supemonSelected->currentLife <= 0) {
             return;
         }
         if (attacker->currentLife <= 0) {

@@ -26,10 +26,16 @@ void displayDeck(const Player *player) {
         printf("The deck is currently empty.\n");
         return;
     }
-
     printf("+-<3----<3----<3----<3----<3----<3-----+\n");
     printf("| Your current Supemon deck:           \n");
-    for (int i = 0; i < player->numberDeckSupemons; i++) {
+    for (int i = 0; i < 1; i++) {
+        printf("| 1 - %s, Level: %d, HP: %d/%d    \n", 
+               player->supemonSelected->name, 
+               player->supemonSelected->level, 
+               player->supemonSelected->currentLife, 
+               player->supemonSelected->maxLife);
+    }
+    for (int i = 1; i < player->numberDeckSupemons; i++) {
         printf("| %d - %s, Level: %d, HP: %d/%d    \n", 
                i + 1, 
                player->deckSupemons[i].name, 
@@ -98,7 +104,6 @@ void removeSupemonFromDeck(Player *player, int deckPosition) {
     printf("Supemon successfully removed from position %d of the deck.\n", deckPosition);
 }
 
-
 void changeSupemon(Player *player, int deckPosition) {
     if (player == NULL) {
         printf("Error: Cannot change Supemon, player data is null.\n");
@@ -116,9 +121,13 @@ void changeSupemon(Player *player, int deckPosition) {
     }
 
     Supemon temp = player->deckSupemons[0];
+    if (player->deckSupemons[deckPosition - 1].currentLife <= 0){
+        printf("Error: The selected Supemon is dead.\n");
+        return;
+    }
+    
     player->deckSupemons[0] = player->deckSupemons[deckPosition - 1];
     player->deckSupemons[deckPosition - 1] = temp;
-
-    player->supemonSelected = &player->deckSupemons[0];
+    player->supemonSelected = &player->deckSupemons[0]; 
     printf("Supemon %s is now selected for battle!\n", player->supemonSelected->name);
 }

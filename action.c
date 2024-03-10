@@ -41,7 +41,7 @@ void action(Supemon *defender, Player *player) {
                 printf("You go into the wild!\n");
                 Supemon attacker;
                 randomSupemon(&attacker);
-                affichage(attacker, defender, player);
+                affichage(attacker,defender,player);
                 break;
             case 2:
                 strcpy(place, "Shop");
@@ -60,5 +60,3 @@ void action(Supemon *defender, Player *player) {
     } 
     return;
 }
-
-

@@ -158,29 +158,29 @@ void loadGame(Player *player){
         int nb;
         char move1Str[30], move2Str[30], skill1Str[30], skill2Str[30];
         fscanf(file, "Deck Supemon %d: %79[^,], Level: %d, HP: %d/%d, Exp : %d/%d, Attack: %d, Defense: %d, Speed: %d, Dodge: %d, Precision: %d, Move 1 : %29[^,], Move 2 : %29[^,], Skill 1 : %29[^,], Skill 2 : %29[^,], Skill1 Damage : %d\n",
-           &nb,
-           player->deckSupemons[i].name,
-           &player->deckSupemons[i].level,
-           &player->deckSupemons[i].currentLife,
-           &player->deckSupemons[i].maxLife,
-           &player->deckSupemons[i].experience,
-           &player->deckSupemons[i].experienceToNextLevel,
-           &player->deckSupemons[i].Attack,
-           &player->deckSupemons[i].Defense,
-           &player->deckSupemons[i].Speed,
-           &player->deckSupemons[i].Dodge,
-           &player->deckSupemons[i].Precision,
-           move1Str,
-           move2Str,
-           skill1Str,
-           skill2Str,
-           &player->deckSupemons[i].skill1damage);
+               &nb,
+               player->deckSupemons[i].name,
+               &player->deckSupemons[i].level,
+               &player->deckSupemons[i].currentLife,
+               &player->deckSupemons[i].maxLife,
+               &player->deckSupemons[i].experience,
+               &player->deckSupemons[i].experienceToNextLevel,
+               &player->deckSupemons[i].Attack,
+               &player->deckSupemons[i].Defense,
+               &player->deckSupemons[i].Speed,
+               &player->deckSupemons[i].Dodge,
+               &player->deckSupemons[i].Precision,
+               move1Str,
+               move2Str,
+               skill1Str,
+               skill2Str,
+               &player->deckSupemons[i].skill1damage);
 
         player->deckSupemons[i].Move[0] = StringToMove(move1Str);
         player->deckSupemons[i].Move[1] = StringToMove(move2Str);
         player->deckSupemons[i].Skill1 = StringToSkill(skill1Str);
         player->deckSupemons[i].Skill2 = StringToSkill(skill2Str);
-}
+    }
     printf("Number of Supemon in deck: %d\n", player->numberDeckSupemons);
     fclose(file);
     printf("Game successfully loaded from %s\n", filename);
@@ -210,7 +210,7 @@ void quitGame(Player *player) {
         printf("Game saved successfully.\n");
     } else if (choice == 'Q' || choice == 'q') {
         printf("Quitting cancelled. Returning to the game.\n");
-        return; 
+        return;
     } else if (choice != 'N' && choice != 'n') {
         printf("Invalid input. Exiting without saving.\n");
     }
@@ -275,5 +275,5 @@ void initializePlayer(Player *player){
     Supemon Supdragon;
     initializeSupragon(&Supdragon);
     addSupemonToDeck(player, Supdragon);
-    action(&starterSupemon, player);
+    action(player->supemonSelected, player);
 }

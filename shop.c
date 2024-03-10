@@ -44,7 +44,7 @@ void shop(Player *player){
     char response;
 
     printf("+-<3----<3----<3----<3----<3----<3----<3----<3----<3----<3----<3----+\n");
-    printf("|Welcome to the shop!                                               |\n");
+    printf("|Welcome to the shop! You have %d Supcoins.                         |\n", player->supcoins);
     printf("| 1 - Buy a Potion [+5HP] (100 Supcoins)                            |\n");
     printf("| 2 - Buy a SuperPotion [+10HP] (300 Supcoins)                      |\n");
     printf("| 3 - Buy a RareCandy [adds a level to the Supemon] (700 Supcoins)  |\n");
