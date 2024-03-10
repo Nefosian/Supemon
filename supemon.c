@@ -618,7 +618,7 @@ void skill_condition(Supemon *defender, Supemon *attacker){
 }
 
 void displayUsedDefender(Supemon *defender, Supemon *attacker, int i,Player *player) {
-    printf("%s used %s\n", defender->name, moveToString(defender->Move[i-1]));
+    printf("%s used %s\n", player->supemonSelected->name, moveToString(player->supemonSelected->Move[i - 1]));
     if (i == 1) {
         srand(time(NULL));
         printf("Attack : %s\n",skillToString(defender->Skill1));
