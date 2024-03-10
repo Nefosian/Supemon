@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include "ui.h"
-#include "items.h"
-#include "supemon.h"
+#include "inventory.h"
+#include "player.h"
+
 
 int main() {
     Player player;
-    initializePlayer(&player);
+    welcomeScreen(&player);
     return 0;
 }
